@@ -16,7 +16,6 @@ import {
   useDoc,
   useMemoFirebase,
 } from '@/firebase';
-import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 import {
   Card,
   CardContent,
