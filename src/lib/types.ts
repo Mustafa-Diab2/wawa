@@ -1,3 +1,5 @@
+import type { Timestamp } from 'firebase/firestore';
+
 export interface User {
   id: string;
   name: string;
@@ -52,4 +54,13 @@ export interface Bot {
   isActive: boolean;
   aiModel?: string;
   aiPrompt?: string;
+}
+
+export interface WhatsAppSession {
+    id: string;
+    ownerId: string;
+    qr: string;
+    isReady: boolean;
+    createdAt: Timestamp;
+    updatedAt: Timestamp;
 }

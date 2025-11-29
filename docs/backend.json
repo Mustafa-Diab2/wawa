@@ -89,10 +89,8 @@
       },
       "required": [
         "id",
-        "sessionId",
         "ownerId",
         "isReady",
-        "sharedWith",
         "createdAt",
         "updatedAt"
       ]
@@ -459,7 +457,6 @@
   },
   "auth": {
     "providers": [
-      "password",
       "anonymous"
     ]
   },
@@ -482,7 +479,7 @@
         }
       },
       {
-        "path": "/users/{userId}/whatsappSessions/{sessionId}",
+        "path": "/whatsappSessions/{sessionId}",
         "definition": {
           "entityName": "WhatsAppSession",
           "schema": {
@@ -491,10 +488,6 @@
           "description": "Represents a WhatsApp session for a user. Includes denormalized 'ownerId' and 'sharedWith' for authorization independence.",
           "params": [
             {
-              "name": "userId",
-              "description": "The unique identifier of the user."
-            },
-            {
               "name": "sessionId",
               "description": "The unique identifier of the WhatsApp session."
             }
@@ -502,7 +495,7 @@
         }
       },
       {
-        "path": "/users/{userId}/whatsappSessions/{sessionId}/chats/{chatId}",
+        "path": "/whatsappSessions/{sessionId}/chats/{chatId}",
         "definition": {
           "entityName": "Chat",
           "schema": {
@@ -510,10 +503,6 @@
           },
           "description": "Represents a chat session within a WhatsApp session.",
           "params": [
-            {
-              "name": "userId",
-              "description": "The unique identifier of the user."
-            },
             {
               "name": "sessionId",
               "description": "The unique identifier of the WhatsApp session."
@@ -526,7 +515,7 @@
         }
       },
       {
-        "path": "/users/{userId}/whatsappSessions/{sessionId}/chats/{chatId}/messages/{messageId}",
+        "path": "/whatsappSessions/{sessionId}/chats/{chatId}/messages/{messageId}",
         "definition": {
           "entityName": "Message",
           "schema": {
@@ -534,10 +523,6 @@
           },
           "description": "Represents a message within a chat session. The message includes the 'sessionId' and 'userId' to validate against the ownership.",
           "params": [
-            {
-              "name": "userId",
-              "description": "The unique identifier of the user."
-            },
             {
               "name": "sessionId",
               "description": "The unique identifier of the WhatsApp session."
@@ -634,6 +619,6 @@
         }
       }
     ],
-    "reasoning": "The Firestore data structure is designed to support a WhatsApp CRM platform with a focus on real-time chat, AI-powered bots, and customer relationship management features, while adhering to the principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), and QAPs (Rules are Not Filters).\n\n**Authorization Independence (Denormalization):**\n\n*   **WhatsApp Sessions:** The `whatsappSessions` collection includes the `ownerId` and `sharedWith` fields. This denormalization allows security rules to determine access based on the user's ID without needing to perform `get()` operations to retrieve parent document data. The `ownerId` specifies who owns the session. The `sharedWith` field is an array of user IDs that the session is shared with. This enables collaborative access to the session without complex rule evaluations.\n*   **Chats & Messages:** `chats` does not contain the `ownerId` or `sharedWith`. Instead, security rules must validate ownership up the chain in `whatsappSessions/{sessionId}` to ensure that the user has the right to interact with the `chat` and its nested `messages`. This assumes chats are scoped to sessions. Each `message` contains the `userId` and `sessionId` to enable validation that the `message` belongs to a `session` owned by the `user`.\n*   **Bots, Contacts, Conversations, Categories:** These collections all contain a `userId` field, indicating the owner of the entity. This allows straight-forward security rules to validate if the user owns the entity and has access to it.\n\n**Structural Segregation (Homogeneous Security Posture):**\n\n*   The structure segregates user-owned data into path-based hierarchies (e.g., `/users/{userId}/whatsappSessions/{sessionId}`), ensuring that each collection has a consistent security posture. This simplifies security rules and reduces the risk of accidentally exposing data.\n\n**Access Modeling (Standardization and Consistency):**\n\n*   **Ownership:** Path-based ownership (`/users/{userId}/...`) is used for private user data. The `ownerId` field in `whatsappSessions` and `userId` field in `bots`, `contacts`, `conversations`, and `categories` collections are used to determine ownership.\n\n**QAPs (Rules are not Filters):**\n\n*   The data structure enables secure `list` operations. Since authorization context is denormalized (e.g., `ownerId` in `whatsappSessions`), security rules can efficiently filter based on these fields without needing complex queries or server-side filtering.\n\n**Invariants:**\n\n*   Timestamps (`createdAt`, `updatedAt`) are included in each entity to maintain data integrity and track changes.\n*   The `status` field in the `chats` and `messages` collections explicitly models the state of these entities, making it easier to enforce business logic and prevent invalid state transitions.\n\nThis structure prioritizes simplicity and security, making it easier to write, debug, and maintain Firestore security rules."
+    "reasoning": "The Firestore data structure is designed to support a WhatsApp CRM platform with a focus on real-time chat, AI-powered bots, and customer relationship management features, while adhering to the principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), and QAPs (Rules are Not Filters).\n\n**Authorization Independence (Denormalization):**\n\n*   **WhatsApp Sessions:** The `whatsappSessions` collection is now a root collection. It includes the `ownerId` field. This denormalization allows security rules to determine access based on the user's ID without needing to perform `get()` operations to retrieve parent document data. The `ownerId` specifies who owns the session. This enables collaborative access to the session without complex rule evaluations.\n*   **Chats & Messages:** `chats` and `messages` are subcollections of `whatsappSessions`. Security rules must validate ownership via the parent `whatsappSessions/{sessionId}` to ensure that the user has the right to interact with the `chat` and its nested `messages`. This assumes chats are scoped to sessions. Each `message` contains the `userId` and `sessionId` to enable validation that the `message` belongs to a `session` owned by the `user`.\n*   **Bots, Contacts, Conversations, Categories:** These collections all contain a `userId` field, indicating the owner of the entity. This allows straight-forward security rules to validate if the user owns the entity and has access to it.\n\n**Structural Segregation (Homogeneous Security Posture):**\n\n*   The structure segregates user-owned data into path-based hierarchies (e.g., `/users/{userId}/bots/{botId}`), ensuring that each collection has a consistent security posture. The `whatsappSessions` collection is a root collection to simplify access for the backend process that will update the QR code and session status.\n\n**Access Modeling (Standardization and Consistency):**\n\n*   **Ownership:** Path-based ownership (`/users/{userId}/...`) is used for private user data. The `ownerId` field in `whatsappSessions` and `userId` field in `bots`, `contacts`, `conversations`, and `categories` collections are used to determine ownership.\n\n**QAPs (Rules are not Filters):**\n\n*   The data structure enables secure `list` operations. Since authorization context is denormalized (e.g., `ownerId` in `whatsappSessions`), security rules can efficiently filter based on these fields without needing complex queries or server-side filtering.\n\n**Invariants:**\n\n*   Timestamps (`createdAt`, `updatedAt`) are included in each entity to maintain data integrity and track changes.\n*   The `status` field in the `chats` and `messages` collections explicitly models the state of these entities, making it easier to enforce business logic and prevent invalid state transitions.\n\nThis structure prioritizes simplicity and security, making it easier to write, debug, and maintain Firestore security rules."
   }
 }
