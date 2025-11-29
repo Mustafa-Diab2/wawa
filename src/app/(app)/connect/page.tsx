@@ -95,17 +95,26 @@ export default function ConnectPage() {
   
   // Hook to get the session document in real-time
   const sessionRef = useMemoFirebase(
-    () => (sessionId ? doc(firestore, `whatsappSessions/${sessionId}`) : null),
-    [firestore, sessionId]
+    () => (user && firestore && sessionId ? doc(firestore, `whatsappSessions/${sessionId}`) : null),
+    [firestore, user, sessionId]
   );
   const { data: session, isLoading: isSessionLoading } = useDoc<WhatsAppSession>(sessionRef);
 
 
   const isLoading = isUserLoading || isCreatingSession || (sessionId && isSessionLoading);
-  const connectionStatus = session?.isReady ? "connected" : isLoading ? "loading" : "disconnected";
+  const connectionStatus = session?.isReady ? "connected" : "disconnected";
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(session?.qr || '')}`;
 
   const renderStatus = () => {
+    if (isLoading) {
+       return (
+          <Badge variant="secondary" className="gap-2">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            جاري التحميل...
+          </Badge>
+        );
+    }
+
     switch (connectionStatus) {
       case 'connected':
         return (
@@ -119,13 +128,6 @@ export default function ConnectPage() {
           <Badge variant="destructive" className="gap-2">
             <XCircle className="h-4 w-4" />
             غير متصل
-          </Badge>
-        );
-      case 'loading':
-        return (
-          <Badge variant="secondary" className="gap-2">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            جاري الحصول على الرمز...
           </Badge>
         );
     }
@@ -153,10 +155,12 @@ export default function ConnectPage() {
               />
             ) : (
               <div className="w-[200px] h-[200px] flex items-center justify-center bg-gray-100 rounded-md">
-                {connectionStatus === 'connected' ? (
+                {isLoading ? (
+                    <Loader2 className="h-16 w-16 animate-spin text-primary" />
+                ) : connectionStatus === 'connected' ? (
                   <CheckCircle className="h-16 w-16 text-green-500" />
                 ) : (
-                  <Loader2 className="h-16 w-16 animate-spin text-primary" />
+                   <p className="text-sm text-muted-foreground text-center p-4">جاري إنشاء الرمز...</p>
                 )}
               </div>
             )}
