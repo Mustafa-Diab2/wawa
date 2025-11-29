@@ -5,6 +5,10 @@ import {
   addDoc,
   collection,
   serverTimestamp,
+  query,
+  where,
+  getDocs,
+  limit
 } from 'firebase/firestore';
 import {
   useFirestore,
@@ -36,46 +40,69 @@ export default function ConnectPage() {
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [isCreatingSession, setIsCreatingSession] = useState(false);
 
+  // Function to find an existing session or create a new one
+  const findOrCreateSession = async () => {
+    if (!user || !firestore || isCreatingSession) return;
+    setIsCreatingSession(true);
+
+    try {
+      // 1. Check for an existing session for the current user
+      const sessionsQuery = query(
+        collection(firestore, 'whatsappSessions'),
+        where('ownerId', '==', user.uid),
+        limit(1)
+      );
+      const querySnapshot = await getDocs(sessionsQuery);
+
+      if (!querySnapshot.empty) {
+        // Existing session found
+        const existingSession = querySnapshot.docs[0];
+        setSessionId(existingSession.id);
+      } else {
+        // 2. No session found, create a new one
+        const sessionData = {
+          ownerId: user.uid,
+          isReady: false,
+          qr: '',
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        };
+        const colRef = collection(firestore, 'whatsappSessions');
+        const docRef = await addDoc(colRef, sessionData); // Use await here to get the ID
+        setSessionId(docRef.id);
+      }
+    } catch (error) {
+      console.error("Error finding or creating session:", error);
+    } finally {
+        setIsCreatingSession(false);
+    }
+  };
+  
+  // Effect to handle user login and session creation
+  useEffect(() => {
+    // If there's no user and auth isn't loading, sign in anonymously.
+    if (!user && !isUserLoading && auth) {
+      initiateAnonymousSignIn(auth);
+    }
+
+    // Once we have a user and firestore, find or create the session.
+    if (user && firestore && !sessionId) {
+      findOrCreateSession();
+    }
+  }, [user, isUserLoading, auth, firestore, sessionId]);
+  
+  // Hook to get the session document in real-time
   const sessionRef = useMemoFirebase(
     () => (sessionId ? doc(firestore, `whatsappSessions/${sessionId}`) : null),
     [firestore, sessionId]
   );
-
   const { data: session, isLoading: isSessionLoading } = useDoc<WhatsAppSession>(sessionRef);
 
-  useEffect(() => {
-    if (!user && !isUserLoading) {
-      initiateAnonymousSignIn(auth);
-    }
-  }, [user, isUserLoading, auth]);
 
-  const createSession = async () => {
-    if (!user || !firestore) return;
-    try {
-      const sessionData = {
-        ownerId: user.uid,
-        isReady: false,
-        qr: '',
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      };
-      const colRef = collection(firestore, 'whatsappSessions');
-      const docRef = await addDocumentNonBlocking(colRef, sessionData);
-      setSessionId(docRef.id);
-    } catch (error) {
-      console.error("Error creating session:", error);
-    }
-  };
-  
-  useEffect(() => {
-    if (user && !sessionId && firestore) {
-      createSession();
-    }
-  }, [user, sessionId, firestore]);
-  
-
-  const connectionStatus = session?.isReady ? "connected" : (isSessionLoading || !session) ? "loading" : "disconnected";
+  const isLoading = isUserLoading || isCreatingSession || (sessionId && isSessionLoading);
+  const connectionStatus = session?.isReady ? "connected" : isLoading ? "loading" : "disconnected";
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(session?.qr || '')}`;
 
   const renderStatus = () => {
@@ -140,7 +167,7 @@ export default function ConnectPage() {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline" className="gap-2" onClick={createSession} disabled={isSessionLoading}>
+           <Button variant="outline" className="gap-2" onClick={findOrCreateSession} disabled={isLoading}>
             <RefreshCw className="h-4 w-4" />
             تحديث الرمز
           </Button>
