@@ -1,4 +1,4 @@
-import type { Timestamp } from 'firebase/firestore';
+import type { FieldValue, Timestamp } from 'firebase/firestore';
 
 export interface User {
   id: string;
@@ -13,8 +13,8 @@ export interface WhatsAppSession {
     ownerId: string;
     qr: string;
     isReady: boolean;
-    createdAt: Timestamp;
-    updatedAt: Timestamp;
+    createdAt: Timestamp | FieldValue;
+    updatedAt: Timestamp | FieldValue;
 }
 
 export interface Chat {
@@ -59,11 +59,17 @@ export interface Contact {
   email: string | null;
   categoryId: string | null;
   avatar: string;
+  userId: string;
+  createdAt: Timestamp | FieldValue;
+  updatedAt: Timestamp | FieldValue;
 }
 
 export interface Category {
   id: string;
   name: string;
+  userId: string;
+  createdAt: Timestamp | FieldValue;
+  updatedAt: Timestamp | FieldValue;
 }
 
 export interface Bot {
@@ -73,4 +79,7 @@ export interface Bot {
   isActive: boolean;
   aiModel?: string;
   aiPrompt?: string;
+  userId: string;
+  createdAt: Timestamp | FieldValue;
+  updatedAt: Timestamp | FieldValue;
 }

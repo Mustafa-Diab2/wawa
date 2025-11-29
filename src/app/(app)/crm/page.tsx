@@ -1,8 +1,27 @@
+'use client';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ContactsTable from "@/components/crm/contacts-table";
 import CategoriesTable from "@/components/crm/categories-table";
+import { useFirestore, useUser, useCollection, useMemoFirebase } from '@/firebase';
+import { collection, query } from 'firebase/firestore';
+import type { Contact, Category } from '@/lib/types';
 
 export default function CrmPage() {
+  const { user } = useUser();
+  const firestore = useFirestore();
+
+  const contactsQuery = useMemoFirebase(
+    () => user && firestore ? query(collection(firestore, `users/${user.uid}/contacts`)) : null,
+    [firestore, user]
+  );
+  const { data: contacts, isLoading: contactsLoading } = useCollection<Contact>(contactsQuery);
+
+  const categoriesQuery = useMemoFirebase(
+    () => user && firestore ? query(collection(firestore, `users/${user.uid}/categories`)) : null,
+    [firestore, user]
+  );
+  const { data: categories, isLoading: categoriesLoading } = useCollection<Category>(categoriesQuery);
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
@@ -21,10 +40,10 @@ export default function CrmPage() {
           <TabsTrigger value="categories">الفئات</TabsTrigger>
         </TabsList>
         <TabsContent value="contacts">
-          <ContactsTable />
+          <ContactsTable contacts={contacts || []} categories={categories || []} isLoading={contactsLoading} />
         </TabsContent>
         <TabsContent value="categories">
-          <CategoriesTable />
+          <CategoriesTable categories={categories || []} isLoading={categoriesLoading} />
         </TabsContent>
       </Tabs>
     </div>
