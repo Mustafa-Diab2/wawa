@@ -1,0 +1,218 @@
+/**
+ * Core Philosophy: This ruleset enforces a strict user-ownership security model. All data is
+ * segregated into user-specific paths (`/users/{userId}/...`), ensuring that by default, users can only
+ * access their own information.
+ *
+ * Data Structure: Data is hierarchically organized under a top-level `users` collection. Each user
+ * document acts as a root for all of their associated data, including WhatsApp sessions, bots,
+ * contacts, and more. This structure simplifies ownership-based rules.
+ *
+ * Key Security Decisions:
+ * - User Isolation: Users are strictly confined to their own data tree. There is no public or
+ *   cross-user access by default.
+ * - User Enumeration Disabled: Listing the top-level `/users` collection is explicitly forbidden
+ *   to protect user privacy.
+ * - Shared Access for Sessions: The `whatsappSessions` collection supports collaboration. Access is
+ *   granted to the document's `ownerId` or any user ID listed in the `sharedWith` array. Access to
+ *   nested `chats` and `messages` is inherited from the parent session.
+ * - Default Deny: Any operation not explicitly granted is denied. Write operations that could
+ *   remove or modify a document require that the document already exists.
+ *
+ * Denormalization for Authorization: To ensure fast and secure access control, authorization-critical
+ * data is denormalized. For example, `whatsappSessions` documents contain an `ownerId` and a `sharedWith`
+ * array directly on the document. This avoids slow and costly lookups to parent documents for many
+ * direct access cases and is essential for securing nested collections. All other user-specific
+ * documents contain a `userId` field to enforce a consistent ownership link between the data and the path.
+ *
+ * Structural Segregation: All user-specific data is stored in subcollections under `/users/{userId}`.
+ * This clear separation creates a homogeneous security posture where all documents within a given
+ * subcollection path share the same ownership-based access rules, improving security and maintainability.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for cleaner, more maintainable rules.
+    
+    /**
+     * Returns true if the user is signed in.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Returns true if the requesting user's UID matches the provided userId.
+     * This is the primary function for enforcing data ownership.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Returns true if the document being accessed already exists.
+     * CRITICAL for safe update and delete operations.
+     */
+    function isExistingDoc() {
+      return resource != null;
+    }
+
+    /**
+     * Combines ownership and existence checks for secure updates and deletes.
+     */
+    function isOwnerOfExistingDoc(userId) {
+      return isOwner(userId) && isExistingDoc();
+    }
+
+    /**
+     * Returns true if the user is the owner of the session.
+     * Uses a 'get' call to the session document to check the 'ownerId'.
+     */
+    function isSessionOwner(userId, sessionId) {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(userId)/whatsappSessions/$(sessionId)).data.ownerId == request.auth.uid;
+    }
+
+    /**
+     * Returns true if the user is either the owner or a collaborator.
+     * Uses a 'get' call to check both 'ownerId' and the 'sharedWith' array.
+     */
+    function isSessionMember(userId, sessionId) {
+      let sessionData = get(/databases/$(database)/documents/users/$(userId)/whatsappSessions/$(sessionId)).data;
+      return isSignedIn() && (request.auth.uid == sessionData.ownerId || request.auth.uid in sessionData.sharedWith);
+    }
+    
+    /**
+     * Ensures the internal userId field matches the document's path userId on create.
+     */
+    function newDocHasCorrectOwner(userId) {
+      return request.resource.data.userId == userId;
+    }
+
+    /**
+     * Ensures the internal userId field is immutable on update.
+     */
+    function ownerIsImmutable() {
+      return request.resource.data.userId == resource.data.userId;
+    }
+
+    /**
+     * @description Rules for a user's own document.
+     * @path /users/{userId}
+     * @allow (create) A new user with uid 'user_abc' creating their own document at /users/user_abc.
+     * @deny (list) Any user trying to list all documents in the /users collection.
+     * @principle Restricts access to a user's own data tree and prevents user enumeration.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isOwnerOfExistingDoc(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Rules for a user's WhatsApp sessions, which can be shared.
+     * @path /users/{userId}/whatsappSessions/{sessionId}
+     * @allow (get) A user in the 'sharedWith' array retrieving the session document.
+     * @deny (update) A user in 'sharedWith' trying to modify the session document (only the owner can).
+     * @principle Implements a "Closed Collaborators" model where an owner can share access with others.
+     */
+    match /users/{userId}/whatsappSessions/{sessionId} {
+      allow get: if isSessionMember(userId, sessionId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.ownerId == userId;
+      allow update: if isSessionOwner(userId, sessionId) && isExistingDoc() && request.resource.data.ownerId == resource.data.ownerId;
+      allow delete: if isSessionOwner(userId, sessionId) && isExistingDoc();
+    }
+
+    /**
+     * @description Rules for chats, inheriting access from the parent WhatsApp session.
+     * @path /users/{userId}/whatsappSessions/{sessionId}/chats/{chatId}
+     * @allow (create) A session member (owner or collaborator) creating a new chat within the session.
+     * @deny (get) A user who is not a member of the parent session trying to read a chat.
+     * @principle Enforces inherited access control, where subcollection permissions are derived from a parent document.
+     */
+    match /users/{userId}/whatsappSessions/{sessionId}/chats/{chatId} {
+      allow get: if isSessionMember(userId, sessionId);
+      allow list: if isSessionMember(userId, sessionId);
+      allow create: if isSessionMember(userId, sessionId) && request.resource.data.sessionId == sessionId;
+      allow update: if isSessionMember(userId, sessionId) && isExistingDoc() && request.resource.data.sessionId == resource.data.sessionId;
+      allow delete: if isSessionMember(userId, sessionId) && isExistingDoc();
+    }
+
+    /**
+     * @description Rules for messages, inheriting access from the grandparent WhatsApp session.
+     * @path /users/{userId}/whatsappSessions/{sessionId}/chats/{chatId}/messages/{messageId}
+     * @allow (list) A session member listing all messages in a chat.
+     * @deny (create) An authenticated user trying to create a message in a session they are not part of.
+     * @principle Enforces deeply nested inherited access control and validates relational integrity on create.
+     */
+    match /users/{userId}/whatsappSessions/{sessionId}/chats/{chatId}/messages/{messageId} {
+      allow get: if isSessionMember(userId, sessionId);
+      allow list: if isSessionMember(userId, sessionId);
+      allow create: if isSessionMember(userId, sessionId) && request.resource.data.sessionId == sessionId && request.resource.data.chatId == chatId && request.resource.data.userId == request.auth.uid;
+      allow update: if isSessionMember(userId, sessionId) && isExistingDoc() && request.resource.data.sessionId == resource.data.sessionId && request.resource.data.chatId == resource.data.chatId && request.resource.data.userId == resource.data.userId;
+      allow delete: if isSessionMember(userId, sessionId) && isExistingDoc();
+    }
+
+    /**
+     * @description Rules for user-owned automated bots.
+     * @path /users/{userId}/bots/{botId}
+     * @allow (create) User 'user_abc' creating a new bot at /users/user_abc/bots/bot_123.
+     * @deny (update) User 'user_xyz' trying to update a bot belonging to 'user_abc'.
+     * @principle Enforces strict document ownership for all operations.
+     */
+    match /users/{userId}/bots/{botId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && newDocHasCorrectOwner(userId);
+      allow update: if isOwnerOfExistingDoc(userId) && ownerIsImmutable();
+      allow delete: if isOwnerOfExistingDoc(userId);
+    }
+
+    /**
+     * @description Rules for a user's private contacts.
+     * @path /users/{userId}/contacts/{contactId}
+     * @allow (list) User 'user_abc' listing all their contacts at /users/user_abc/contacts.
+     * @deny (get) Any user other than the owner trying to read a specific contact.
+     * @principle Enforces strict document ownership for all operations.
+     */
+    match /users/{userId}/contacts/{contactId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && newDocHasCorrectOwner(userId);
+      allow update: if isOwnerOfExistingDoc(userId) && ownerIsImmutable();
+      allow delete: if isOwnerOfExistingDoc(userId);
+    }
+
+    /**
+     * @description Rules for a user's private conversations.
+     * @path /users/{userId}/conversations/{conversationId}
+     * @allow (delete) User 'user_abc' deleting their own conversation at /users/user_abc/conversations/convo_456.
+     * @deny (create) An anonymous user trying to create a conversation.
+     * @principle Enforces strict document ownership for all operations.
+     */
+    match /users/{userId}/conversations/{conversationId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && newDocHasCorrectOwner(userId);
+      allow update: if isOwnerOfExistingDoc(userId) && ownerIsImmutable();
+      allow delete: if isOwnerOfExistingDoc(userId);
+    }
+
+    /**
+     * @description Rules for a user's private categories for organizing contacts.
+     * @path /users/{userId}/categories/{categoryId}
+     * @allow (update) User 'user_abc' updating their own category.
+     * @deny (list) User 'user_xyz' trying to list categories belonging to 'user_abc'.
+     * @principle Enforces strict document ownership for all operations.
+     */
+    match /users/{userId}/categories/{categoryId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && newDocHasCorrectOwner(userId);
+      allow update: if isOwnerOfExistingDoc(userId) && ownerIsImmutable();
+      allow delete: if isOwnerOfExistingDoc(userId);
+    }
+  }
+}
