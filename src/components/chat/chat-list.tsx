@@ -9,13 +9,25 @@ import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import type { Chat } from '@/lib/types';
+import { Skeleton } from '../ui/skeleton';
 
 interface ChatListProps {
-  chats: Chat[];
-  selectedChatId: string;
+  chats: Chat[] | null;
+  selectedChatId: string | null;
+  onSelectChat: (chatId: string) => void;
 }
 
-export default function ChatList({ chats, selectedChatId }: ChatListProps) {
+export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatListProps) {
+  const getFormattedTimestamp = (date: any) => {
+    if (!date) return '';
+    // Check if it's a Firebase Timestamp and convert it
+    if (typeof date.toDate === 'function') {
+      return formatDistanceToNow(date.toDate(), { addSuffix: true, locale: ar });
+    }
+    // Assume it's already a Date object or a string
+    return formatDistanceToNow(new Date(date), { addSuffix: true, locale: ar });
+  };
+  
   return (
     <div className="flex h-full flex-col">
       <div className="p-4 space-y-4">
@@ -42,38 +54,51 @@ export default function ChatList({ chats, selectedChatId }: ChatListProps) {
       <Separator />
       <ScrollArea className="flex-1">
         <div className="flex flex-col">
-          {chats.map((chat) => (
-            <button
-              key={chat.id}
-              className={cn(
-                'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50',
-                selectedChatId === chat.id && 'bg-muted'
-              )}
-            >
-              <Avatar className="h-10 w-10 border">
-                <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
-                <AvatarFallback>
-                  {chat.name ? chat.name.charAt(0) : 'C'}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 overflow-hidden">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-semibold truncate">{chat.name}</h3>
-                  <p className="text-xs text-muted-foreground">
-                    {formatDistanceToNow(chat.lastMessageAt, { addSuffix: true, locale: ar })}
+          {!chats ? (
+            Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="flex items-center gap-3 p-4">
+                <Skeleton className="h-10 w-10 rounded-full" />
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-3 w-1/2" />
+                </div>
+              </div>
+            ))
+          ) : (
+            chats.map((chat) => (
+              <button
+                key={chat.id}
+                onClick={() => onSelectChat(chat.id)}
+                className={cn(
+                  'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50',
+                  selectedChatId === chat.id && 'bg-muted'
+                )}
+              >
+                <Avatar className="h-10 w-10 border">
+                  <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
+                  <AvatarFallback>
+                    {chat.name ? chat.name.charAt(0) : chat.remoteId.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1 overflow-hidden">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-semibold truncate">{chat.name || chat.remoteId.split('@')[0]}</h3>
+                    <p className="text-xs text-muted-foreground whitespace-nowrap">
+                      {getFormattedTimestamp(chat.lastMessageAt)}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground truncate">
+                    {chat.lastMessage}
                   </p>
                 </div>
-                <p className="text-sm text-muted-foreground truncate">
-                  {chat.lastMessage}
-                </p>
-              </div>
-              {chat.isUnread && (
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
-                  1
-                </div>
-              )}
-            </button>
-          ))}
+                {chat.isUnread && (
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                    1
+                  </div>
+                )}
+              </button>
+            ))
+          )}
         </div>
       </ScrollArea>
     </div>

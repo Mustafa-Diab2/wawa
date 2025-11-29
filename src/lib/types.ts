@@ -8,17 +8,33 @@ export interface User {
   avatar: string;
 }
 
+export interface WhatsAppSession {
+    id: string;
+    ownerId: string;
+    qr: string;
+    isReady: boolean;
+    createdAt: Timestamp;
+    updatedAt: Timestamp;
+}
+
 export interface Chat {
   id: string;
   remoteId: string;
   name: string | null;
   type: 'INDIVIDUAL' | 'GROUP';
   status: 'INBOX' | 'DONE' | 'ARCHIVED';
-  isUnread: boolean;
-  lastMessage: string;
-  lastMessageAt: Date;
-  avatar: string;
+  isUnread?: boolean;
+  lastMessage?: string;
+  lastMessageAt: Timestamp;
+  avatar?: string;
   assignedTo: string | null;
+  isGroup: boolean;
+  isRead: boolean;
+  isMuted: boolean;
+  isArchived: boolean;
+  sessionId: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 }
 
 export interface Message {
@@ -26,11 +42,14 @@ export interface Message {
   chatId: string;
   sender: string;
   body: string | null;
-  timestamp: Date;
+  timestamp: Timestamp;
   isFromUs: boolean;
   mediaType: 'image' | 'video' | 'audio' | 'document' | null;
   mediaUrl: string | null;
   status: 'sent' | 'delivered' | 'read';
+  userId?: string;
+  sessionId: string;
+  createdAt: Timestamp;
 }
 
 export interface Contact {
@@ -54,13 +73,4 @@ export interface Bot {
   isActive: boolean;
   aiModel?: string;
   aiPrompt?: string;
-}
-
-export interface WhatsAppSession {
-    id: string;
-    ownerId: string;
-    qr: string;
-    isReady: boolean;
-    createdAt: Timestamp;
-    updatedAt: Timestamp;
 }

@@ -1,4 +1,6 @@
 import type { User, Chat, Message, Contact, Category, Bot } from './types';
+import { Timestamp } from 'firebase/firestore';
+
 
 export const mockUser: User = {
   id: 'user-1',
@@ -8,7 +10,10 @@ export const mockUser: User = {
   avatar: 'https://i.pravatar.cc/150?u=user-1',
 };
 
-export const mockChats: Chat[] = [
+// This mock data is being kept for other pages that still use it.
+// The chat page now uses live data from Firebase.
+
+export const mockChats: any[] = [
   {
     id: 'chat-1',
     remoteId: '971501234567@c.us',
@@ -21,54 +26,6 @@ export const mockChats: Chat[] = [
     avatar: 'https://i.pravatar.cc/150?u=sara',
     assignedTo: 'user-1',
   },
-  {
-    id: 'chat-2',
-    remoteId: '971559876543@c.us',
-    name: 'محمد عبد الله',
-    type: 'INDIVIDUAL',
-    status: 'INBOX',
-    isUnread: false,
-    lastMessage: 'شكرًا جزيلاً على المساعدة!',
-    lastMessageAt: new Date(Date.now() - 30 * 60 * 1000),
-    avatar: 'https://i.pravatar.cc/150?u=mohamed',
-    assignedTo: 'user-1',
-  },
-  {
-    id: 'chat-3',
-    remoteId: '966501122334@c.us',
-    name: 'فريق التسويق',
-    type: 'GROUP',
-    status: 'INBOX',
-    isUnread: true,
-    lastMessage: 'علي: لا تنسوا اجتماع الغد الساعة 10 صباحًا.',
-    lastMessageAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    avatar: 'https://i.pravatar.cc/150?u=marketing-team',
-    assignedTo: null,
-  },
-  {
-    id: 'chat-4',
-    remoteId: '971528877665@c.us',
-    name: 'عميل جديد',
-    type: 'INDIVIDUAL',
-    status: 'DONE',
-    isUnread: false,
-    lastMessage: 'تم حل المشكلة، شكرًا.',
-    lastMessageAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
-    avatar: 'https://i.pravatar.cc/150?u=new-client',
-    assignedTo: 'user-1',
-  },
-  {
-    id: 'chat-5',
-    remoteId: '96599887766@c.us',
-    name: 'مجموعة المشروع',
-    type: 'GROUP',
-    status: 'ARCHIVED',
-    isUnread: false,
-    lastMessage: 'تم الانتهاء من المشروع بنجاح.',
-    lastMessageAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
-    avatar: 'https://i.pravatar.cc/150?u=project-group',
-    assignedTo: null,
-  },
 ];
 
 export const mockMessages: { [chatId: string]: Message[] } = {
@@ -78,61 +35,17 @@ export const mockMessages: { [chatId: string]: Message[] } = {
       chatId: 'chat-1',
       sender: 'سارة خالد',
       body: 'مرحبًا، أود الاستفسار عن باقات الأسعار.',
-      timestamp: new Date(Date.now() - 10 * 60 * 1000),
+      timestamp: Timestamp.fromMillis(Date.now() - 10 * 60 * 1000),
       isFromUs: false,
       mediaType: null,
       mediaUrl: null,
       status: 'read',
-    },
-    {
-      id: 'msg-1-2',
-      chatId: 'chat-1',
-      sender: 'أحمد الرئيسي',
-      body: 'أهلاً بكِ سارة. يسعدنا خدمتك. لدينا عدة باقات تناسب الاحتياجات المختلفة.',
-      timestamp: new Date(Date.now() - 8 * 60 * 1000),
-      isFromUs: true,
-      mediaType: null,
-      mediaUrl: null,
-      status: 'read',
-    },
-    {
-      id: 'msg-1-3',
-      chatId: 'chat-1',
-      sender: 'سارة خالد',
-      body: 'ممتاز، هل يمكن إرسال تفاصيل الباقة الاحترافية؟',
-      timestamp: new Date(Date.now() - 6 * 60 * 1000),
-      isFromUs: false,
-      mediaType: null,
-      mediaUrl: null,
-      status: 'read',
-    },
-    {
-      id: 'msg-1-4',
-      chatId: 'chat-1',
-      sender: 'أحمد الرئيسي',
-      body: 'تمام، سأرسل لك التفاصيل الآن.',
-      timestamp: new Date(Date.now() - 5 * 60 * 1000),
-      isFromUs: true,
-      mediaType: null,
-      mediaUrl: null,
-      status: 'delivered',
+      sessionId: 'session-1',
+      createdAt: Timestamp.fromMillis(Date.now() - 10 * 60 * 1000),
     },
   ],
-  'chat-2': [
-    {
-      id: 'msg-2-1',
-      chatId: 'chat-2',
-      sender: 'محمد عبد الله',
-      body: 'شكرًا جزيلاً على المساعدة!',
-      timestamp: new Date(Date.now() - 30 * 60 * 1000),
-      isFromUs: false,
-      mediaType: null,
-      mediaUrl: null,
-      status: 'read',
-    },
-  ],
-  // Add more messages for other chats if needed
 };
+
 
 export const mockContacts: Contact[] = [
   {
