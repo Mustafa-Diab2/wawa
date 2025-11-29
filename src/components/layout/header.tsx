@@ -24,9 +24,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { mockUser } from "@/lib/mock-data";
 import { useIsMobile } from "@/hooks/use-mobile";
 import WaCrmLogo from "../icons/wacrm-logo";
+import { useAuth } from "@/firebase";
+import { signOut } from "firebase/auth";
 
 export default function AppHeader() {
   const isMobile = useIsMobile();
+  const auth = useAuth();
+
+  const handleSignOut = () => {
+    if (auth) {
+      signOut(auth);
+    }
+  };
+
   return (
     <header className="flex h-16 shrink-0 items-center gap-4 border-b bg-card px-4 md:px-6">
       <div className="flex items-center gap-2">
@@ -73,7 +83,7 @@ export default function AppHeader() {
               <span>الإعدادات</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSignOut}>
               <LogOut className="mr-2 h-4 w-4" />
               <span>تسجيل الخروج</span>
             </DropdownMenuItem>

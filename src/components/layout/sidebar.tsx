@@ -20,6 +20,8 @@ import {
   LogOut,
 } from 'lucide-react';
 import WaCrmLogo from '../icons/wacrm-logo';
+import { useAuth } from '@/firebase';
+import { signOut } from 'firebase/auth';
 
 const menuItems = [
   { href: '/dashboard', label: 'لوحة التحكم', icon: LayoutGrid },
@@ -32,10 +34,18 @@ const menuItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const auth = useAuth();
 
   const isActive = (href: string) => {
     return pathname === href || (href !== '/dashboard' && pathname.startsWith(href));
   };
+
+  const handleSignOut = () => {
+    if (auth) {
+      signOut(auth);
+    }
+  };
+
 
   return (
     <>
@@ -73,7 +83,7 @@ export default function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip={{ children: 'تسجيل الخروج', side: 'left' }}>
+              <SidebarMenuButton onClick={handleSignOut} tooltip={{ children: 'تسجيل الخروج', side: 'left' }}>
                 <LogOut />
                 <span>تسجيل الخروج</span>
               </SidebarMenuButton>
