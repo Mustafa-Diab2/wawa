@@ -32,6 +32,10 @@ service cloud.firestore {
     function isSessionOwner(sessionId) {
       return isSignedIn() && get(/databases/$(database)/documents/whatsappSessions/$(sessionId)).data.ownerId == request.auth.uid;
     }
+
+    function isResourceOwner() {
+      return isSignedIn() && resource.data.ownerId == request.auth.uid;
+    }
     
     function newDocHasCorrectOwner(userId) {
       return request.resource.data.userId == userId;
@@ -50,12 +54,12 @@ service cloud.firestore {
     }
 
     match /whatsappSessions/{sessionId} {
-      allow get: if isSessionOwner(sessionId);
-      allow list: if isSignedIn() && query.filters.size() == 1 && query.filters[0][0] == 'ownerId' && query.filters[0][2] == request.auth.uid;
+      allow get: if isResourceOwner();
+      allow list: if isSignedIn() && request.query.filters.size() == 1 && request.query.filters[0][0] == 'ownerId' && request.query.filters[0][2] == request.auth.uid;
       allow create: if isSignedIn() && request.resource.data.ownerId == request.auth.uid;
       // Allow external process to update QR and status, but only owner can change other fields
-      allow update: if (isSessionOwner(sessionId) && isExistingDoc() && request.resource.data.ownerId == resource.data.ownerId) || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['qr', 'isReady', 'updatedAt']));
-      allow delete: if isSessionOwner(sessionId) && isExistingDoc();
+      allow update: if (isResourceOwner() && isExistingDoc() && request.resource.data.ownerId == resource.data.ownerId) || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['qr', 'isReady', 'updatedAt']));
+      allow delete: if isResourceOwner() && isExistingDoc();
     }
 
     match /whatsappSessions/{sessionId}/chats/{chatId} {
