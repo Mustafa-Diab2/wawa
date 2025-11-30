@@ -8,7 +8,8 @@ import {
   query,
   where,
   getDocs,
-  limit
+  limit,
+  updateDoc
 } from 'firebase/firestore';
 import {
   useFirestore,
@@ -78,7 +79,21 @@ export default function ConnectPage() {
         setIsCreatingSession(false);
     }
   }, [user, firestore, isCreatingSession]);
-  
+
+  const refreshSession = async () => {
+    if (!user || !firestore || !sessionId) return;
+    try {
+      const sessionDocRef = doc(firestore, 'whatsappSessions', sessionId);
+      await updateDoc(sessionDocRef, {
+        qr: '',
+        isReady: false,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (error) {
+       console.error("Error refreshing session:", error);
+    }
+  };
+
   // Effect to handle user login and session creation
   useEffect(() => {
     // If there's no user and auth isn't loading, sign in anonymously.
@@ -170,7 +185,7 @@ export default function ConnectPage() {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-           <Button variant="outline" className="gap-2" onClick={findOrCreateSession} disabled={isLoading}>
+           <Button variant="outline" className="gap-2" onClick={refreshSession} disabled={isLoading}>
             <RefreshCw className="h-4 w-4" />
             تحديث الرمز
           </Button>
