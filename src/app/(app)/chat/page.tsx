@@ -7,7 +7,8 @@ import {
   orderBy,
   limit
 } from 'firebase/firestore';
-import { useFirestore, useUser, useCollection, useMemoFirebase, type Chat, type Message, type WhatsAppSession } from '@/firebase';
+import { useFirestore, useUser, useCollection, useMemoFirebase } from '@/firebase';
+import type { Chat, Message, WhatsAppSession } from '@/lib/types';
 import { Card, CardContent } from "@/components/ui/card";
 import ChatList from "@/components/chat/chat-list";
 import ChatWindow from "@/components/chat/chat-window";

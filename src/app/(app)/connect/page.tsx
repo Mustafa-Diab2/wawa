@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   doc,
   addDoc,
@@ -42,7 +42,7 @@ export default function ConnectPage() {
   const [isCreatingSession, setIsCreatingSession] = useState(false);
 
   // Function to find an existing session or create a new one
-  const findOrCreateSession = async () => {
+  const findOrCreateSession = useCallback(async () => {
     if (!user || !firestore || isCreatingSession) return;
     setIsCreatingSession(true);
 
@@ -77,7 +77,7 @@ export default function ConnectPage() {
     } finally {
         setIsCreatingSession(false);
     }
-  };
+  }, [user, firestore, isCreatingSession]);
   
   // Effect to handle user login and session creation
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function ConnectPage() {
     if (user && firestore && !sessionId) {
       findOrCreateSession();
     }
-  }, [user, isUserLoading, auth, firestore, sessionId]);
+  }, [user, isUserLoading, auth, firestore, sessionId, findOrCreateSession]);
   
   // Hook to get the session document in real-time
   const sessionRef = useMemoFirebase(
@@ -100,7 +100,7 @@ export default function ConnectPage() {
   const { data: session, isLoading: isSessionLoading } = useDoc<WhatsAppSession>(sessionRef);
 
 
-  const isLoading = isUserLoading || isCreatingSession || (sessionId && isSessionLoading);
+  const isLoading = Boolean(isUserLoading || isCreatingSession || (sessionId && isSessionLoading));
   const connectionStatus = session?.isReady ? "connected" : "disconnected";
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(session?.qr || '')}`;
 

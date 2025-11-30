@@ -77,7 +77,7 @@ export default function BotsPage() {
       ) : (
         <div className="flex flex-col items-center justify-center h-64 border-2 border-dashed rounded-lg">
             <p className="text-muted-foreground">لم تقم بإنشاء أي بوتات بعد.</p>
-            <p className="text-sm text-muted-foreground">انقر على "إنشاء بوت جديد" للبدء.</p>
+            <p className="text-sm text-muted-foreground">انقر على {"\"إنشاء بوت جديد\""} للبدء.</p>
         </div>
       )}
     </div>

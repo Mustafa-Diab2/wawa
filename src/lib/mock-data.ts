@@ -55,6 +55,9 @@ export const mockContacts: Contact[] = [
     email: 'sara.k@example.com',
     categoryId: 'cat-1',
     avatar: 'https://i.pravatar.cc/150?u=sara',
+    userId: 'user-1',
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
   },
   {
     id: 'contact-2',
@@ -63,6 +66,9 @@ export const mockContacts: Contact[] = [
     email: 'mo.abdullah@example.com',
     categoryId: 'cat-2',
     avatar: 'https://i.pravatar.cc/150?u=mohamed',
+    userId: 'user-1',
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
   },
   {
     id: 'contact-3',
@@ -71,13 +77,16 @@ export const mockContacts: Contact[] = [
     email: 'ali.h@example.com',
     categoryId: 'cat-1',
     avatar: 'https://i.pravatar.cc/150?u=ali-hassan',
+    userId: 'user-1',
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
   },
 ];
 
 export const mockCategories: Category[] = [
-  { id: 'cat-1', name: 'عملاء محتملون' },
-  { id: 'cat-2', name: 'عملاء حاليون' },
-  { id: 'cat-3', name: 'VIP' },
+  { id: 'cat-1', name: 'عملاء محتملون', userId: 'user-1', createdAt: Timestamp.now(), updatedAt: Timestamp.now() },
+  { id: 'cat-2', name: 'عملاء حاليون', userId: 'user-1', createdAt: Timestamp.now(), updatedAt: Timestamp.now() },
+  { id: 'cat-3', name: 'VIP', userId: 'user-1', createdAt: Timestamp.now(), updatedAt: Timestamp.now() },
 ];
 
 export const mockBots: Bot[] = [
@@ -86,6 +95,9 @@ export const mockBots: Bot[] = [
     name: 'بوت الترحيب',
     type: 'welcome',
     isActive: true,
+    userId: 'user-1',
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
   },
   {
     id: 'bot-2',
@@ -94,11 +106,17 @@ export const mockBots: Bot[] = [
     isActive: true,
     aiModel: 'gpt-4o-mini',
     aiPrompt: 'أنت مساعد ذكي لخدمة العملاء. مهمتك هي الإجابة على استفساراتهم بأسلوب ودود ومحترف.',
+    userId: 'user-1',
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
   },
   {
     id: 'bot-3',
     name: 'بوت الرد التلقائي (خارج أوقات العمل)',
     type: 'auto',
     isActive: false,
+    userId: 'user-1',
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
   },
 ];
