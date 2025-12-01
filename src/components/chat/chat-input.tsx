@@ -10,9 +10,10 @@ import { respondToInquiry } from '@/ai/flows/respond-to-customer-inquiries';
 
 interface ChatInputProps {
   chat: Chat;
+  sessionId: string;
 }
 
-export default function ChatInput({ chat }: ChatInputProps) {
+export default function ChatInput({ chat, sessionId }: ChatInputProps) {
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isAiResponding, setIsAiResponding] = useState(false);
@@ -20,18 +21,18 @@ export default function ChatInput({ chat }: ChatInputProps) {
   const { user } = useUser();
 
   const handleSendMessage = async () => {
-    if (!message.trim() || !firestore || !user || !chat) return;
+    if (!message.trim() || !firestore || !user || !chat || !sessionId) return;
 
     setIsSending(true);
 
-    const messagesColRef = collection(firestore, `whatsappSessions/${chat.sessionId}/chats/${chat.id}/messages`);
+    const messagesColRef = collection(firestore, `whatsappSessions/${sessionId}/chats/${chat.id}/messages`);
     
     const messageData = {
       body: message,
       chatId: chat.id,
       isFromUs: true,
       sender: 'me',
-      sessionId: chat.sessionId,
+      sessionId: sessionId,
       status: 'pending',
       timestamp: serverTimestamp(),
       userId: user.uid,

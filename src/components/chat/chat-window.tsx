@@ -12,9 +12,10 @@ interface ChatWindowProps {
   chat: Chat;
   messages: Message[];
   messagesLoading: boolean;
+  sessionId: string;
 }
 
-export default function ChatWindow({ chat, messages, messagesLoading }: ChatWindowProps) {
+export default function ChatWindow({ chat, messages, messagesLoading, sessionId }: ChatWindowProps) {
   return (
     <Card className="flex flex-col h-full">
       <div className="flex items-center p-4 border-b">
@@ -50,7 +51,7 @@ export default function ChatWindow({ chat, messages, messagesLoading }: ChatWind
       </ScrollArea>
 
       <div className="p-4 border-t">
-        <ChatInput chat={chat} />
+        <ChatInput chat={chat} sessionId={sessionId} />
       </div>
     </Card>
   );
