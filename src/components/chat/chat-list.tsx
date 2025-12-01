@@ -20,12 +20,20 @@ interface ChatListProps {
 export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatListProps) {
   const getFormattedTimestamp = (date: any) => {
     if (!date) return '';
-    // Check if it's a Firebase Timestamp and convert it
-    if (typeof date.toDate === 'function') {
-      return formatDistanceToNow(date.toDate(), { addSuffix: true, locale: ar });
+    try {
+      // Check if it's a Firebase Timestamp and convert it
+      if (typeof date.toDate === 'function') {
+        return formatDistanceToNow(date.toDate(), { addSuffix: true, locale: ar });
+      }
+      // Assume it's already a Date object or a string
+      const dateObj = new Date(date);
+      if (isNaN(dateObj.getTime())) {
+        return '';
+      }
+      return formatDistanceToNow(dateObj, { addSuffix: true, locale: ar });
+    } catch (e) {
+      return '';
     }
-    // Assume it's already a Date object or a string
-    return formatDistanceToNow(new Date(date), { addSuffix: true, locale: ar });
   };
   
   return (
