@@ -1,4 +1,4 @@
-import { makeWASocket, useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore } from '@whiskeysockets/baileys';
 import * as admin from 'firebase-admin';
 import pino from 'pino';
 
@@ -32,7 +32,10 @@ async function startSession(sessionId: string) {
         const { state, saveCreds } = await useMultiFileAuthState(`auth_info_baileys/${sessionId}`);
 
         const sock = makeWASocket({
-            auth: state,
+            auth: {
+                creds: state.creds,
+                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' }) as any),
+            },
             printQRInTerminal: false,
             logger: pino({ level: 'silent' }) as any,
             // Mobile API is often more stable for bots
@@ -91,30 +94,34 @@ async function startSession(sessionId: string) {
                     // Fetch and save existing chats after connection
                     console.log(`Fetching chats for session ${sessionId}...`);
 
-                    // Fetch both groups and individual chats
-                    const groups = await sock.groupFetchAllParticipating();
-                    const groupIds = Object.keys(groups);
-                    console.log(`Found ${groupIds.length} group chats`);
+                    // Fetch groups
+                    try {
+                        const groups = await sock.groupFetchAllParticipating();
+                        const groupIds = Object.keys(groups);
+                        console.log(`Found ${groupIds.length} group chats`);
 
-                    // Save group chats
-                    for (const chatId of groupIds) {
-                        const chat = groups[chatId];
-                        try {
-                            await db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId).set({
-                                id: chatId,
-                                remoteId: chatId,
-                                name: chat.subject || chat.id,
-                                unreadCount: 0,
-                                lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
-                                updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                            }, { merge: true });
-                        } catch (e) {
-                            console.error(`Error saving group chat ${chatId}:`, e);
+                        for (const chatId of groupIds) {
+                            const chat = groups[chatId];
+                            try {
+                                await db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId).set({
+                                    id: chatId,
+                                    remoteId: chatId,
+                                    name: chat.subject || chat.id,
+                                    unreadCount: 0,
+                                    lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
+                                    updatedAt: admin.firestore.FieldValue.serverTimestamp()
+                                }, { merge: true });
+                            } catch (e) {
+                                console.error(`Error saving group chat ${chatId}:`, e);
+                            }
                         }
+                    } catch (e) {
+                        console.log(`Could not fetch groups:`, e);
                     }
 
                     // Note: Individual chats will be created automatically when messages arrive
-                    // via the messages.upsert event handler below
+                    // via the messages.upsert and chats.upsert event handlers
+                    console.log(`Finished loading chats for session ${sessionId}`)
                 } catch (e) {
                     console.error(`Error updating connected status for ${sessionId}:`, e);
                 }

@@ -1,4 +1,5 @@
 'use client';
+import { useState, useMemo } from 'react';
 import { Search, Inbox, CheckCircle, Archive } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,39 @@ interface ChatListProps {
   onSelectChat: (chatId: string) => void;
 }
 
+type FilterType = 'ALL' | 'INBOX' | 'DONE' | 'ARCHIVED';
+
 export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatListProps) {
+  const [filter, setFilter] = useState<FilterType>('ALL');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter chats based on status and search
+  const filteredChats = useMemo(() => {
+    if (!chats) return null;
+
+    let filtered = chats;
+
+    // Apply status filter
+    if (filter === 'INBOX') {
+      filtered = filtered.filter(chat => chat.status === 'INBOX' || !chat.status);
+    } else if (filter === 'DONE') {
+      filtered = filtered.filter(chat => chat.status === 'DONE');
+    } else if (filter === 'ARCHIVED') {
+      filtered = filtered.filter(chat => chat.isArchived);
+    }
+
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(chat =>
+        (chat.name?.toLowerCase().includes(query)) ||
+        (chat.remoteId?.toLowerCase().includes(query)) ||
+        (chat.lastMessage?.toLowerCase().includes(query))
+      );
+    }
+
+    return filtered;
+  }, [chats, filter, searchQuery]);
   const getFormattedTimestamp = (date: any) => {
     if (!date) return '';
     try {
@@ -42,18 +75,38 @@ export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatLi
         <h2 className="text-xl font-bold font-headline">المحادثات</h2>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="بحث..." className="pl-9" />
+          <Input
+            placeholder="بحث..."
+            className="pl-9"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
         <div className="flex justify-between gap-1">
-          <Button variant="ghost" size="sm" className="flex-1 gap-2">
+          <Button
+            variant={filter === 'ALL' ? 'default' : 'ghost'}
+            size="sm"
+            className="flex-1 gap-2"
+            onClick={() => setFilter('ALL')}
+          >
             <Inbox className="h-4 w-4" />
             الكل
           </Button>
-          <Button variant="ghost" size="sm" className="flex-1 gap-2 text-primary">
+          <Button
+            variant={filter === 'DONE' ? 'default' : 'ghost'}
+            size="sm"
+            className="flex-1 gap-2"
+            onClick={() => setFilter('DONE')}
+          >
             <CheckCircle className="h-4 w-4" />
             تم
           </Button>
-          <Button variant="ghost" size="sm" className="flex-1 gap-2">
+          <Button
+            variant={filter === 'ARCHIVED' ? 'default' : 'ghost'}
+            size="sm"
+            className="flex-1 gap-2"
+            onClick={() => setFilter('ARCHIVED')}
+          >
             <Archive className="h-4 w-4" />
             مؤرشف
           </Button>
@@ -62,7 +115,7 @@ export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatLi
       <Separator />
       <ScrollArea className="flex-1">
         <div className="flex flex-col">
-          {!chats ? (
+          {!filteredChats ? (
             Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="flex items-center gap-3 p-4">
                 <Skeleton className="h-10 w-10 rounded-full" />
@@ -72,8 +125,12 @@ export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatLi
                 </div>
               </div>
             ))
+          ) : filteredChats.length === 0 ? (
+            <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
+              <p>لا توجد محادثات</p>
+            </div>
           ) : (
-            chats.map((chat) => (
+            filteredChats.map((chat) => (
               <button
                 key={chat.id}
                 onClick={() => onSelectChat(chat.id)}
