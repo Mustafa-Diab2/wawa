@@ -1,0 +1,15 @@
+# Authentication files
+auth_info_baileys/
+
+# Log files
+worker.log
+*.log
+
+# Test files
+test-worker.ts
+src/test-workflow.ts
+
+# Environment files (Vercel manages these separately)
+.env
+.env.local
+.env*.local
