@@ -77,12 +77,12 @@ export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatLi
                 <Avatar className="h-10 w-10 border">
                   <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
                   <AvatarFallback>
-                    {chat.name ? chat.name.charAt(0) : chat.remoteId.charAt(0)}
+                    {chat.name ? chat.name.charAt(0) : (chat.remoteId || chat.id || '?').charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 overflow-hidden">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold truncate">{chat.name || chat.remoteId.split('@')[0]}</h3>
+                    <h3 className="font-semibold truncate">{chat.name || (chat.remoteId || chat.id || '').split('@')[0]}</h3>
                     <p className="text-xs text-muted-foreground whitespace-nowrap">
                       {getFormattedTimestamp(chat.lastMessageAt)}
                     </p>

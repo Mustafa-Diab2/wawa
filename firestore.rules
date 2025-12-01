@@ -54,12 +54,11 @@ service cloud.firestore {
     }
 
     match /whatsappSessions/{sessionId} {
-      allow get: if isResourceOwner();
-      allow list: if isResourceOwner();
+      allow read: if isResourceOwner();
       allow create: if isSignedIn() && request.resource.data.ownerId == request.auth.uid;
       // Allow external process to update QR and status, but only owner can change other fields
-      allow update: if (isResourceOwner() && isExistingDoc() && request.resource.data.ownerId == resource.data.ownerId) || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['qr', 'isReady', 'updatedAt']));
-      allow delete: if isResourceOwner() && isExistingDoc();
+      allow update: if (isResourceOwner() && request.resource.data.ownerId == request.auth.uid) || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['qr', 'isReady', 'updatedAt']));
+      allow delete: if isResourceOwner();
     }
 
     match /whatsappSessions/{sessionId}/chats/{chatId} {

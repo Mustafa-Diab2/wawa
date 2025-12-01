@@ -27,7 +27,6 @@ export default function ChatPage() {
         ? query(
             collection(firestore, 'whatsappSessions'),
             where('ownerId', '==', user.uid),
-            orderBy('createdAt', 'desc'),
             limit(1)
           )
         : null,

@@ -119,14 +119,14 @@ export default function ContactForm({ contact, categories, onFormSubmit }: Conta
           render={({ field }) => (
             <FormItem className="grid grid-cols-4 items-center gap-4">
               <FormLabel className="text-right">الفئة</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                <Select onValueChange={(val) => field.onChange(val === "none" ? null : val)} defaultValue={field.value || "none"}>
                      <FormControl>
                         <SelectTrigger className="col-span-3">
                             <SelectValue placeholder="اختر فئة (اختياري)" />
                         </SelectTrigger>
                      </FormControl>
                     <SelectContent>
-                        <SelectItem value=""><em>بدون فئة</em></SelectItem>
+                        <SelectItem value="none"><em>بدون فئة</em></SelectItem>
                         {categories.map(cat => (
                             <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
                         ))}

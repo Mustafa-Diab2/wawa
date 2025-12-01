@@ -32,7 +32,7 @@ export default function ChatInput({ chat }: ChatInputProps) {
       isFromUs: true,
       sender: 'me',
       sessionId: chat.sessionId,
-      status: 'sent',
+      status: 'pending',
       timestamp: serverTimestamp(),
       userId: user.uid,
       createdAt: serverTimestamp(),
