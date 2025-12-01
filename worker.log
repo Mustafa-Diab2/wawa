@@ -1,3 +1,4 @@
+nohup: ignoring input
 
 > nextn@0.1.0 worker
 > tsx src/worker.ts
@@ -51,339 +52,56 @@ New session detected: r25y3hS2ux5V3hJKtfDz
 Starting session manager for: r25y3hS2ux5V3hJKtfDz
 New session detected: sehDPJcNzcpb6Gg7qDXs
 Starting session manager for: sehDPJcNzcpb6Gg7qDXs
+New session detected: test-session-1764521527367
+Starting session manager for: test-session-1764521527367
+New session detected: test-session-1764521638438
+Starting session manager for: test-session-1764521638438
 New session detected: xYwK2EJTupLbaRXGZ0U6
 Starting session manager for: xYwK2EJTupLbaRXGZ0U6
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session xYwK2EJTupLbaRXGZ0U6
 QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
+QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
 QR Code generated for session oLIUWSEGZ76vN225Jq40
-Session EBIIIOhSn9f3cK7nLgvo connected.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
+QR Code generated for session 6I2jzyO4mdwukL1RlqMy
+QR Code generated for session sehDPJcNzcpb6Gg7qDXs
+QR Code generated for session KIwrU157jp62zuB3aYzG
+QR Code generated for session LVQCPo0rZRW5T8U5uRTB
+QR Code generated for session cBhCWigDCAZKw9SbZJdW
+QR Code generated for session UeStIVVwNfR8UTMUBdqN
+QR Code generated for session r25y3hS2ux5V3hJKtfDz
+QR Code generated for session test-session-1764521527367
+QR Code generated for session YW9UvkPVjfoF14sBnEz5
+QR Code generated for session test-session-1764521638438
+QR Code generated for session SlD5bBS1jHFaBdc2XbCN
 Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
 Session W8X62zWe5WA3wzL8X5rs logged out.
 Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
 Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
 Session GEGJvQ2heLEJHUq6cBuo logged out.
 Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+New session detected: test-session-1764521863195
+Starting session manager for: test-session-1764521863195
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
 Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
 Session W8X62zWe5WA3wzL8X5rs logged out.
+QR Code generated for session test-session-1764521863195
 Starting session manager for: W8X62zWe5WA3wzL8X5rs
 Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
 Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
 Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
 Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
 Session miZRQntit4ttCRnWxRZf logged out.
 Starting session manager for: miZRQntit4ttCRnWxRZf
-Session xYwK2EJTupLbaRXGZ0U6 disconnected by user. Logging out.
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
 Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
 Session xYwK2EJTupLbaRXGZ0U6 logged out.
 Starting session manager for: xYwK2EJTupLbaRXGZ0U6
-QR Code generated for session xYwK2EJTupLbaRXGZ0U6
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
 Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
 Session fS7kw9R77PkMZf7vFi8F logged out.
 Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
@@ -392,1135 +110,160 @@ Starting session manager for: fS7kw9R77PkMZf7vFi8F
 Starting session manager for: W8X62zWe5WA3wzL8X5rs
 Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
 Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
 Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
 Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
 Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
 Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
 Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
 Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
 Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
 Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: true
-Starting session manager for: xYwK2EJTupLbaRXGZ0U6
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Session xYwK2EJTupLbaRXGZ0U6 connected.
-Saved message ACC9ED3760F1048601C427D719F23006 to chat 201553676986@s.whatsapp.net
-Saved message AC94754F90E29A1DD8896E7DE2A2A996 to chat 201553676986@s.whatsapp.net
-Saved message AC01008AA639E40E4F331B719D99A5F6 to chat 201553676986@s.whatsapp.net
-Saved message ACE9AFD578D64DC810B69C47ABA0AA1C to chat 201553676986@s.whatsapp.net
-Saved message AC7B5D8FFAA940A9ACB08F74C90CC6D1 to chat 201553676986@s.whatsapp.net
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Saved message AC48B767EE24D9DB0109D66CD7B665D0 to chat 201553676986@s.whatsapp.net
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Saved message AC28F1CB823A5D2C31D840A1EE8B5644 to chat 201553676986@s.whatsapp.net
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Saved message ACC0361E2544F7532DE0A455BAFD74BF to chat 201553676986@s.whatsapp.net
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for UeStIVVwNfR8UTMUBdqN. Reconnecting: true
-Starting session manager for: UeStIVVwNfR8UTMUBdqN
-Connection closed for LVQCPo0rZRW5T8U5uRTB. Reconnecting: true
-Starting session manager for: LVQCPo0rZRW5T8U5uRTB
-Connection closed for SlD5bBS1jHFaBdc2XbCN. Reconnecting: true
-Starting session manager for: SlD5bBS1jHFaBdc2XbCN
-Connection closed for KIwrU157jp62zuB3aYzG. Reconnecting: true
-Starting session manager for: KIwrU157jp62zuB3aYzG
-Connection closed for sehDPJcNzcpb6Gg7qDXs. Reconnecting: true
-Starting session manager for: sehDPJcNzcpb6Gg7qDXs
-Connection closed for cBhCWigDCAZKw9SbZJdW. Reconnecting: true
-Starting session manager for: cBhCWigDCAZKw9SbZJdW
-Connection closed for 6I2jzyO4mdwukL1RlqMy. Reconnecting: true
-Starting session manager for: 6I2jzyO4mdwukL1RlqMy
-Connection closed for YW9UvkPVjfoF14sBnEz5. Reconnecting: true
-Starting session manager for: YW9UvkPVjfoF14sBnEz5
-Connection closed for 1sbqZCeRkRTEtm4Qb2mm. Reconnecting: true
-Starting session manager for: 1sbqZCeRkRTEtm4Qb2mm
-Connection closed for P7i3Hw9iI6RqhIZx8w4a. Reconnecting: true
-Starting session manager for: P7i3Hw9iI6RqhIZx8w4a
-Connection closed for r25y3hS2ux5V3hJKtfDz. Reconnecting: true
-Starting session manager for: r25y3hS2ux5V3hJKtfDz
-Connection closed for oLIUWSEGZ76vN225Jq40. Reconnecting: true
-Starting session manager for: oLIUWSEGZ76vN225Jq40
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-QR Code generated for session 6I2jzyO4mdwukL1RlqMy
-QR Code generated for session YW9UvkPVjfoF14sBnEz5
-QR Code generated for session P7i3Hw9iI6RqhIZx8w4a
-QR Code generated for session cBhCWigDCAZKw9SbZJdW
-QR Code generated for session UeStIVVwNfR8UTMUBdqN
-QR Code generated for session LVQCPo0rZRW5T8U5uRTB
-QR Code generated for session SlD5bBS1jHFaBdc2XbCN
-QR Code generated for session 1sbqZCeRkRTEtm4Qb2mm
-QR Code generated for session KIwrU157jp62zuB3aYzG
-QR Code generated for session r25y3hS2ux5V3hJKtfDz
-QR Code generated for session oLIUWSEGZ76vN225Jq40
-QR Code generated for session sehDPJcNzcpb6Gg7qDXs
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
-Session fS7kw9R77PkMZf7vFi8F logged out.
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Starting session manager for: fS7kw9R77PkMZf7vFi8F
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
-Session miZRQntit4ttCRnWxRZf logged out.
-Starting session manager for: miZRQntit4ttCRnWxRZf
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
-Session W8X62zWe5WA3wzL8X5rs logged out.
-Starting session manager for: W8X62zWe5WA3wzL8X5rs
-Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
-Session 1AJzO9YRzdBH3Iko9pkZ logged out.
-Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
-Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
-Session GEGJvQ2heLEJHUq6cBuo logged out.
-Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
-Session EBIIIOhSn9f3cK7nLgvo logged out.
-Starting session manager for: GEGJvQ2heLEJHUq6cBuo
-Starting session manager for: EBIIIOhSn9f3cK7nLgvo
-Session xYwK2EJTupLbaRXGZ0U6 disconnected by user. Logging out.
 Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
 Session xYwK2EJTupLbaRXGZ0U6 logged out.
 Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
 Starting session manager for: xYwK2EJTupLbaRXGZ0U6
-Session xYwK2EJTupLbaRXGZ0U6 disconnected by user. Logging out.
-/home/user/studio/node_modules/@whiskeysockets/baileys/lib/Socket/socket.js:50
-            throw new Boom('Connection Closed', { statusCode: DisconnectReason.connectionClosed });
-                  ^
-
-
-Error: Connection Closed
-    at sendRawMessage (/home/user/studio/node_modules/@whiskeysockets/baileys/lib/Socket/socket.js:50:19)
-    at sendNode (/home/user/studio/node_modules/@whiskeysockets/baileys/lib/Socket/socket.js:69:16)
-    at Object.logout (/home/user/studio/node_modules/@whiskeysockets/baileys/lib/Socket/socket.js:564:19)
-    at <anonymous> (/home/user/studio/src/worker.ts:240:27)
-    at Array.forEach (<anonymous>)
-    at <anonymous> (/home/user/studio/src/worker.ts:227:31)
-    at QueryWatch.onNext (/home/user/studio/node_modules/@google-cloud/firestore/build/src/reference/query.js:1048:13)
-    at QueryWatch.pushSnapshot (/home/user/studio/node_modules/@google-cloud/firestore/build/src/watch.js:476:18)
-    at QueryWatch.onData (/home/user/studio/node_modules/@google-cloud/firestore/build/src/watch.js:360:26)
-    at PassThrough.<anonymous> (/home/user/studio/node_modules/@google-cloud/firestore/build/src/watch.js:322:26) {
-  data: null,
-  isBoom: true,
-  isServer: false,
-  output: {
-    statusCode: 428,
-    payload: {
-      statusCode: 428,
-      error: 'Precondition Required',
-      message: 'Connection Closed'
-    },
-    headers: {}
-  }
-}
-
-Node.js v20.19.1
+Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
+Session W8X62zWe5WA3wzL8X5rs logged out.
+Starting session manager for: W8X62zWe5WA3wzL8X5rs
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Starting session manager for: miZRQntit4ttCRnWxRZf
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
+Session W8X62zWe5WA3wzL8X5rs logged out.
+Starting session manager for: W8X62zWe5WA3wzL8X5rs
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
+Session W8X62zWe5WA3wzL8X5rs logged out.
+Starting session manager for: W8X62zWe5WA3wzL8X5rs
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+Connection closed for 1AJzO9YRzdBH3Iko9pkZ. Reconnecting: false
+Session 1AJzO9YRzdBH3Iko9pkZ logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
+Starting session manager for: 1AJzO9YRzdBH3Iko9pkZ
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
+Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
+Session W8X62zWe5WA3wzL8X5rs logged out.
+Starting session manager for: W8X62zWe5WA3wzL8X5rs
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
+Session W8X62zWe5WA3wzL8X5rs logged out.
+Starting session manager for: W8X62zWe5WA3wzL8X5rs
+Connection closed for xYwK2EJTupLbaRXGZ0U6. Reconnecting: false
+Session xYwK2EJTupLbaRXGZ0U6 logged out.
+Starting session manager for: xYwK2EJTupLbaRXGZ0U6
+Connection closed for miZRQntit4ttCRnWxRZf. Reconnecting: false
+Session miZRQntit4ttCRnWxRZf logged out.
+Starting session manager for: miZRQntit4ttCRnWxRZf
+Connection closed for W8X62zWe5WA3wzL8X5rs. Reconnecting: false
+Session W8X62zWe5WA3wzL8X5rs logged out.
+Starting session manager for: W8X62zWe5WA3wzL8X5rs
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
+Connection closed for EBIIIOhSn9f3cK7nLgvo. Reconnecting: false
+Session EBIIIOhSn9f3cK7nLgvo logged out.
+Starting session manager for: EBIIIOhSn9f3cK7nLgvo
+Connection closed for fS7kw9R77PkMZf7vFi8F. Reconnecting: false
+Session fS7kw9R77PkMZf7vFi8F logged out.
+Starting session manager for: fS7kw9R77PkMZf7vFi8F
+Connection closed for GEGJvQ2heLEJHUq6cBuo. Reconnecting: false
+Session GEGJvQ2heLEJHUq6cBuo logged out.
+Starting session manager for: GEGJvQ2heLEJHUq6cBuo
