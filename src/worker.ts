@@ -87,6 +87,27 @@ async function startSession(sessionId: string) {
                         qr: '',
                         updatedAt: admin.firestore.FieldValue.serverTimestamp()
                     });
+
+                    // Fetch and save existing chats after connection
+                    console.log(`Fetching chats for session ${sessionId}...`);
+                    const chats = await sock.groupFetchAllParticipating();
+                    const chatIds = Object.keys(chats);
+                    console.log(`Found ${chatIds.length} group chats`);
+
+                    for (const chatId of chatIds) {
+                        const chat = chats[chatId];
+                        try {
+                            await db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId).set({
+                                id: chatId,
+                                remoteId: chatId,
+                                name: chat.subject || chat.id,
+                                unreadCount: 0,
+                                updatedAt: admin.firestore.FieldValue.serverTimestamp()
+                            }, { merge: true });
+                        } catch (e) {
+                            console.error(`Error saving group chat ${chatId}:`, e);
+                        }
+                    }
                 } catch (e) {
                     console.error(`Error updating connected status for ${sessionId}:`, e);
                 }
