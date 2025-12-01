@@ -102,6 +102,7 @@ async function startSession(sessionId: string) {
                                 remoteId: chatId,
                                 name: chat.subject || chat.id,
                                 unreadCount: 0,
+                                lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
                                 updatedAt: admin.firestore.FieldValue.serverTimestamp()
                             }, { merge: true });
                         } catch (e) {
