@@ -114,11 +114,12 @@ export default function ChatPage() {
         />
       </Card>
       <div className="md:col-span-7 lg:col-span-4 flex flex-col h-full">
-        {selectedChat ? (
+        {selectedChat && activeSessionId ? (
           <ChatWindow
             chat={selectedChat}
             messages={messages || []}
             messagesLoading={messagesLoading}
+            sessionId={activeSessionId}
           />
         ) : (
            <div className="flex h-full items-center justify-center">
