@@ -30,12 +30,11 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
     const messageData = {
       body: message,
       chatId: chat.id,
-      isFromUs: true,
-      sender: 'me',
+      isFromMe: true,
+      text: message,
       sessionId: sessionId,
       status: 'pending',
       timestamp: serverTimestamp(),
-      userId: user.uid,
       createdAt: serverTimestamp(),
     };
     

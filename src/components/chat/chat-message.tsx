@@ -13,8 +13,16 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const isFromUs = message.isFromUs;
 
   const getFormattedTimestamp = (ts: Date | Timestamp) => {
-    const date = ts instanceof Timestamp ? ts.toDate() : ts;
-    return format(date, 'HH:mm', { locale: ar });
+    try {
+      const date = ts instanceof Timestamp ? ts.toDate() : ts;
+      if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+        return '';
+      }
+      return format(date, 'HH:mm', { locale: ar });
+    } catch (e) {
+      console.error('Error formatting timestamp:', e);
+      return '';
+    }
   };
 
   return (

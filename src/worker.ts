@@ -90,12 +90,15 @@ async function startSession(sessionId: string) {
 
                     // Fetch and save existing chats after connection
                     console.log(`Fetching chats for session ${sessionId}...`);
-                    const chats = await sock.groupFetchAllParticipating();
-                    const chatIds = Object.keys(chats);
-                    console.log(`Found ${chatIds.length} group chats`);
 
-                    for (const chatId of chatIds) {
-                        const chat = chats[chatId];
+                    // Fetch both groups and individual chats
+                    const groups = await sock.groupFetchAllParticipating();
+                    const groupIds = Object.keys(groups);
+                    console.log(`Found ${groupIds.length} group chats`);
+
+                    // Save group chats
+                    for (const chatId of groupIds) {
+                        const chat = groups[chatId];
                         try {
                             await db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId).set({
                                 id: chatId,
@@ -109,6 +112,9 @@ async function startSession(sessionId: string) {
                             console.error(`Error saving group chat ${chatId}:`, e);
                         }
                     }
+
+                    // Note: Individual chats will be created automatically when messages arrive
+                    // via the messages.upsert event handler below
                 } catch (e) {
                     console.error(`Error updating connected status for ${sessionId}:`, e);
                 }
