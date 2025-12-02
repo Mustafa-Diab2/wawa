@@ -43,6 +43,76 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     }
   };
 
+  const renderMedia = () => {
+    if (!message.mediaUrl) return null;
+
+    switch (message.mediaType) {
+      case 'image':
+        return (
+          <div className="mt-2">
+            <img
+              src={message.mediaUrl}
+              alt={message.body || 'Image'}
+              className="rounded-lg max-w-full h-auto max-h-96 object-contain"
+              loading="lazy"
+            />
+            {message.body && message.body !== '📷 صورة' && (
+              <p className="text-sm mt-1">{message.body}</p>
+            )}
+          </div>
+        );
+
+      case 'sticker':
+        return (
+          <img
+            src={message.mediaUrl}
+            alt="Sticker"
+            className="w-32 h-32 object-contain"
+            loading="lazy"
+          />
+        );
+
+      case 'audio':
+        return (
+          <div className="mt-2">
+            <audio controls className="max-w-full">
+              <source src={message.mediaUrl} type="audio/ogg" />
+              متصفحك لا يدعم تشغيل الصوت
+            </audio>
+          </div>
+        );
+
+      case 'video':
+        return (
+          <div className="mt-2">
+            <video controls className="rounded-lg max-w-full h-auto max-h-96">
+              <source src={message.mediaUrl} type="video/mp4" />
+              متصفحك لا يدعم تشغيل الفيديو
+            </video>
+            {message.body && message.body !== '🎥 فيديو' && (
+              <p className="text-sm mt-1">{message.body}</p>
+            )}
+          </div>
+        );
+
+      case 'document':
+        return (
+          <a
+            href={message.mediaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm hover:underline"
+          >
+            <FileText className="h-4 w-4" />
+            {message.body}
+          </a>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={cn("flex items-end gap-2", isFromUs ? "justify-end" : "justify-start")}>
       <div
@@ -53,10 +123,14 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             : "bg-muted rounded-bl-none"
         )}
       >
-        <p className="text-sm whitespace-pre-wrap flex items-center">
-          {getMediaIcon()}
-          {message.body}
-        </p>
+        {message.mediaType && message.mediaUrl ? (
+          renderMedia()
+        ) : (
+          <p className="text-sm whitespace-pre-wrap flex items-center">
+            {getMediaIcon()}
+            {message.body}
+          </p>
+        )}
       </div>
       <div className="flex flex-col items-center">
          <span className="text-[10px] text-muted-foreground">

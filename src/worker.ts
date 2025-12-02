@@ -1,6 +1,9 @@
-import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore } from '@whiskeysockets/baileys';
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from '@whiskeysockets/baileys';
 import * as admin from 'firebase-admin';
 import pino from 'pino';
+import { createWriteStream } from 'fs';
+import { pipeline } from 'stream/promises';
+import path from 'path';
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
@@ -16,7 +19,46 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+const bucket = admin.storage().bucket();
 const sessions = new Map<string, any>();
+
+// Helper function to download and upload media
+async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: string): Promise<string | null> {
+    try {
+        const buffer = await downloadMediaMessage(
+            msg,
+            'buffer',
+            {},
+            {
+                logger: pino({ level: 'silent' }) as any,
+                reuploadRequest: () => Promise.resolve({} as any)
+            }
+        );
+
+        if (!buffer) return null;
+
+        // Generate unique filename
+        const messageId = msg.key.id;
+        const ext = mediaType === 'audio' ? 'ogg' : mediaType === 'image' ? 'jpg' : mediaType === 'video' ? 'mp4' : mediaType === 'sticker' ? 'webp' : 'bin';
+        const fileName = `media/${sessionId}/${messageId}.${ext}`;
+
+        // Upload to Firebase Storage
+        const file = bucket.file(fileName);
+        await file.save(buffer as Buffer, {
+            metadata: {
+                contentType: mediaType === 'audio' ? 'audio/ogg' : mediaType === 'image' ? 'image/jpeg' : mediaType === 'video' ? 'video/mp4' : mediaType === 'sticker' ? 'image/webp' : 'application/octet-stream',
+            },
+            public: true,
+        });
+
+        // Get public URL
+        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+        return publicUrl;
+    } catch (error) {
+        console.error('Error downloading/uploading media:', error);
+        return null;
+    }
+}
 
 async function startSession(sessionId: string) {
     if (sessions.has(sessionId)) {
@@ -159,20 +201,26 @@ async function startSession(sessionId: string) {
                     } else if (msg.message.imageMessage) {
                         text = msg.message.imageMessage.caption || '📷 صورة';
                         mediaType = 'image';
+                        // Download and upload media
+                        mediaUrl = await downloadAndUploadMedia(msg, 'image', sessionId);
                     } else if (msg.message.videoMessage) {
                         text = msg.message.videoMessage.caption || '🎥 فيديو';
                         mediaType = 'video';
+                        mediaUrl = await downloadAndUploadMedia(msg, 'video', sessionId);
                     } else if (msg.message.audioMessage) {
                         const isPtt = msg.message.audioMessage.ptt;
                         text = isPtt ? '🎤 رسالة صوتية' : '🎵 ملف صوتي';
                         mediaType = 'audio';
+                        mediaUrl = await downloadAndUploadMedia(msg, 'audio', sessionId);
                     } else if (msg.message.stickerMessage) {
                         text = '🎨 ملصق';
                         mediaType = 'sticker';
+                        mediaUrl = await downloadAndUploadMedia(msg, 'sticker', sessionId);
                     } else if (msg.message.documentMessage) {
                         const fileName = msg.message.documentMessage.fileName || 'ملف';
                         text = `📎 ${fileName}`;
                         mediaType = 'document';
+                        mediaUrl = await downloadAndUploadMedia(msg, 'document', sessionId);
                     }
 
                     const messageData = {
