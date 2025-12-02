@@ -134,6 +134,10 @@ async function startSession(sessionId: string) {
                             qr: '',
                             updatedAt: admin.firestore.FieldValue.serverTimestamp()
                         });
+
+                        // Restart session to generate new QR code
+                        console.log(`Restarting session ${sessionId} to generate new QR code...`);
+                        startSession(sessionId);
                      } catch (e) {
                          console.error(`Error updating logout status for ${sessionId}:`, e);
                      }
@@ -386,10 +390,6 @@ db.collection('whatsappSessions').onSnapshot(
                          await Promise.all(deletePromises);
                          console.log(`Deleted all chats for session ${sessionId}`);
 
-                         // Logout from WhatsApp
-                         sock.logout();
-                         sessions.delete(sessionId);
-
                          // Reset the session document
                          await db.collection('whatsappSessions').doc(sessionId).update({
                              isReady: false,
@@ -397,6 +397,11 @@ db.collection('whatsappSessions').onSnapshot(
                              shouldDisconnect: false,
                              updatedAt: admin.firestore.FieldValue.serverTimestamp()
                          });
+
+                         // Logout from WhatsApp - this will trigger connection.update which will restart the session
+                         console.log(`Logging out session ${sessionId}...`);
+                         sock.logout();
+                         sessions.delete(sessionId);
                      } catch (e) {
                          console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
                      }
