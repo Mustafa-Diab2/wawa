@@ -398,10 +398,14 @@ db.collection('whatsappSessions').onSnapshot(
                              updatedAt: admin.firestore.FieldValue.serverTimestamp()
                          });
 
-                         // Logout from WhatsApp - this will trigger connection.update which will restart the session
+                         // Logout from WhatsApp
                          console.log(`Logging out session ${sessionId}...`);
                          sock.logout();
                          sessions.delete(sessionId);
+
+                         // Restart session to generate new QR code after manual disconnect
+                         console.log(`Restarting session ${sessionId} to generate new QR code after manual disconnect...`);
+                         setTimeout(() => startSession(sessionId), 1000);
                      } catch (e) {
                          console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
                      }
