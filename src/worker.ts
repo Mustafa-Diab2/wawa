@@ -114,14 +114,26 @@ async function startSession(sessionId: string) {
                 if (shouldReconnect) {
                     startSession(sessionId);
                 } else {
-                    console.log(`Session ${sessionId} logged out.`);
+                    console.log(`Session ${sessionId} logged out. Clearing all chats...`);
                      try {
+                        // Delete all chats for this session
+                        const chatsSnapshot = await db.collection('whatsappSessions').doc(sessionId).collection('chats').get();
+                        const deletePromises = chatsSnapshot.docs.map(async (chatDoc) => {
+                            // Delete all messages in this chat
+                            const messagesSnapshot = await chatDoc.ref.collection('messages').get();
+                            const messageDeletePromises = messagesSnapshot.docs.map(msgDoc => msgDoc.ref.delete());
+                            await Promise.all(messageDeletePromises);
+                            // Delete the chat itself
+                            return chatDoc.ref.delete();
+                        });
+                        await Promise.all(deletePromises);
+                        console.log(`Deleted all chats for logged out session ${sessionId}`);
+
                         await db.collection('whatsappSessions').doc(sessionId).update({
                             isReady: false,
                             qr: '',
                             updatedAt: admin.firestore.FieldValue.serverTimestamp()
                         });
-                        // Optional: Delete auth folder
                      } catch (e) {
                          console.error(`Error updating logout status for ${sessionId}:`, e);
                      }
@@ -346,21 +358,48 @@ db.collectionGroup('messages')
 // Listen for session changes
 db.collection('whatsappSessions').onSnapshot(
     (snapshot) => {
-        snapshot.docChanges().forEach((change) => {
+        snapshot.docChanges().forEach(async (change) => {
             const sessionId = change.doc.id;
             const data = change.doc.data();
 
             if (change.type === 'added') {
                 console.log(`New session detected: ${sessionId}`);
                 startSession(sessionId);
-            } 
+            }
             else if (change.type === 'modified') {
-                 // If the user clicked Disconnect (isReady=false, qr='')
-                 if (data.isReady === false && !data.qr && sessions.has(sessionId)) {
-                     console.log(`Session ${sessionId} disconnected by user. Logging out.`);
+                 // If the user clicked Disconnect (shouldDisconnect flag)
+                 if (data.shouldDisconnect && sessions.has(sessionId)) {
+                     console.log(`Session ${sessionId} disconnected by user. Logging out and clearing chats...`);
                      const sock = sessions.get(sessionId);
-                     sock.logout(); // This will clear creds and close connection
-                     sessions.delete(sessionId);
+
+                     try {
+                         // Delete all chats for this session
+                         const chatsSnapshot = await db.collection('whatsappSessions').doc(sessionId).collection('chats').get();
+                         const deletePromises = chatsSnapshot.docs.map(async (chatDoc) => {
+                             // Delete all messages in this chat
+                             const messagesSnapshot = await chatDoc.ref.collection('messages').get();
+                             const messageDeletePromises = messagesSnapshot.docs.map(msgDoc => msgDoc.ref.delete());
+                             await Promise.all(messageDeletePromises);
+                             // Delete the chat itself
+                             return chatDoc.ref.delete();
+                         });
+                         await Promise.all(deletePromises);
+                         console.log(`Deleted all chats for session ${sessionId}`);
+
+                         // Logout from WhatsApp
+                         sock.logout();
+                         sessions.delete(sessionId);
+
+                         // Reset the session document
+                         await db.collection('whatsappSessions').doc(sessionId).update({
+                             isReady: false,
+                             qr: '',
+                             shouldDisconnect: false,
+                             updatedAt: admin.firestore.FieldValue.serverTimestamp()
+                         });
+                     } catch (e) {
+                         console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
+                     }
                  }
                  else if (!sessions.has(sessionId)) {
                      startSession(sessionId);

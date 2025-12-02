@@ -94,6 +94,22 @@ export default function ConnectPage() {
     }
   };
 
+  const disconnectSession = async () => {
+    if (!user || !firestore || !sessionId) return;
+    try {
+      const sessionDocRef = doc(firestore, 'whatsappSessions', sessionId);
+      // This will trigger the worker to logout and clear the session
+      await updateDoc(sessionDocRef, {
+        qr: '',
+        isReady: false,
+        shouldDisconnect: true,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (error) {
+       console.error("Error disconnecting session:", error);
+    }
+  };
+
   // Effect to handle user login and session creation
   useEffect(() => {
     // If there's no user and auth isn't loading, sign in anonymously.
@@ -189,7 +205,7 @@ export default function ConnectPage() {
             <RefreshCw className="h-4 w-4" />
             تحديث الرمز
           </Button>
-          <Button variant="destructive" disabled={connectionStatus !== 'connected'}>
+          <Button variant="destructive" disabled={connectionStatus !== 'connected'} onClick={disconnectSession}>
             قطع الاتصال
           </Button>
         </CardFooter>
