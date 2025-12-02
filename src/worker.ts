@@ -10,7 +10,9 @@ if (!admin.apps.length) {
   // Try to find credentials from environment or default
   try {
       // In many dev environments, this just works if gcloud auth is set up
-      admin.initializeApp();
+      admin.initializeApp({
+          storageBucket: 'studio-5509266701-95460.appspot.com'
+      });
       console.log('Firebase Admin initialized successfully.');
   } catch (error) {
       console.error('Failed to initialize Firebase Admin:', error);
