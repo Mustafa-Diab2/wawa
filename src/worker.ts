@@ -135,9 +135,9 @@ async function startSession(sessionId: string) {
                             updatedAt: admin.firestore.FieldValue.serverTimestamp()
                         });
 
-                        // Restart session to generate new QR code
-                        console.log(`Restarting session ${sessionId} to generate new QR code...`);
-                        startSession(sessionId);
+                        // Don't restart automatically - let user decide when to reconnect
+                        // This prevents infinite loop when auth is invalid
+                        console.log(`Session ${sessionId} logged out. Not restarting automatically to avoid loop.`);
                      } catch (e) {
                          console.error(`Error updating logout status for ${sessionId}:`, e);
                      }

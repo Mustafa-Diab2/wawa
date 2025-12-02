@@ -4,7 +4,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Paperclip, Smile, Mic, Send, Bot, Loader2 } from 'lucide-react';
 import { useFirestore, useUser, addDocumentNonBlocking } from '@/firebase';
-import { collection, serverTimestamp } from 'firebase/firestore';
+import { collection, serverTimestamp, doc, setDoc } from 'firebase/firestore';
 import type { Chat } from '@/lib/types';
 import { respondToInquiry } from '@/ai/flows/respond-to-customer-inquiries';
 
@@ -40,8 +40,20 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
     };
     
     try {
-      // Non-blocking update
+      // Non-blocking update for message
       addDocumentNonBlocking(messagesColRef, messageData);
+
+      // Update chat with lastMessage and lastMessageAt
+      const chatDocRef = doc(firestore, `whatsappSessions/${sessionId}/chats/${chat.id}`);
+      await setDoc(chatDocRef, {
+        id: chat.id,
+        remoteId: chat.id,
+        name: chat.name || chat.id.split('@')[0],
+        lastMessage: message,
+        lastMessageAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      }, { merge: true });
+
       setMessage('');
     } catch(error) {
         console.error("Error sending message: ", error);
