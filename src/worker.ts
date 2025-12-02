@@ -7,13 +7,26 @@ import path from 'path';
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
-  // Try to find credentials from environment or default
   try {
-      // In many dev environments, this just works if gcloud auth is set up
-      admin.initializeApp({
-          storageBucket: 'studio-5509266701-95460.appspot.com'
-      });
-      console.log('Firebase Admin initialized successfully.');
+      const serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+      if (serviceAccountPath) {
+          // If GOOGLE_APPLICATION_CREDENTIALS is set, use it
+          const serviceAccount = require(serviceAccountPath);
+          admin.initializeApp({
+              credential: admin.credential.cert(serviceAccount),
+              projectId: 'studio-5509266701-95460',
+              storageBucket: 'studio-5509266701-95460'
+          });
+          console.log('Firebase Admin initialized successfully using GOOGLE_APPLICATION_CREDENTIALS.');
+      } else {
+          // Fallback to default credentials (e.g., from gcloud auth application-default login)
+          admin.initializeApp({
+              projectId: 'studio-5509266701-95460',
+              storageBucket: 'studio-5509266701-95460'
+          });
+          console.log('Firebase Admin initialized successfully using default credentials.');
+      }
+      console.log(`Firebase Project ID: ${admin.app().options.projectId}`);
   } catch (error) {
       console.error('Failed to initialize Firebase Admin:', error);
       process.exit(1);
@@ -99,6 +112,7 @@ async function startSession(sessionId: string) {
                         isReady: false,
                         updatedAt: admin.firestore.FieldValue.serverTimestamp()
                     });
+                    console.log(`QR Code for session ${sessionId} successfully updated in Firestore.`);
                 } catch (e) {
                     console.error(`Error updating QR for ${sessionId}:`, e);
                 }
