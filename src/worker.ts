@@ -339,13 +339,13 @@ db.collectionGroup('messages')
                     const sock = sessions.get(sessionId);
                     console.log(`Sending message ${messageId} to ${chatId}`);
                     try {
-                        // Send message using the same ID
-                        await sock.sendMessage(chatId, { text: body || '' }, { messageId: messageId });
-                        
+                        // Send message (let Baileys generate the messageId)
+                        await sock.sendMessage(chatId, { text: body || '' });
+
                         // Update status to sent
                         await change.doc.ref.update({
                             status: 'sent',
-                            updatedAt: admin.firestore.FieldValue.serverTimestamp() 
+                            updatedAt: admin.firestore.FieldValue.serverTimestamp()
                         });
                     } catch (e) {
                         console.error(`Error sending message ${messageId}:`, e);
@@ -402,10 +402,6 @@ db.collection('whatsappSessions').onSnapshot(
                          console.log(`Logging out session ${sessionId}...`);
                          sock.logout();
                          sessions.delete(sessionId);
-
-                         // Restart session to generate new QR code after manual disconnect
-                         console.log(`Restarting session ${sessionId} to generate new QR code after manual disconnect...`);
-                         setTimeout(() => startSession(sessionId), 1000);
                      } catch (e) {
                          console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
                      }
