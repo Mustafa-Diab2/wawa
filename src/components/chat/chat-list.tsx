@@ -93,11 +93,20 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
   return (
     <div className="flex h-full flex-col">
       <div className="p-4 space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold font-headline">المحادثات</h2>
+        <h2 className="text-xl font-bold font-headline">المحادثات</h2>
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="بحث..."
+              className="pl-9"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
           <Dialog open={newChatOpen} onOpenChange={setNewChatOpen}>
             <DialogTrigger asChild>
-              <Button size="icon" variant="ghost">
+              <Button size="icon" variant="outline">
                 <MessageSquarePlus className="h-5 w-5" />
               </Button>
             </DialogTrigger>
@@ -121,15 +130,6 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
               </div>
             </DialogContent>
           </Dialog>
-        </div>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="بحث..."
-            className="pl-9"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
         </div>
         <div className="flex justify-between gap-1">
           <Button
