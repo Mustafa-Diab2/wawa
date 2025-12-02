@@ -20,6 +20,11 @@ export default function ChatPage() {
   const firestore = useFirestore();
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
 
+  const handleNewChat = (phoneNumber: string) => {
+    // Select the new chat (it will be created when message is sent)
+    setSelectedChatId(phoneNumber);
+  };
+
   // 1. Fetch user's WhatsApp sessions
   const sessionsQuery = useMemoFirebase(
     () =>
@@ -111,12 +116,28 @@ export default function ChatPage() {
           chats={chats}
           selectedChatId={selectedChatId}
           onSelectChat={setSelectedChatId}
+          onNewChat={handleNewChat}
         />
       </Card>
       <div className="md:col-span-7 lg:col-span-4 flex flex-col h-full">
-        {selectedChat && activeSessionId ? (
+        {selectedChatId && activeSessionId ? (
           <ChatWindow
-            chat={selectedChat}
+            chat={selectedChat || {
+              id: selectedChatId,
+              remoteId: selectedChatId,
+              name: selectedChatId.split('@')[0],
+              type: 'INDIVIDUAL',
+              status: 'INBOX',
+              isGroup: false,
+              isRead: true,
+              isMuted: false,
+              isArchived: false,
+              assignedTo: null,
+              sessionId: activeSessionId,
+              createdAt: new Date() as any,
+              updatedAt: new Date() as any,
+              lastMessageAt: new Date() as any,
+            }}
             messages={messages || []}
             messagesLoading={messagesLoading}
             sessionId={activeSessionId}

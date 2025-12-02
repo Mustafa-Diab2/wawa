@@ -1,6 +1,6 @@
 'use client';
 import { useState, useMemo } from 'react';
-import { Search, Inbox, CheckCircle, Archive } from 'lucide-react';
+import { Search, Inbox, CheckCircle, Archive, MessageSquarePlus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -11,18 +11,29 @@ import { ar } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import type { Chat } from '@/lib/types';
 import { Skeleton } from '../ui/skeleton';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 interface ChatListProps {
   chats: Chat[] | null;
   selectedChatId: string | null;
   onSelectChat: (chatId: string) => void;
+  onNewChat?: (phoneNumber: string) => void;
 }
 
 type FilterType = 'ALL' | 'INBOX' | 'DONE' | 'ARCHIVED';
 
-export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatListProps) {
+export default function ChatList({ chats, selectedChatId, onSelectChat, onNewChat }: ChatListProps) {
   const [filter, setFilter] = useState<FilterType>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [newChatOpen, setNewChatOpen] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   // Filter chats based on status and search
   const filteredChats = useMemo(() => {
@@ -69,10 +80,48 @@ export default function ChatList({ chats, selectedChatId, onSelectChat }: ChatLi
     }
   };
   
+  const handleNewChat = () => {
+    if (phoneNumber.trim() && onNewChat) {
+      // Format phone number for WhatsApp (add @s.whatsapp.net)
+      const formattedNumber = phoneNumber.replace(/\D/g, '') + '@s.whatsapp.net';
+      onNewChat(formattedNumber);
+      setNewChatOpen(false);
+      setPhoneNumber('');
+    }
+  };
+
   return (
     <div className="flex h-full flex-col">
       <div className="p-4 space-y-4">
-        <h2 className="text-xl font-bold font-headline">المحادثات</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold font-headline">المحادثات</h2>
+          <Dialog open={newChatOpen} onOpenChange={setNewChatOpen}>
+            <DialogTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <MessageSquarePlus className="h-5 w-5" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>محادثة جديدة</DialogTitle>
+                <DialogDescription>
+                  أدخل رقم الهاتف لبدء محادثة جديدة
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <Input
+                  placeholder="مثال: 966xxxxxxxxx"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  dir="ltr"
+                />
+                <Button onClick={handleNewChat} className="w-full">
+                  بدء المحادثة
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
