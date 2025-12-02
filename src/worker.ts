@@ -111,6 +111,9 @@ async function startSession(sessionId: string) {
                                     lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
                                     updatedAt: admin.firestore.FieldValue.serverTimestamp()
                                 }, { merge: true });
+
+                                // Messages will be loaded via messages.upsert event
+                                // when they arrive or when the chat is opened in WhatsApp
                             } catch (e) {
                                 console.error(`Error saving group chat ${chatId}:`, e);
                             }
@@ -150,8 +153,14 @@ async function startSession(sessionId: string) {
                     const messageData = {
                         id: messageId,
                         text: text,
+                        body: text,
                         isFromMe: isFromMe,
+                        isFromUs: isFromMe,
+                        chatId: chatId,
+                        sessionId: sessionId,
+                        status: 'delivered' as const,
                         timestamp: admin.firestore.Timestamp.fromMillis(timestamp),
+                        createdAt: admin.firestore.Timestamp.fromMillis(timestamp),
                     };
 
                     try {
