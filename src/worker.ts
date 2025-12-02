@@ -146,9 +146,34 @@ async function startSession(sessionId: string) {
                     
                     const isFromMe = msg.key.fromMe || false;
                     const timestamp = typeof msg.messageTimestamp === 'number' ? msg.messageTimestamp * 1000 : Date.now();
-                    
-                    // Extract text (simple version)
-                    const text = msg.message.conversation || msg.message.extendedTextMessage?.text || msg.message.imageMessage?.caption || '';
+
+                    // Extract message content based on type
+                    let text = '';
+                    let mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null = null;
+                    let mediaUrl: string | null = null;
+
+                    if (msg.message.conversation) {
+                        text = msg.message.conversation;
+                    } else if (msg.message.extendedTextMessage?.text) {
+                        text = msg.message.extendedTextMessage.text;
+                    } else if (msg.message.imageMessage) {
+                        text = msg.message.imageMessage.caption || '📷 صورة';
+                        mediaType = 'image';
+                    } else if (msg.message.videoMessage) {
+                        text = msg.message.videoMessage.caption || '🎥 فيديو';
+                        mediaType = 'video';
+                    } else if (msg.message.audioMessage) {
+                        const isPtt = msg.message.audioMessage.ptt;
+                        text = isPtt ? '🎤 رسالة صوتية' : '🎵 ملف صوتي';
+                        mediaType = 'audio';
+                    } else if (msg.message.stickerMessage) {
+                        text = '🎨 ملصق';
+                        mediaType = 'sticker';
+                    } else if (msg.message.documentMessage) {
+                        const fileName = msg.message.documentMessage.fileName || 'ملف';
+                        text = `📎 ${fileName}`;
+                        mediaType = 'document';
+                    }
 
                     const messageData = {
                         id: messageId,
@@ -158,6 +183,8 @@ async function startSession(sessionId: string) {
                         isFromUs: isFromMe,
                         chatId: chatId,
                         sessionId: sessionId,
+                        mediaType: mediaType,
+                        mediaUrl: mediaUrl,
                         status: 'delivered' as const,
                         timestamp: admin.firestore.Timestamp.fromMillis(timestamp),
                         createdAt: admin.firestore.Timestamp.fromMillis(timestamp),
