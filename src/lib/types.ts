@@ -13,6 +13,7 @@ export interface WhatsAppSession {
     ownerId: string;
     qr: string;
     isReady: boolean;
+    shouldDisconnect?: boolean;
     createdAt: Timestamp | FieldValue;
     updatedAt: Timestamp | FieldValue;
 }
@@ -44,7 +45,7 @@ export interface Message {
   body: string | null;
   timestamp: Timestamp;
   isFromUs: boolean;
-  mediaType: 'image' | 'video' | 'audio' | 'document' | null;
+  mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null;
   mediaUrl: string | null;
   status: 'sent' | 'delivered' | 'read';
   userId?: string;

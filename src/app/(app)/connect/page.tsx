@@ -44,11 +44,22 @@ export default function ConnectPage() {
 
   // Function to find an existing session or create a new one
   const findOrCreateSession = useCallback(async () => {
-    if (!user || !firestore || isCreatingSession) return;
+    console.log('[findOrCreateSession] Called with:', {
+      hasUser: !!user,
+      userId: user?.uid,
+      hasFirestore: !!firestore,
+      isCreatingSession
+    });
+
+    if (!user || !firestore || isCreatingSession) {
+      console.log('[findOrCreateSession] Early return - missing requirements');
+      return;
+    }
     setIsCreatingSession(true);
 
     try {
       // 1. Check for an existing session for the current user
+      console.log('[findOrCreateSession] Querying for existing sessions for user:', user.uid);
       const sessionsQuery = query(
         collection(firestore, 'whatsappSessions'),
         where('ownerId', '==', user.uid),
@@ -59,9 +70,18 @@ export default function ConnectPage() {
       if (!querySnapshot.empty) {
         // Existing session found
         const existingSession = querySnapshot.docs[0];
+        const sessionData = existingSession.data();
+        console.log('[findOrCreateSession] Existing session found:', {
+          sessionId: existingSession.id,
+          isReady: sessionData.isReady,
+          hasQR: !!sessionData.qr,
+          qrLength: sessionData.qr?.length || 0,
+          shouldDisconnect: sessionData.shouldDisconnect
+        });
         setSessionId(existingSession.id);
       } else {
         // 2. No session found, create a new one
+        console.log('[findOrCreateSession] No existing session, creating new session for user:', user.uid);
         const sessionData = {
           ownerId: user.uid,
           isReady: false,
@@ -70,33 +90,60 @@ export default function ConnectPage() {
           updatedAt: serverTimestamp(),
         };
         const colRef = collection(firestore, 'whatsappSessions');
-        const docRef = await addDoc(colRef, sessionData); // Use await here to get the ID
+        const docRef = await addDoc(colRef, sessionData);
+        console.log('[findOrCreateSession] New session created with ID:', docRef.id);
         setSessionId(docRef.id);
       }
     } catch (error) {
-      console.error("Error finding or creating session:", error);
+      console.error("[findOrCreateSession] Error finding or creating session:", error);
     } finally {
         setIsCreatingSession(false);
+        console.log('[findOrCreateSession] Completed');
     }
   }, [user, firestore, isCreatingSession]);
 
   const refreshSession = async () => {
-    if (!user || !firestore || !sessionId) return;
+    console.log('[refreshSession] Called with:', {
+      hasUser: !!user,
+      userId: user?.uid,
+      hasFirestore: !!firestore,
+      sessionId
+    });
+
+    if (!user || !firestore || !sessionId) {
+      console.log('[refreshSession] Early return - missing requirements');
+      return;
+    }
+
     try {
+      console.log('[refreshSession] Updating session document:', sessionId);
       const sessionDocRef = doc(firestore, 'whatsappSessions', sessionId);
       await updateDoc(sessionDocRef, {
         qr: '',
         isReady: false,
         updatedAt: serverTimestamp(),
       });
+      console.log('[refreshSession] Session document updated successfully');
     } catch (error) {
-       console.error("Error refreshing session:", error);
+       console.error("[refreshSession] Error refreshing session:", error);
     }
   };
 
   const disconnectSession = async () => {
-    if (!user || !firestore || !sessionId) return;
+    console.log('[disconnectSession] Called with:', {
+      hasUser: !!user,
+      userId: user?.uid,
+      hasFirestore: !!firestore,
+      sessionId
+    });
+
+    if (!user || !firestore || !sessionId) {
+      console.log('[disconnectSession] Early return - missing requirements');
+      return;
+    }
+
     try {
+      console.log('[disconnectSession] Updating session document to trigger disconnect:', sessionId);
       const sessionDocRef = doc(firestore, 'whatsappSessions', sessionId);
       // This will trigger the worker to logout and clear the session
       await updateDoc(sessionDocRef, {
@@ -105,8 +152,9 @@ export default function ConnectPage() {
         shouldDisconnect: true,
         updatedAt: serverTimestamp(),
       });
+      console.log('[disconnectSession] Session document updated successfully');
     } catch (error) {
-       console.error("Error disconnecting session:", error);
+       console.error("[disconnectSession] Error disconnecting session:", error);
     }
   };
 
@@ -122,7 +170,7 @@ export default function ConnectPage() {
       findOrCreateSession();
     }
   }, [user, isUserLoading, auth, firestore, sessionId, findOrCreateSession]);
-  
+
   // Hook to get the session document in real-time
   const sessionRef = useMemoFirebase(
     () => (user && firestore && sessionId ? doc(firestore, `whatsappSessions/${sessionId}`) : null),
@@ -130,6 +178,18 @@ export default function ConnectPage() {
   );
   const { data: session, isLoading: isSessionLoading } = useDoc<WhatsAppSession>(sessionRef);
 
+  // Log session state changes
+  useEffect(() => {
+    if (session) {
+      console.log('[ConnectPage] Session state updated:', {
+        sessionId,
+        isReady: session.isReady,
+        hasQR: !!session.qr,
+        qrLength: session.qr?.length || 0,
+        shouldDisconnect: session.shouldDisconnect
+      });
+    }
+  }, [session, sessionId]);
 
   const isLoading = Boolean(isUserLoading || isCreatingSession || (sessionId && isSessionLoading));
   const connectionStatus = session?.isReady ? "connected" : "disconnected";

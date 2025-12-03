@@ -1,6 +1,7 @@
 import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from '@whiskeysockets/baileys';
 import * as admin from 'firebase-admin';
 import pino from 'pino';
+import fs from 'fs';
 import { createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
 import path from 'path';
@@ -403,6 +404,19 @@ db.collection('whatsappSessions').onSnapshot(
                          });
                          await Promise.all(deletePromises);
                          console.log(`Deleted all chats for session ${sessionId}`);
+
+                         // Delete auth state files to ensure fresh QR on next connect
+                         const authPath = path.join(process.cwd(), 'auth_info_baileys', sessionId);
+                         try {
+                             if (fs.existsSync(authPath)) {
+                                 fs.rmSync(authPath, { recursive: true, force: true });
+                                 console.log(`✅ Deleted auth state for session ${sessionId}`);
+                             } else {
+                                 console.log(`ℹ️  No auth state folder found for session ${sessionId}`);
+                             }
+                         } catch (err) {
+                             console.error(`❌ Error deleting auth state for session ${sessionId}:`, err);
+                         }
 
                          // Reset the session document
                          await db.collection('whatsappSessions').doc(sessionId).update({
