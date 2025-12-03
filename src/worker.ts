@@ -1,37 +1,44 @@
+// Load environment variables from .env.local
+import { config } from 'dotenv';
+import path from 'path';
+config({ path: path.join(process.cwd(), '.env.local') });
+
 import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from '@whiskeysockets/baileys';
 import * as admin from 'firebase-admin';
 import pino from 'pino';
 import fs from 'fs';
 import { createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
-import path from 'path';
 import { callAI } from './lib/ai-agent';
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
   try {
-      const serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-      if (serviceAccountPath) {
-          // If GOOGLE_APPLICATION_CREDENTIALS is set, use it
-          const serviceAccount = require(serviceAccountPath);
-          admin.initializeApp({
-              credential: admin.credential.cert(serviceAccount),
-              projectId: 'studio-5509266701-95460',
-              storageBucket: 'studio-5509266701-95460'
-          });
-          console.log('Firebase Admin initialized successfully using GOOGLE_APPLICATION_CREDENTIALS.');
-      } else {
-          // Fallback to default credentials (e.g., from gcloud auth application-default login)
-          admin.initializeApp({
-              projectId: 'studio-5509266701-95460',
-              storageBucket: 'studio-5509266701-95460'
-          });
-          console.log('Firebase Admin initialized successfully using default credentials.');
-      }
+    // Try to use service account from environment variable (for Vercel/production and local)
+    if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+      const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        projectId: serviceAccount.project_id,
+        storageBucket: `${serviceAccount.project_id}.appspot.com`
+      });
+
+      console.log('Firebase Admin initialized with service account');
+      console.log(`Firebase Project ID: ${serviceAccount.project_id}`);
+    } else {
+      // Fallback to default credentials (for local development)
+      admin.initializeApp({
+        projectId: process.env.FIREBASE_PROJECT_ID || 'studio-5509266701-95460',
+        storageBucket: 'studio-5509266701-95460.appspot.com'
+      });
+
+      console.log('Firebase Admin initialized with default credentials');
       console.log(`Firebase Project ID: ${admin.app().options.projectId}`);
+    }
   } catch (error) {
-      console.error('Failed to initialize Firebase Admin:', error);
-      process.exit(1);
+    console.error('Failed to initialize Firebase Admin:', error);
+    process.exit(1);
   }
 }
 
