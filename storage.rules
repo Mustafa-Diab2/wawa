@@ -1,0 +1,15 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow read/write for media files
+    match /media/{sessionId}/{fileName} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // For testing - allow all (remove in production)
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+}
