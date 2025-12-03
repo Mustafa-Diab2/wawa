@@ -1,18 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as admin from 'firebase-admin';
-
-// Initialize Firebase Admin if not already initialized
-if (!admin.apps.length) {
-  try {
-    admin.initializeApp({
-      projectId: 'studio-5509266701-95460',
-    });
-  } catch (error) {
-    console.error('Failed to initialize Firebase Admin:', error);
-  }
-}
-
-const db = admin.firestore();
+import { adminDb, admin } from '@/lib/firebaseAdmin';
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if session exists and is ready
-    const sessionDoc = await db.collection('whatsappSessions').doc(sessionId).get();
+    const sessionDoc = await adminDb.collection('whatsappSessions').doc(sessionId).get();
 
     if (!sessionDoc.exists) {
       return NextResponse.json(
@@ -49,7 +36,7 @@ export async function POST(request: NextRequest) {
     const jid = to.includes('@') ? to : `${to}@s.whatsapp.net`;
 
     // Create or get existing chat
-    const chatsRef = db.collection('whatsappSessions').doc(sessionId).collection('chats');
+    const chatsRef = adminDb.collection('whatsappSessions').doc(sessionId).collection('chats');
     const existingChats = await chatsRef.where('remoteId', '==', jid).limit(1).get();
 
     let chatId: string;
