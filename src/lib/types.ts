@@ -43,13 +43,14 @@ export interface Chat {
 export interface Message {
   id: string;
   chatId: string;
+  remoteId: string; // WhatsApp JID (e.g., "201234567890@s.whatsapp.net")
   sender: string;
   body: string | null;
   timestamp: Timestamp;
   isFromUs: boolean;
   mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null;
   mediaUrl: string | null;
-  status: 'sent' | 'delivered' | 'read';
+  status: 'sent' | 'delivered' | 'read' | 'pending' | 'failed';
   userId?: string;
   sessionId: string;
   createdAt: Timestamp;

@@ -81,6 +81,7 @@ export async function POST(request: NextRequest) {
     await messageRef.set({
       id: messageRef.id,
       chatId,
+      remoteId: jid, // Add JID for worker to send via Baileys
       sender: 'agent',
       body: text,
       text,
