@@ -34,6 +34,8 @@ export interface Chat {
   isMuted: boolean;
   isArchived: boolean;
   sessionId: string;
+  mode: 'ai' | 'human';
+  needsHuman: boolean;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
