@@ -1,12 +1,17 @@
 'use client';
+import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MoreVertical, Phone, Video, Loader2 } from "lucide-react";
+import { MoreVertical, Phone, Video, Loader2, Bot, User } from "lucide-react";
 import ChatInput from "./chat-input";
 import ChatMessage from "./chat-message";
 import type { Chat, Message } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { doc, updateDoc } from 'firebase/firestore';
+import { useFirestore } from '@/firebase';
+import { useToast } from '@/hooks/use-toast';
 
 interface ChatWindowProps {
   chat: Chat;
@@ -16,6 +21,38 @@ interface ChatWindowProps {
 }
 
 export default function ChatWindow({ chat, messages, messagesLoading, sessionId }: ChatWindowProps) {
+  const firestore = useFirestore();
+  const { toast } = useToast();
+  const [isTogglingMode, setIsTogglingMode] = useState(false);
+
+  const toggleMode = async () => {
+    if (!firestore || isTogglingMode) return;
+
+    try {
+      setIsTogglingMode(true);
+      const newMode = chat.mode === 'ai' ? 'human' : 'ai';
+      const chatRef = doc(firestore, `whatsappSessions/${sessionId}/chats/${chat.id}`);
+
+      await updateDoc(chatRef, {
+        mode: newMode,
+        needsHuman: false, // Reset needsHuman when manually toggling
+      });
+
+      toast({
+        title: newMode === 'ai' ? 'تم التبديل إلى الوضع الذكي' : 'تم التبديل إلى الوضع اليدوي',
+        description: newMode === 'ai' ? 'سيرد الذكاء الاصطناعي تلقائياً' : 'يجب الرد يدوياً على الرسائل',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'خطأ',
+        description: 'فشل تبديل الوضع',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsTogglingMode(false);
+    }
+  };
+
   return (
     <Card className="flex flex-col h-full">
       <div className="flex items-center p-4 border-b">
@@ -24,8 +61,29 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
             <AvatarImage src={chat.avatar} alt={chat.name || "Chat"} />
             <AvatarFallback>{chat.name ? chat.name.charAt(0) : "C"}</AvatarFallback>
           </Avatar>
-          <div>
-            <h3 className="font-semibold">{chat.name || chat.remoteId.split('@')[0]}</h3>
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <h3 className="font-semibold">{chat.name || chat.remoteId.split('@')[0]}</h3>
+              <Badge
+                variant={chat.mode === 'ai' ? 'default' : 'secondary'}
+                className="text-xs cursor-pointer"
+                onClick={toggleMode}
+              >
+                {isTogglingMode ? (
+                  <Loader2 className="h-3 w-3 animate-spin ml-1" />
+                ) : chat.mode === 'ai' ? (
+                  <Bot className="h-3 w-3 ml-1" />
+                ) : (
+                  <User className="h-3 w-3 ml-1" />
+                )}
+                {chat.mode === 'ai' ? 'ذكي' : 'يدوي'}
+              </Badge>
+              {chat.needsHuman && (
+                <Badge variant="destructive" className="text-xs">
+                  يحتاج خدمة عملاء
+                </Badge>
+              )}
+            </div>
             <p className="text-xs text-muted-foreground">متصل الآن</p>
           </div>
         </div>

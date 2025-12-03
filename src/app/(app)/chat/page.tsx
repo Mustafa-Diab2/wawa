@@ -13,16 +13,57 @@ import { Card, CardContent } from "@/components/ui/card";
 import ChatList from "@/components/chat/chat-list";
 import ChatWindow from "@/components/chat/chat-window";
 import ContactDetails from "@/components/chat/contact-details";
+import NewChatModal from "@/components/chat/new-chat-modal";
 import { Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export default function ChatPage() {
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
+  const { toast } = useToast();
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
+  const [newChatModalOpen, setNewChatModalOpen] = useState(false);
 
   const handleNewChat = (phoneNumber: string) => {
-    // Select the new chat (it will be created when message is sent)
-    setSelectedChatId(phoneNumber);
+    // Open the new chat modal
+    setNewChatModalOpen(true);
+  };
+
+  const handleSendMessage = async (data: { phone: string; jid: string; message: string }) => {
+    try {
+      const response = await fetch('/api/messages/manual-send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: activeSessionId,
+          to: data.jid,
+          text: data.message,
+          assignedTo: user?.uid || null,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'فشل إرسال الرسالة');
+      }
+
+      const result = await response.json();
+
+      // Select the newly created chat
+      setSelectedChatId(result.chatId);
+
+      toast({
+        title: 'تم إرسال الرسالة',
+        description: 'تم إنشاء المحادثة بنجاح',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'خطأ',
+        description: error.message || 'حدث خطأ أثناء إرسال الرسالة',
+        variant: 'destructive',
+      });
+      throw error;
+    }
   };
 
   // 1. Fetch user's WhatsApp sessions
@@ -110,15 +151,22 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="grid h-[calc(100vh-8rem)] w-full grid-cols-1 md:grid-cols-10 gap-4">
-      <Card className="md:col-span-3 lg:col-span-3">
-        <ChatList
-          chats={chats}
-          selectedChatId={selectedChatId}
-          onSelectChat={setSelectedChatId}
-          onNewChat={handleNewChat}
-        />
-      </Card>
+    <>
+      <NewChatModal
+        open={newChatModalOpen}
+        onOpenChange={setNewChatModalOpen}
+        onSendMessage={handleSendMessage}
+        sessionId={activeSessionId}
+      />
+      <div className="grid h-[calc(100vh-8rem)] w-full grid-cols-1 md:grid-cols-10 gap-4">
+        <Card className="md:col-span-3 lg:col-span-3">
+          <ChatList
+            chats={chats}
+            selectedChatId={selectedChatId}
+            onSelectChat={setSelectedChatId}
+            onNewChat={handleNewChat}
+          />
+        </Card>
       <div className="md:col-span-7 lg:col-span-4 flex flex-col h-full">
         {selectedChatId && activeSessionId ? (
           <ChatWindow
@@ -134,6 +182,8 @@ export default function ChatPage() {
               isArchived: false,
               assignedTo: null,
               sessionId: activeSessionId,
+              mode: 'ai',
+              needsHuman: false,
               createdAt: new Date() as any,
               updatedAt: new Date() as any,
               lastMessageAt: new Date() as any,
@@ -151,6 +201,7 @@ export default function ChatPage() {
       <Card className="hidden lg:block lg:col-span-3">
         {selectedChat ? <ContactDetails chat={selectedChat} /> : <div className="flex h-full items-center justify-center p-4"><p>الرجاء تحديد محادثة لعرض تفاصيلها.</p></div>}
       </Card>
-    </div>
+      </div>
+    </>
   );
 }

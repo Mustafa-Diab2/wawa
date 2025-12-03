@@ -5,6 +5,7 @@ import fs from 'fs';
 import { createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
 import path from 'path';
+import { callAI } from './lib/ai-agent';
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
@@ -288,6 +289,115 @@ async function startSession(sessionId: string) {
                         }, { merge: true });
 
                         console.log(`Saved message ${messageId} to chat ${chatId}`);
+
+                        // AI Agent Logic - Only for incoming messages (not from us)
+                        if (!isFromMe && text && text.trim() !== '') {
+                            try {
+                                // Get or create chat document
+                                const chatDoc = await chatRef.get();
+                                let chatData = chatDoc.data();
+
+                                // If chat doesn't exist or doesn't have mode field, create/update it
+                                if (!chatDoc.exists || !chatData?.mode) {
+                                    console.log(`[AI] Creating/updating chat ${chatId} with AI mode`);
+                                    await chatRef.set({
+                                        id: chatId,
+                                        remoteId: chatId,
+                                        name: chatId.split('@')[0],
+                                        type: 'INDIVIDUAL',
+                                        status: 'INBOX',
+                                        lastMessage: text,
+                                        lastMessageAt: admin.firestore.Timestamp.fromMillis(timestamp),
+                                        assignedTo: null,
+                                        isGroup: false,
+                                        isRead: false,
+                                        isMuted: false,
+                                        isArchived: false,
+                                        sessionId,
+                                        mode: 'ai', // Default to AI mode
+                                        needsHuman: false,
+                                        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+                                        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+                                    }, { merge: true });
+
+                                    chatData = { mode: 'ai', needsHuman: false };
+                                }
+
+                                // Check chat mode
+                                if (chatData?.mode === 'human') {
+                                    console.log(`[AI] Chat ${chatId} is in human mode, skipping AI`);
+                                } else {
+                                    // Mode is 'ai' - call AI agent
+                                    console.log(`[AI] Chat ${chatId} is in AI mode, calling AI agent...`);
+
+                                    // Get conversation history (last 5 messages)
+                                    const messagesSnapshot = await chatRef
+                                        .collection('messages')
+                                        .orderBy('timestamp', 'desc')
+                                        .limit(6)
+                                        .get();
+
+                                    const conversationHistory = messagesSnapshot.docs
+                                        .reverse()
+                                        .slice(0, -1) // Exclude the current message
+                                        .map((doc) => {
+                                            const msg = doc.data();
+                                            return {
+                                                role: msg.isFromMe ? ('assistant' as const) : ('user' as const),
+                                                content: msg.body || msg.text || '',
+                                            };
+                                        })
+                                        .filter((m) => m.content.trim() !== '');
+
+                                    // Call AI
+                                    const aiResponse = await callAI(conversationHistory, text);
+
+                                    // Send reply via WhatsApp
+                                    await sock.sendMessage(chatId, { text: aiResponse.reply });
+                                    console.log(`[AI] Sent reply to ${chatId}`);
+
+                                    // Save AI message to Firestore
+                                    const aiMessageId = `ai_${Date.now()}`;
+                                    await chatRef.collection('messages').doc(aiMessageId).set({
+                                        id: aiMessageId,
+                                        chatId,
+                                        sender: 'bot',
+                                        body: aiResponse.reply,
+                                        text: aiResponse.reply,
+                                        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+                                        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+                                        isFromMe: true,
+                                        isFromUs: true,
+                                        mediaType: null,
+                                        mediaUrl: null,
+                                        status: 'sent',
+                                        sessionId,
+                                    });
+
+                                    // Update chat's last message
+                                    await chatRef.update({
+                                        lastMessage: aiResponse.reply,
+                                        lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
+                                    });
+
+                                    // Handle handoff if requested
+                                    if (aiResponse.handoff) {
+                                        console.log(`[AI] Handoff requested for chat ${chatId}: ${aiResponse.handoff_reason}`);
+
+                                        await chatRef.update({
+                                            mode: 'human',
+                                            needsHuman: true,
+                                            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+                                        });
+
+                                        console.log(`[AI] Chat ${chatId} switched to human mode`);
+                                    }
+                                }
+                            } catch (aiError) {
+                                console.error(`[AI] Error processing AI for chat ${chatId}:`, aiError);
+                                // Don't fail the whole message processing if AI fails
+                            }
+                        }
 
                     } catch (e) {
                          console.error(`Error saving message for ${sessionId}:`, e);
