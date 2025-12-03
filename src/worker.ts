@@ -4,49 +4,14 @@ import path from 'path';
 config({ path: path.join(process.cwd(), '.env.local') });
 
 import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from '@whiskeysockets/baileys';
-import * as admin from 'firebase-admin';
+import { supabaseAdmin } from './lib/supabaseAdmin';
 import pino from 'pino';
 import fs from 'fs';
-import { createWriteStream } from 'fs';
-import { pipeline } from 'stream/promises';
 import { callAI } from './lib/ai-agent';
 
-// Initialize Firebase Admin
-if (!admin.apps.length) {
-  try {
-    // Try to use service account from environment variable (for Vercel/production and local)
-    if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-      const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
-      admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        projectId: serviceAccount.project_id,
-        storageBucket: `${serviceAccount.project_id}.appspot.com`
-      });
-
-      console.log('Firebase Admin initialized with service account');
-      console.log(`Firebase Project ID: ${serviceAccount.project_id}`);
-    } else {
-      // Fallback to default credentials (for local development)
-      admin.initializeApp({
-        projectId: process.env.FIREBASE_PROJECT_ID || 'studio-5509266701-95460',
-        storageBucket: 'studio-5509266701-95460.appspot.com'
-      });
-
-      console.log('Firebase Admin initialized with default credentials');
-      console.log(`Firebase Project ID: ${admin.app().options.projectId}`);
-    }
-  } catch (error) {
-    console.error('Failed to initialize Firebase Admin:', error);
-    process.exit(1);
-  }
-}
-
-const db = admin.firestore();
-const bucket = admin.storage().bucket();
 const sessions = new Map<string, any>();
 
-// Helper function to download and upload media
+// Helper function to download and upload media (simplified for now - using external storage later)
 async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: string): Promise<string | null> {
     try {
         const buffer = await downloadMediaMessage(
@@ -61,23 +26,10 @@ async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: st
 
         if (!buffer) return null;
 
-        // Generate unique filename
-        const messageId = msg.key.id;
-        const ext = mediaType === 'audio' ? 'ogg' : mediaType === 'image' ? 'jpg' : mediaType === 'video' ? 'mp4' : mediaType === 'sticker' ? 'webp' : 'bin';
-        const fileName = `media/${sessionId}/${messageId}.${ext}`;
-
-        // Upload to Firebase Storage
-        const file = bucket.file(fileName);
-        await file.save(buffer as Buffer, {
-            metadata: {
-                contentType: mediaType === 'audio' ? 'audio/ogg' : mediaType === 'image' ? 'image/jpeg' : mediaType === 'video' ? 'video/mp4' : mediaType === 'sticker' ? 'image/webp' : 'application/octet-stream',
-            },
-            public: true,
-        });
-
-        // Get public URL
-        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
-        return publicUrl;
+        // TODO: Upload to Supabase Storage
+        // For now, return null and handle media later
+        console.log(`Media download successful for ${mediaType}, upload to Supabase Storage coming soon`);
+        return null;
     } catch (error) {
         console.error('Error downloading/uploading media:', error);
         return null;
@@ -86,8 +38,6 @@ async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: st
 
 async function startSession(sessionId: string) {
     if (sessions.has(sessionId)) {
-        // If it's already running, we might want to check its status or just leave it.
-        // For simplicity, let's leave it unless we implement a force restart mechanism.
         return;
     }
 
@@ -104,8 +54,6 @@ async function startSession(sessionId: string) {
             },
             printQRInTerminal: false,
             logger: pino({ level: 'silent' }) as any,
-            // Mobile API is often more stable for bots
-             // browser: ['WaCRM', 'Chrome', '10.0.0'],
         });
 
         sessions.set(sessionId, sock);
@@ -116,12 +64,16 @@ async function startSession(sessionId: string) {
             if (qr) {
                 console.log(`QR Code generated for session ${sessionId}`);
                 try {
-                    await db.collection('whatsappSessions').doc(sessionId).update({
-                        qr: qr,
-                        isReady: false,
-                        updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                    });
-                    console.log(`QR Code for session ${sessionId} successfully updated in Firestore.`);
+                    await supabaseAdmin
+                        .from('whatsapp_sessions')
+                        .update({
+                            qr: qr,
+                            is_ready: false,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', sessionId);
+
+                    console.log(`QR Code for session ${sessionId} successfully updated in Supabase.`);
                 } catch (e) {
                     console.error(`Error updating QR for ${sessionId}:`, e);
                 }
@@ -130,51 +82,53 @@ async function startSession(sessionId: string) {
             if (connection === 'close') {
                 const shouldReconnect = (lastDisconnect?.error as any)?.output?.statusCode !== DisconnectReason.loggedOut;
                 console.log(`Connection closed for ${sessionId}. Reconnecting: ${shouldReconnect}`);
-                
-                // Remove from memory map
+
                 sessions.delete(sessionId);
 
                 if (shouldReconnect) {
                     startSession(sessionId);
                 } else {
                     console.log(`Session ${sessionId} logged out. Clearing all chats...`);
-                     try {
-                        // Delete all chats for this session
-                        const chatsSnapshot = await db.collection('whatsappSessions').doc(sessionId).collection('chats').get();
-                        const deletePromises = chatsSnapshot.docs.map(async (chatDoc) => {
-                            // Delete all messages in this chat
-                            const messagesSnapshot = await chatDoc.ref.collection('messages').get();
-                            const messageDeletePromises = messagesSnapshot.docs.map(msgDoc => msgDoc.ref.delete());
-                            await Promise.all(messageDeletePromises);
-                            // Delete the chat itself
-                            return chatDoc.ref.delete();
-                        });
-                        await Promise.all(deletePromises);
+                    try {
+                        // Delete all chats and messages for this session
+                        await supabaseAdmin
+                            .from('chats')
+                            .delete()
+                            .eq('session_id', sessionId);
+
+                        await supabaseAdmin
+                            .from('messages')
+                            .delete()
+                            .eq('session_id', sessionId);
+
                         console.log(`Deleted all chats for logged out session ${sessionId}`);
 
-                        await db.collection('whatsappSessions').doc(sessionId).update({
-                            isReady: false,
-                            qr: '',
-                            updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                        });
+                        await supabaseAdmin
+                            .from('whatsapp_sessions')
+                            .update({
+                                is_ready: false,
+                                qr: '',
+                                updated_at: new Date().toISOString()
+                            })
+                            .eq('id', sessionId);
 
-                        // Don't restart automatically - let user decide when to reconnect
-                        // This prevents infinite loop when auth is invalid
                         console.log(`Session ${sessionId} logged out. Not restarting automatically to avoid loop.`);
-                     } catch (e) {
-                         console.error(`Error updating logout status for ${sessionId}:`, e);
-                     }
+                    } catch (e) {
+                        console.error(`Error updating logout status for ${sessionId}:`, e);
+                    }
                 }
             } else if (connection === 'open') {
                 console.log(`Session ${sessionId} connected.`);
                 try {
-                    await db.collection('whatsappSessions').doc(sessionId).update({
-                        isReady: true,
-                        qr: '',
-                        updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                    });
+                    await supabaseAdmin
+                        .from('whatsapp_sessions')
+                        .update({
+                            is_ready: true,
+                            qr: '',
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', sessionId);
 
-                    // Fetch and save existing chats after connection
                     console.log(`Fetching chats for session ${sessionId}...`);
 
                     // Fetch groups
@@ -186,17 +140,20 @@ async function startSession(sessionId: string) {
                         for (const chatId of groupIds) {
                             const chat = groups[chatId];
                             try {
-                                await db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId).set({
-                                    id: chatId,
-                                    remoteId: chatId,
-                                    name: chat.subject || chat.id,
-                                    unreadCount: 0,
-                                    lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
-                                    updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                                }, { merge: true });
-
-                                // Messages will be loaded via messages.upsert event
-                                // when they arrive or when the chat is opened in WhatsApp
+                                await supabaseAdmin
+                                    .from('chats')
+                                    .upsert({
+                                        id: chatId,
+                                        session_id: sessionId,
+                                        remote_id: chatId,
+                                        name: chat.subject || chat.id,
+                                        type: 'GROUP',
+                                        is_group: true,
+                                        last_message_at: new Date().toISOString(),
+                                        updated_at: new Date().toISOString()
+                                    }, {
+                                        onConflict: 'id'
+                                    });
                             } catch (e) {
                                 console.error(`Error saving group chat ${chatId}:`, e);
                             }
@@ -205,8 +162,6 @@ async function startSession(sessionId: string) {
                         console.log(`Could not fetch groups:`, e);
                     }
 
-                    // Note: Individual chats will be created automatically when messages arrive
-                    // via the messages.upsert and chats.upsert event handlers
                     console.log(`Finished loading chats for session ${sessionId}`)
                 } catch (e) {
                     console.error(`Error updating connected status for ${sessionId}:`, e);
@@ -223,14 +178,14 @@ async function startSession(sessionId: string) {
                     if (!msg.message) continue;
                     const chatId = msg.key.remoteJid;
                     if (!chatId) continue;
-                    
+
                     const messageId = msg.key.id;
                     if (!messageId) continue;
-                    
-                    const isFromMe = msg.key.fromMe || false;
-                    const timestamp = typeof msg.messageTimestamp === 'number' ? msg.messageTimestamp * 1000 : Date.now();
 
-                    // Extract message content based on type
+                    const isFromMe = msg.key.fromMe || false;
+                    const timestamp = typeof msg.messageTimestamp === 'number' ? new Date(msg.messageTimestamp * 1000).toISOString() : new Date().toISOString();
+
+                    // Extract message content
                     let text = '';
                     let mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null = null;
                     let mediaUrl: string | null = null;
@@ -242,7 +197,6 @@ async function startSession(sessionId: string) {
                     } else if (msg.message.imageMessage) {
                         text = msg.message.imageMessage.caption || '📷 صورة';
                         mediaType = 'image';
-                        // Download and upload media
                         mediaUrl = await downloadAndUploadMedia(msg, 'image', sessionId);
                     } else if (msg.message.videoMessage) {
                         text = msg.message.videoMessage.caption || '🎥 فيديو';
@@ -266,95 +220,113 @@ async function startSession(sessionId: string) {
 
                     const messageData = {
                         id: messageId,
-                        text: text,
+                        chat_id: chatId,
+                        session_id: sessionId,
+                        remote_id: chatId,
+                        sender: isFromMe ? 'me' : chatId,
                         body: text,
-                        isFromMe: isFromMe,
-                        isFromUs: isFromMe,
-                        chatId: chatId,
-                        remoteId: chatId, // Add remoteId for consistency with manual-send
-                        sessionId: sessionId,
-                        mediaType: mediaType,
-                        mediaUrl: mediaUrl,
+                        timestamp: timestamp,
+                        is_from_us: isFromMe,
+                        media_type: mediaType,
+                        media_url: mediaUrl,
                         status: 'delivered' as const,
-                        timestamp: admin.firestore.Timestamp.fromMillis(timestamp),
-                        createdAt: admin.firestore.Timestamp.fromMillis(timestamp),
+                        created_at: timestamp,
                     };
 
                     try {
-                        const chatRef = db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId);
-                        const messageRef = chatRef.collection('messages').doc(messageId);
+                        // Insert message
+                        await supabaseAdmin
+                            .from('messages')
+                            .upsert(messageData, {
+                                onConflict: 'id'
+                            });
 
-                        await messageRef.set(messageData, { merge: true });
-
-                        // Update Chat metadata
-                        await chatRef.set({
-                            id: chatId,
-                            remoteId: chatId,
-                            lastMessage: text,
-                            lastMessageAt: admin.firestore.Timestamp.fromMillis(timestamp),
-                            // Increment unread count if it's not from me
-                            unreadCount: isFromMe ? 0 : admin.firestore.FieldValue.increment(1),
-                        }, { merge: true });
+                        // Update or create chat
+                        await supabaseAdmin
+                            .from('chats')
+                            .upsert({
+                                id: chatId,
+                                session_id: sessionId,
+                                remote_id: chatId,
+                                name: chatId.split('@')[0],
+                                type: 'INDIVIDUAL',
+                                last_message: text,
+                                last_message_at: timestamp,
+                                is_unread: !isFromMe,
+                                updated_at: new Date().toISOString()
+                            }, {
+                                onConflict: 'id'
+                            });
 
                         console.log(`Saved message ${messageId} to chat ${chatId}`);
 
                         // AI Agent Logic - Only for incoming messages (not from us)
                         if (!isFromMe && text && text.trim() !== '') {
                             try {
-                                // Get or create chat document
-                                const chatDoc = await chatRef.get();
-                                let chatData = chatDoc.data();
+                                // Get chat data
+                                const { data: chatData } = await supabaseAdmin
+                                    .from('chats')
+                                    .select('*')
+                                    .eq('id', chatId)
+                                    .single();
 
                                 // If chat doesn't exist or doesn't have mode field, create/update it
-                                if (!chatDoc.exists || !chatData?.mode) {
+                                if (!chatData || !chatData.mode) {
                                     console.log(`[AI] Creating/updating chat ${chatId} with AI mode`);
-                                    await chatRef.set({
-                                        id: chatId,
-                                        remoteId: chatId,
-                                        name: chatId.split('@')[0],
-                                        type: 'INDIVIDUAL',
-                                        status: 'INBOX',
-                                        lastMessage: text,
-                                        lastMessageAt: admin.firestore.Timestamp.fromMillis(timestamp),
-                                        assignedTo: null,
-                                        isGroup: false,
-                                        isRead: false,
-                                        isMuted: false,
-                                        isArchived: false,
-                                        sessionId,
-                                        mode: 'ai', // Default to AI mode
-                                        needsHuman: false,
-                                        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-                                        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-                                    }, { merge: true });
-
-                                    chatData = { mode: 'ai', needsHuman: false };
+                                    await supabaseAdmin
+                                        .from('chats')
+                                        .upsert({
+                                            id: chatId,
+                                            session_id: sessionId,
+                                            remote_id: chatId,
+                                            name: chatId.split('@')[0],
+                                            type: 'INDIVIDUAL',
+                                            status: 'INBOX',
+                                            last_message: text,
+                                            last_message_at: timestamp,
+                                            assigned_to: null,
+                                            is_group: false,
+                                            is_read: false,
+                                            is_muted: false,
+                                            is_archived: false,
+                                            mode: 'ai',
+                                            needs_human: false,
+                                            created_at: new Date().toISOString(),
+                                            updated_at: new Date().toISOString(),
+                                        }, {
+                                            onConflict: 'id'
+                                        });
                                 }
 
+                                // Re-fetch to get updated data
+                                const { data: updatedChatData } = await supabaseAdmin
+                                    .from('chats')
+                                    .select('*')
+                                    .eq('id', chatId)
+                                    .single();
+
                                 // Check chat mode
-                                if (chatData?.mode === 'human') {
+                                if (updatedChatData?.mode === 'human') {
                                     console.log(`[AI] Chat ${chatId} is in human mode, skipping AI`);
                                 } else {
                                     // Mode is 'ai' - call AI agent
                                     console.log(`[AI] Chat ${chatId} is in AI mode, calling AI agent...`);
 
                                     // Get conversation history (last 5 messages)
-                                    const messagesSnapshot = await chatRef
-                                        .collection('messages')
-                                        .orderBy('timestamp', 'desc')
-                                        .limit(6)
-                                        .get();
+                                    const { data: messagesHistory } = await supabaseAdmin
+                                        .from('messages')
+                                        .select('*')
+                                        .eq('chat_id', chatId)
+                                        .order('timestamp', { ascending: false })
+                                        .limit(6);
 
-                                    const conversationHistory = messagesSnapshot.docs
+                                    const conversationHistory = (messagesHistory || [])
                                         .reverse()
-                                        .slice(0, -1) // Exclude the current message
-                                        .map((doc) => {
-                                            const msg = doc.data();
-                                            return {
-                                                role: msg.isFromMe ? ('assistant' as const) : ('user' as const),
-                                                content: msg.body || msg.text || '',
-                                            };
-                                        })
+                                        .slice(0, -1)
+                                        .map((msg: any) => ({
+                                            role: msg.is_from_us ? ('assistant' as const) : ('user' as const),
+                                            content: msg.body || '',
+                                        }))
                                         .filter((m) => m.content.trim() !== '');
 
                                     // Call AI
@@ -364,51 +336,57 @@ async function startSession(sessionId: string) {
                                     await sock.sendMessage(chatId, { text: aiResponse.reply });
                                     console.log(`[AI] Sent reply to ${chatId}`);
 
-                                    // Save AI message to Firestore
+                                    // Save AI message to Supabase
                                     const aiMessageId = `ai_${Date.now()}`;
-                                    await chatRef.collection('messages').doc(aiMessageId).set({
-                                        id: aiMessageId,
-                                        chatId,
-                                        sender: 'bot',
-                                        body: aiResponse.reply,
-                                        text: aiResponse.reply,
-                                        timestamp: admin.firestore.FieldValue.serverTimestamp(),
-                                        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-                                        isFromMe: true,
-                                        isFromUs: true,
-                                        mediaType: null,
-                                        mediaUrl: null,
-                                        status: 'sent',
-                                        sessionId,
-                                    });
+                                    await supabaseAdmin
+                                        .from('messages')
+                                        .insert({
+                                            id: aiMessageId,
+                                            chat_id: chatId,
+                                            session_id: sessionId,
+                                            remote_id: chatId,
+                                            sender: 'bot',
+                                            body: aiResponse.reply,
+                                            timestamp: new Date().toISOString(),
+                                            created_at: new Date().toISOString(),
+                                            is_from_us: true,
+                                            media_type: null,
+                                            media_url: null,
+                                            status: 'sent',
+                                        });
 
                                     // Update chat's last message
-                                    await chatRef.update({
-                                        lastMessage: aiResponse.reply,
-                                        lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
-                                    });
+                                    await supabaseAdmin
+                                        .from('chats')
+                                        .update({
+                                            last_message: aiResponse.reply,
+                                            last_message_at: new Date().toISOString(),
+                                        })
+                                        .eq('id', chatId);
 
                                     // Handle handoff if requested
                                     if (aiResponse.handoff) {
                                         console.log(`[AI] Handoff requested for chat ${chatId}: ${aiResponse.handoff_reason}`);
 
-                                        await chatRef.update({
-                                            mode: 'human',
-                                            needsHuman: true,
-                                            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-                                        });
+                                        await supabaseAdmin
+                                            .from('chats')
+                                            .update({
+                                                mode: 'human',
+                                                needs_human: true,
+                                                updated_at: new Date().toISOString(),
+                                            })
+                                            .eq('id', chatId);
 
                                         console.log(`[AI] Chat ${chatId} switched to human mode`);
                                     }
                                 }
                             } catch (aiError) {
                                 console.error(`[AI] Error processing AI for chat ${chatId}:`, aiError);
-                                // Don't fail the whole message processing if AI fails
                             }
                         }
 
                     } catch (e) {
-                         console.error(`Error saving message for ${sessionId}:`, e);
+                        console.error(`Error saving message for ${sessionId}:`, e);
                     }
                 }
             }
@@ -416,155 +394,169 @@ async function startSession(sessionId: string) {
 
         // Handle chats
         sock.ev.on('chats.upsert', async (chats) => {
-             console.log(`Received ${chats.length} chats for session ${sessionId}`);
-             for (const chat of chats) {
-                 const chatId = chat.id;
-                 if (!chatId) continue;
-                 try {
-                     await db.collection('whatsappSessions').doc(sessionId).collection('chats').doc(chatId).set({
-                         id: chatId,
-                         remoteId: chatId,
-                         name: chat.name || null,
-                         ...chat,
-                         updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                     }, { merge: true });
-                 } catch (e) {
-                      console.error(`Error saving chat ${chatId}:`, e);
-                 }
-             }
+            console.log(`Received ${chats.length} chats for session ${sessionId}`);
+            for (const chat of chats) {
+                const chatId = chat.id;
+                if (!chatId) continue;
+                try {
+                    await supabaseAdmin
+                        .from('chats')
+                        .upsert({
+                            id: chatId,
+                            session_id: sessionId,
+                            remote_id: chatId,
+                            name: chat.name || null,
+                            updated_at: new Date().toISOString()
+                        }, {
+                            onConflict: 'id'
+                        });
+                } catch (e) {
+                    console.error(`Error saving chat ${chatId}:`, e);
+                }
+            }
         });
 
-        sock.ev.on('contacts.upsert', async (contacts) => {
-            console.log(`Received ${contacts.length} contacts for session ${sessionId}`);
-             for (const contact of contacts) {
-                 const contactId = contact.id;
-                 if (!contactId) continue;
-                 try {
-                     // We might want to save contacts to a contacts collection or update chat names
-                     // For now, let's just log or maybe update chat if exists
-                 } catch (e) {
-                      console.error(`Error saving contact ${contactId}:`, e);
-                 }
-             }
-        });
-        
     } catch (error) {
         console.error(`Error starting session ${sessionId}:`, error);
         sessions.delete(sessionId);
     }
 }
 
-console.log('Starting Worker...');
+console.log('Starting Worker with Supabase...');
 
-// Listen for outgoing messages
-db.collectionGroup('messages')
-    .where('status', '==', 'pending')
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach(async (change) => {
-            if (change.type === 'added') {
-                const messageData = change.doc.data();
-                const sessionId = messageData.sessionId;
-                const remoteId = messageData.remoteId; // Use remoteId (JID) instead of chatId
-                const body = messageData.body;
-                const messageId = change.doc.id;
+// Listen for outgoing messages using Supabase Realtime
+supabaseAdmin
+    .channel('messages-channel')
+    .on(
+        'postgres_changes',
+        {
+            event: 'INSERT',
+            schema: 'public',
+            table: 'messages',
+            filter: 'status=eq.pending'
+        },
+        async (payload) => {
+            const messageData = payload.new;
+            const sessionId = messageData.session_id;
+            const remoteId = messageData.remote_id;
+            const body = messageData.body;
+            const messageId = messageData.id;
 
-                if (sessions.has(sessionId)) {
-                    const sock = sessions.get(sessionId);
-                    console.log(`[Worker] Sending message ${messageId} to ${remoteId}`);
-                    try {
-                        // Send message via Baileys using the JID
-                        await sock.sendMessage(remoteId, { text: body || '' });
+            if (sessions.has(sessionId)) {
+                const sock = sessions.get(sessionId);
+                console.log(`[Worker] Sending message ${messageId} to ${remoteId}`);
+                try {
+                    await sock.sendMessage(remoteId, { text: body || '' });
 
-                        // Update status to sent
-                        await change.doc.ref.update({
+                    await supabaseAdmin
+                        .from('messages')
+                        .update({
                             status: 'sent',
-                            updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                        });
-                        console.log(`[Worker] ✅ Message ${messageId} sent successfully`);
-                    } catch (e) {
-                        console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
-                        await change.doc.ref.update({ status: 'failed' });
-                    }
-                } else {
-                    console.warn(`[Worker] ⚠️ Session ${sessionId} not found in active sessions`);
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', messageId);
+
+                    console.log(`[Worker] ✅ Message ${messageId} sent successfully`);
+                } catch (e) {
+                    console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
+                    await supabaseAdmin
+                        .from('messages')
+                        .update({ status: 'failed' })
+                        .eq('id', messageId);
                 }
+            } else {
+                console.warn(`[Worker] ⚠️ Session ${sessionId} not found in active sessions`);
             }
-        });
-    }, (error) => {
-        console.error('Error listening to outgoing messages:', error);
-    });
+        }
+    )
+    .subscribe();
 
+// Listen for session changes using Supabase Realtime
+supabaseAdmin
+    .channel('sessions-channel')
+    .on(
+        'postgres_changes',
+        {
+            event: '*',
+            schema: 'public',
+            table: 'whatsapp_sessions'
+        },
+        async (payload) => {
+            const sessionId = payload.new.id;
+            const data = payload.new;
 
-// Listen for session changes
-db.collection('whatsappSessions').onSnapshot(
-    (snapshot) => {
-        snapshot.docChanges().forEach(async (change) => {
-            const sessionId = change.doc.id;
-            const data = change.doc.data();
-
-            if (change.type === 'added') {
+            if (payload.eventType === 'INSERT') {
                 console.log(`New session detected: ${sessionId}`);
                 startSession(sessionId);
+            } else if (payload.eventType === 'UPDATE') {
+                // If the user clicked Disconnect (shouldDisconnect flag)
+                if (data.should_disconnect && sessions.has(sessionId)) {
+                    console.log(`Session ${sessionId} disconnected by user. Logging out and clearing chats...`);
+                    const sock = sessions.get(sessionId);
+
+                    try {
+                        // Delete all chats and messages
+                        await supabaseAdmin
+                            .from('chats')
+                            .delete()
+                            .eq('session_id', sessionId);
+
+                        await supabaseAdmin
+                            .from('messages')
+                            .delete()
+                            .eq('session_id', sessionId);
+
+                        console.log(`Deleted all chats for session ${sessionId}`);
+
+                        // Delete auth state files
+                        const authPath = path.join(process.cwd(), 'auth_info_baileys', sessionId);
+                        try {
+                            if (fs.existsSync(authPath)) {
+                                fs.rmSync(authPath, { recursive: true, force: true });
+                                console.log(`✅ Deleted auth state for session ${sessionId}`);
+                            }
+                        } catch (err) {
+                            console.error(`❌ Error deleting auth state for session ${sessionId}:`, err);
+                        }
+
+                        // Reset the session document
+                        await supabaseAdmin
+                            .from('whatsapp_sessions')
+                            .update({
+                                is_ready: false,
+                                qr: '',
+                                should_disconnect: false,
+                                updated_at: new Date().toISOString()
+                            })
+                            .eq('id', sessionId);
+
+                        console.log(`Logging out session ${sessionId}...`);
+                        sock.logout();
+                        sessions.delete(sessionId);
+                    } catch (e) {
+                        console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
+                    }
+                } else if (!sessions.has(sessionId)) {
+                    startSession(sessionId);
+                }
             }
-            else if (change.type === 'modified') {
-                 // If the user clicked Disconnect (shouldDisconnect flag)
-                 if (data.shouldDisconnect && sessions.has(sessionId)) {
-                     console.log(`Session ${sessionId} disconnected by user. Logging out and clearing chats...`);
-                     const sock = sessions.get(sessionId);
+        }
+    )
+    .subscribe();
 
-                     try {
-                         // Delete all chats for this session
-                         const chatsSnapshot = await db.collection('whatsappSessions').doc(sessionId).collection('chats').get();
-                         const deletePromises = chatsSnapshot.docs.map(async (chatDoc) => {
-                             // Delete all messages in this chat
-                             const messagesSnapshot = await chatDoc.ref.collection('messages').get();
-                             const messageDeletePromises = messagesSnapshot.docs.map(msgDoc => msgDoc.ref.delete());
-                             await Promise.all(messageDeletePromises);
-                             // Delete the chat itself
-                             return chatDoc.ref.delete();
-                         });
-                         await Promise.all(deletePromises);
-                         console.log(`Deleted all chats for session ${sessionId}`);
+// Load existing sessions on startup
+(async () => {
+    const { data: existingSessions } = await supabaseAdmin
+        .from('whatsapp_sessions')
+        .select('id');
 
-                         // Delete auth state files to ensure fresh QR on next connect
-                         const authPath = path.join(process.cwd(), 'auth_info_baileys', sessionId);
-                         try {
-                             if (fs.existsSync(authPath)) {
-                                 fs.rmSync(authPath, { recursive: true, force: true });
-                                 console.log(`✅ Deleted auth state for session ${sessionId}`);
-                             } else {
-                                 console.log(`ℹ️  No auth state folder found for session ${sessionId}`);
-                             }
-                         } catch (err) {
-                             console.error(`❌ Error deleting auth state for session ${sessionId}:`, err);
-                         }
-
-                         // Reset the session document
-                         await db.collection('whatsappSessions').doc(sessionId).update({
-                             isReady: false,
-                             qr: '',
-                             shouldDisconnect: false,
-                             updatedAt: admin.firestore.FieldValue.serverTimestamp()
-                         });
-
-                         // Logout from WhatsApp
-                         console.log(`Logging out session ${sessionId}...`);
-                         sock.logout();
-                         sessions.delete(sessionId);
-                     } catch (e) {
-                         console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
-                     }
-                 }
-                 else if (!sessions.has(sessionId)) {
-                     startSession(sessionId);
-                 }
-            }
-        });
-    },
-    (error) => {
-        console.error('Error listening to whatsappSessions:', error);
+    if (existingSessions) {
+        console.log(`Found ${existingSessions.length} existing sessions`);
+        for (const session of existingSessions) {
+            startSession(session.id);
+        }
     }
-);
+})();
 
 // Keep the process alive
 process.on('SIGINT', () => {

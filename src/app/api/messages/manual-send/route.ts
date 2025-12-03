@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { adminDb, admin } from '@/lib/firebaseAdmin';
+import { supabaseAdmin } from '@/lib/supabaseAdmin';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,17 +15,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if session exists and is ready
-    const sessionDoc = await adminDb.collection('whatsappSessions').doc(sessionId).get();
+    const { data: session, error: sessionError } = await supabaseAdmin
+      .from('whatsapp_sessions')
+      .select('*')
+      .eq('id', sessionId)
+      .single();
 
-    if (!sessionDoc.exists) {
+    if (sessionError || !session) {
       return NextResponse.json(
         { error: 'Session not found' },
         { status: 404 }
       );
     }
 
-    const sessionData = sessionDoc.data();
-    if (!sessionData?.isReady) {
+    if (!session.is_ready) {
       return NextResponse.json(
         { error: 'WhatsApp not connected. Please connect first.' },
         { status: 400 }
@@ -36,77 +39,89 @@ export async function POST(request: NextRequest) {
     const jid = to.includes('@') ? to : `${to}@s.whatsapp.net`;
 
     // Create or get existing chat
-    const chatsRef = adminDb.collection('whatsappSessions').doc(sessionId).collection('chats');
-    const existingChats = await chatsRef.where('remoteId', '==', jid).limit(1).get();
+    const { data: existingChats } = await supabaseAdmin
+      .from('chats')
+      .select('*')
+      .eq('session_id', sessionId)
+      .eq('remote_id', jid)
+      .limit(1);
 
     let chatId: string;
-    let chatDoc;
+    let chatData: any;
 
-    if (!existingChats.empty) {
-      chatDoc = existingChats.docs[0];
-      chatId = chatDoc.id;
+    if (existingChats && existingChats.length > 0) {
+      chatData = existingChats[0];
+      chatId = chatData.id;
     } else {
       // Create new chat
-      const newChatRef = chatsRef.doc();
-      chatId = newChatRef.id;
+      const { data: newChat, error: chatError } = await supabaseAdmin
+        .from('chats')
+        .insert({
+          session_id: sessionId,
+          remote_id: jid,
+          name: jid.split('@')[0], // Use phone number as name initially
+          type: 'INDIVIDUAL',
+          status: 'INBOX',
+          is_unread: false,
+          last_message: text,
+          last_message_at: new Date().toISOString(),
+          assigned_to: assignedTo || null,
+          is_group: false,
+          is_read: true,
+          is_muted: false,
+          is_archived: false,
+          mode: 'ai', // Default to AI mode
+          needs_human: false,
+        })
+        .select()
+        .single();
 
-      await newChatRef.set({
-        id: chatId,
-        remoteId: jid,
-        name: jid.split('@')[0], // Use phone number as name initially
-        type: 'INDIVIDUAL',
-        status: 'INBOX',
-        isUnread: false,
-        lastMessage: text,
-        lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
-        assignedTo: assignedTo || null,
-        isGroup: false,
-        isRead: true,
-        isMuted: false,
-        isArchived: false,
-        sessionId,
-        mode: 'ai', // Default to AI mode
-        needsHuman: false,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+      if (chatError || !newChat) {
+        throw new Error('Failed to create chat');
+      }
 
-      chatDoc = await newChatRef.get();
+      chatData = newChat;
+      chatId = newChat.id;
     }
 
     // Create message document with status 'pending'
     // The worker will pick it up and send it via Baileys
-    const messageRef = chatsRef.doc(chatId).collection('messages').doc();
+    const { data: message, error: messageError } = await supabaseAdmin
+      .from('messages')
+      .insert({
+        chat_id: chatId,
+        session_id: sessionId,
+        remote_id: jid, // Add JID for worker to send via Baileys
+        sender: 'agent',
+        body: text,
+        timestamp: new Date().toISOString(),
+        is_from_us: true,
+        media_type: null,
+        media_url: null,
+        status: 'pending', // Worker will change this to 'sent' after sending
+      })
+      .select()
+      .single();
 
-    await messageRef.set({
-      id: messageRef.id,
-      chatId,
-      remoteId: jid, // Add JID for worker to send via Baileys
-      sender: 'agent',
-      body: text,
-      text,
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      isFromUs: true,
-      isFromMe: true,
-      mediaType: null,
-      mediaUrl: null,
-      status: 'pending', // Worker will change this to 'sent' after sending
-      sessionId,
-    });
+    if (messageError) {
+      throw new Error('Failed to create message');
+    }
 
     // Update chat's last message
-    await chatsRef.doc(chatId).update({
-      lastMessage: text,
-      lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    await supabaseAdmin
+      .from('chats')
+      .update({
+        last_message: text,
+        last_message_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', chatId);
 
     return NextResponse.json({
       success: true,
       chatId,
-      messageId: messageRef.id,
-      chat: chatDoc.data(),
+      messageId: message.id,
+      chat: chatData,
     });
   } catch (error: any) {
     console.error('Error in manual-send API:', error);
