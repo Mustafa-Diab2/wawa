@@ -1,5 +1,4 @@
 import type { User, Chat, Message, Contact, Category, Bot } from './types';
-import { Timestamp } from 'firebase/firestore';
 
 
 export const mockUser: User = {

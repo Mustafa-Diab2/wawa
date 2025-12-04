@@ -1,5 +1,3 @@
-import type { FieldValue, Timestamp } from 'firebase/firestore';
-
 export interface User {
   id: string;
   name: string;
@@ -14,8 +12,8 @@ export interface WhatsAppSession {
     qr: string;
     isReady: boolean;
     shouldDisconnect?: boolean;
-    createdAt: Timestamp | FieldValue;
-    updatedAt: Timestamp | FieldValue;
+    createdAt: Date | string;
+    updatedAt: Date | string;
 }
 
 export interface Chat {
@@ -26,7 +24,7 @@ export interface Chat {
   status: 'INBOX' | 'DONE' | 'ARCHIVED';
   isUnread?: boolean;
   lastMessage?: string;
-  lastMessageAt: Timestamp;
+  lastMessageAt: Date | string;
   avatar?: string;
   assignedTo: string | null;
   isGroup: boolean;
@@ -36,8 +34,8 @@ export interface Chat {
   sessionId: string;
   mode: 'ai' | 'human';
   needsHuman: boolean;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface Message {
@@ -46,14 +44,14 @@ export interface Message {
   remoteId: string; // WhatsApp JID (e.g., "201234567890@s.whatsapp.net")
   sender: string;
   body: string | null;
-  timestamp: Timestamp;
+  timestamp: Date | string;
   isFromUs: boolean;
   mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null;
   mediaUrl: string | null;
   status: 'sent' | 'delivered' | 'read' | 'pending' | 'failed';
   userId?: string;
   sessionId: string;
-  createdAt: Timestamp;
+  createdAt: Date | string;
 }
 
 export interface Contact {
@@ -64,16 +62,16 @@ export interface Contact {
   categoryId: string | null;
   avatar: string;
   userId: string;
-  createdAt: Timestamp | FieldValue;
-  updatedAt: Timestamp | FieldValue;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface Category {
   id: string;
   name: string;
   userId: string;
-  createdAt: Timestamp | FieldValue;
-  updatedAt: Timestamp | FieldValue;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface Bot {
@@ -84,6 +82,6 @@ export interface Bot {
   aiModel?: string;
   aiPrompt?: string;
   userId: string;
-  createdAt: Timestamp | FieldValue;
-  updatedAt: Timestamp | FieldValue;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
