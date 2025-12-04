@@ -32,15 +32,16 @@ export const mockMessages: { [chatId: string]: Message[] } = {
     {
       id: 'msg-1-1',
       chatId: 'chat-1',
+      remoteId: '971501234567@c.us',
       sender: 'سارة خالد',
       body: 'مرحبًا، أود الاستفسار عن باقات الأسعار.',
-      timestamp: Timestamp.fromMillis(Date.now() - 10 * 60 * 1000),
+      timestamp: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
       isFromUs: false,
       mediaType: null,
       mediaUrl: null,
       status: 'read',
       sessionId: 'session-1',
-      createdAt: Timestamp.fromMillis(Date.now() - 10 * 60 * 1000),
+      createdAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
     },
   ],
 };
@@ -55,8 +56,8 @@ export const mockContacts: Contact[] = [
     categoryId: 'cat-1',
     avatar: 'https://i.pravatar.cc/150?u=sara',
     userId: 'user-1',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 'contact-2',
@@ -66,8 +67,8 @@ export const mockContacts: Contact[] = [
     categoryId: 'cat-2',
     avatar: 'https://i.pravatar.cc/150?u=mohamed',
     userId: 'user-1',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 'contact-3',
@@ -77,15 +78,15 @@ export const mockContacts: Contact[] = [
     categoryId: 'cat-1',
     avatar: 'https://i.pravatar.cc/150?u=ali-hassan',
     userId: 'user-1',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
 export const mockCategories: Category[] = [
-  { id: 'cat-1', name: 'عملاء محتملون', userId: 'user-1', createdAt: Timestamp.now(), updatedAt: Timestamp.now() },
-  { id: 'cat-2', name: 'عملاء حاليون', userId: 'user-1', createdAt: Timestamp.now(), updatedAt: Timestamp.now() },
-  { id: 'cat-3', name: 'VIP', userId: 'user-1', createdAt: Timestamp.now(), updatedAt: Timestamp.now() },
+  { id: 'cat-1', name: 'عملاء محتملون', userId: 'user-1', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 'cat-2', name: 'عملاء حاليون', userId: 'user-1', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 'cat-3', name: 'VIP', userId: 'user-1', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
 ];
 
 export const mockBots: Bot[] = [
@@ -95,8 +96,8 @@ export const mockBots: Bot[] = [
     type: 'welcome',
     isActive: true,
     userId: 'user-1',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 'bot-2',
@@ -106,8 +107,8 @@ export const mockBots: Bot[] = [
     aiModel: 'gpt-4o-mini',
     aiPrompt: 'أنت مساعد ذكي لخدمة العملاء. مهمتك هي الإجابة على استفساراتهم بأسلوب ودود ومحترف.',
     userId: 'user-1',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 'bot-3',
@@ -115,7 +116,7 @@ export const mockBots: Bot[] = [
     type: 'auto',
     isActive: false,
     userId: 'user-1',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
