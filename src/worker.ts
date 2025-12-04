@@ -471,90 +471,100 @@ supabaseAdmin
     )
     .subscribe();
 
-// Listen for session changes using Supabase Realtime
-supabaseAdmin
-    .channel('sessions-channel')
-    .on(
-        'postgres_changes',
-        {
-            event: '*',
-            schema: 'public',
-            table: 'whatsapp_sessions'
-        },
-        async (payload) => {
-            const sessionId = payload.new.id;
-            const data = payload.new;
+// Polling function to check for new sessions every 5 seconds
+console.log('[Worker] Setting up polling for new sessions (every 5 seconds)...');
+setInterval(async () => {
+    try {
+        const { data: allSessions, error } = await supabaseAdmin
+            .from('whatsapp_sessions')
+            .select('*');
 
-            if (payload.eventType === 'INSERT') {
-                console.log(`New session detected: ${sessionId}`);
-                startSession(sessionId);
-            } else if (payload.eventType === 'UPDATE') {
-                // If the user clicked Disconnect (shouldDisconnect flag)
-                if (data.should_disconnect && sessions.has(sessionId)) {
-                    console.log(`Session ${sessionId} disconnected by user. Logging out and clearing chats...`);
-                    const sock = sessions.get(sessionId);
+        if (error) {
+            console.error('[Polling] Error fetching sessions:', error);
+            return;
+        }
 
+        if (!allSessions) return;
+
+        for (const sessionData of allSessions) {
+            const sessionId = sessionData.id;
+
+            // Check if session should disconnect
+            if (sessionData.should_disconnect && sessions.has(sessionId)) {
+                console.log(`[Polling] Session ${sessionId} should disconnect`);
+                const sock = sessions.get(sessionId);
+
+                try {
+                    // Delete all chats and messages
+                    await supabaseAdmin
+                        .from('chats')
+                        .delete()
+                        .eq('session_id', sessionId);
+
+                    await supabaseAdmin
+                        .from('messages')
+                        .delete()
+                        .eq('session_id', sessionId);
+
+                    console.log(`Deleted all chats for session ${sessionId}`);
+
+                    // Delete auth state files
+                    const authPath = path.join(process.cwd(), 'auth_info_baileys', sessionId);
                     try {
-                        // Delete all chats and messages
-                        await supabaseAdmin
-                            .from('chats')
-                            .delete()
-                            .eq('session_id', sessionId);
-
-                        await supabaseAdmin
-                            .from('messages')
-                            .delete()
-                            .eq('session_id', sessionId);
-
-                        console.log(`Deleted all chats for session ${sessionId}`);
-
-                        // Delete auth state files
-                        const authPath = path.join(process.cwd(), 'auth_info_baileys', sessionId);
-                        try {
-                            if (fs.existsSync(authPath)) {
-                                fs.rmSync(authPath, { recursive: true, force: true });
-                                console.log(`✅ Deleted auth state for session ${sessionId}`);
-                            }
-                        } catch (err) {
-                            console.error(`❌ Error deleting auth state for session ${sessionId}:`, err);
+                        if (fs.existsSync(authPath)) {
+                            fs.rmSync(authPath, { recursive: true, force: true });
+                            console.log(`✅ Deleted auth state for session ${sessionId}`);
                         }
-
-                        // Reset the session document
-                        await supabaseAdmin
-                            .from('whatsapp_sessions')
-                            .update({
-                                is_ready: false,
-                                qr: '',
-                                should_disconnect: false,
-                                updated_at: new Date().toISOString()
-                            })
-                            .eq('id', sessionId);
-
-                        console.log(`Logging out session ${sessionId}...`);
-                        sock.logout();
-                        sessions.delete(sessionId);
-                    } catch (e) {
-                        console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
+                    } catch (err) {
+                        console.error(`❌ Error deleting auth state for session ${sessionId}:`, err);
                     }
-                } else if (!sessions.has(sessionId)) {
-                    startSession(sessionId);
+
+                    // Reset the session document
+                    await supabaseAdmin
+                        .from('whatsapp_sessions')
+                        .update({
+                            is_ready: false,
+                            qr: '',
+                            should_disconnect: false,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', sessionId);
+
+                    console.log(`Logging out session ${sessionId}...`);
+                    sock.logout();
+                    sessions.delete(sessionId);
+                } catch (e) {
+                    console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
                 }
             }
+            // Start session if not already started
+            else if (!sessions.has(sessionId)) {
+                console.log(`[Polling] ✅ New session detected: ${sessionId}`);
+                startSession(sessionId);
+            }
         }
-    )
-    .subscribe();
+    } catch (e) {
+        console.error('[Polling] Error in polling loop:', e);
+    }
+}, 5000);
 
 // Load existing sessions on startup
 (async () => {
-    const { data: existingSessions } = await supabaseAdmin
+    console.log('[Worker] Querying existing sessions from whatsapp_sessions table...');
+    const { data: existingSessions, error } = await supabaseAdmin
         .from('whatsapp_sessions')
         .select('id');
 
-    if (existingSessions) {
-        console.log(`Found ${existingSessions.length} existing sessions`);
+    if (error) {
+        console.error('[Worker] ❌ Error querying sessions:', error);
+    } else if (existingSessions) {
+        console.log(`[Worker] ✅ Found ${existingSessions.length} existing sessions:`, existingSessions);
         for (const session of existingSessions) {
+            console.log(`[Worker] Starting session from DB: ${session.id}`);
             startSession(session.id);
         }
+    } else {
+        console.log('[Worker] No existing sessions found in database');
     }
 })();
 
