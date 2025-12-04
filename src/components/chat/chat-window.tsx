@@ -9,8 +9,6 @@ import type { Chat, Message } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { doc, updateDoc } from 'firebase/firestore';
-import { useFirestore } from '@/firebase';
 import { useToast } from '@/hooks/use-toast';
 
 interface ChatWindowProps {

@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import type { Message } from "@/lib/types";
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { Timestamp } from "firebase/firestore";
 import { FileText, Image as ImageIcon, Video, Music, Sticker } from 'lucide-react';
 
 interface ChatMessageProps {

@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Paperclip, Smile, Mic, Send, Bot, Loader2 } from 'lucide-react';
-import { useFirestore, useUser, addDocumentNonBlocking } from '@/firebase';
-import { collection, serverTimestamp, doc, setDoc } from 'firebase/firestore';
 import type { Chat } from '@/lib/types';
 import { respondToInquiry } from '@/ai/flows/respond-to-customer-inquiries';
 
