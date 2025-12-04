@@ -19,27 +19,35 @@ interface ChatWindowProps {
 }
 
 export default function ChatWindow({ chat, messages, messagesLoading, sessionId }: ChatWindowProps) {
-  const firestore = useFirestore();
   const { toast } = useToast();
   const [isTogglingMode, setIsTogglingMode] = useState(false);
 
   const toggleMode = async () => {
-    if (!firestore || isTogglingMode) return;
+    if (isTogglingMode) return;
 
     try {
       setIsTogglingMode(true);
       const newMode = chat.mode === 'ai' ? 'human' : 'ai';
-      const chatRef = doc(firestore, `whatsappSessions/${sessionId}/chats/${chat.id}`);
 
-      await updateDoc(chatRef, {
-        mode: newMode,
-        needsHuman: false, // Reset needsHuman when manually toggling
+      // Update via API
+      const response = await fetch('/api/chats/toggle-mode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          chatId: chat.id,
+          mode: newMode,
+        }),
       });
 
-      toast({
-        title: newMode === 'ai' ? 'تم التبديل إلى الوضع الذكي' : 'تم التبديل إلى الوضع اليدوي',
-        description: newMode === 'ai' ? 'سيرد الذكاء الاصطناعي تلقائياً' : 'يجب الرد يدوياً على الرسائل',
-      });
+      if (response.ok) {
+        toast({
+          title: newMode === 'ai' ? 'تم التبديل إلى الوضع الذكي' : 'تم التبديل إلى الوضع اليدوي',
+          description: newMode === 'ai' ? 'سيرد الذكاء الاصطناعي تلقائياً' : 'يجب الرد يدوياً على الرسائل',
+        });
+      } else {
+        throw new Error('Failed to toggle mode');
+      }
     } catch (error: any) {
       toast({
         title: 'خطأ',
