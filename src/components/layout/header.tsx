@@ -24,17 +24,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { mockUser } from "@/lib/mock-data";
 import { useIsMobile } from "@/hooks/use-mobile";
 import WaCrmLogo from "../icons/wacrm-logo";
-import { useAuth } from "@/firebase";
-import { signOut } from "firebase/auth";
+import { supabase } from "@/lib/supabase";
 
 export default function AppHeader() {
   const isMobile = useIsMobile();
-  const auth = useAuth();
 
-  const handleSignOut = () => {
-    if (auth) {
-      signOut(auth);
-    }
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
   };
 
   return (
