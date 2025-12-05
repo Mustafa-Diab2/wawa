@@ -179,6 +179,9 @@ async function startSession(sessionId: string) {
                     const chatId = msg.key.remoteJid;
                     if (!chatId) continue;
 
+                    // Ignore status broadcasts
+                    if (chatId === 'status@broadcast') continue;
+
                     const messageId = msg.key.id;
                     if (!messageId) continue;
 
