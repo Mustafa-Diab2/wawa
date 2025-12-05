@@ -1,13 +1,13 @@
 // Load environment variables from .env.local
-import { config } from 'dotenv';
-import path from 'path';
-config({ path: path.join(process.cwd(), '.env.local') });
+import { config } from "dotenv";
+import path from "path";
+config({ path: path.join(process.cwd(), ".env.local") });
 
-import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from '@whiskeysockets/baileys';
-import { supabaseAdmin } from './lib/supabaseAdmin';
-import pino from 'pino';
-import fs from 'fs';
-import { callAI } from './lib/ai-agent';
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from "@whiskeysockets/baileys";
+import { supabaseAdmin } from "./lib/supabaseAdmin";
+import pino from "pino";
+import fs from "fs";
+import { callAI } from "./lib/ai-agent";
 
 const sessions = new Map<string, any>();
 
@@ -16,10 +16,10 @@ async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: st
     try {
         const buffer = await downloadMediaMessage(
             msg,
-            'buffer',
+            "buffer",
             {},
             {
-                logger: pino({ level: 'silent' }) as any,
+                logger: pino({ level: "silent" }) as any,
                 reuploadRequest: () => Promise.resolve({} as any)
             }
         );
@@ -31,7 +31,7 @@ async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: st
         console.log(`Media download successful for ${mediaType}, upload to Supabase Storage coming soon`);
         return null;
     } catch (error) {
-        console.error('Error downloading/uploading media:', error);
+        console.error("Error downloading/uploading media:", error);
         return null;
     }
 }
@@ -50,28 +50,28 @@ async function startSession(sessionId: string) {
         const sock = makeWASocket({
             auth: {
                 creds: state.creds,
-                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' }) as any),
+                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "silent" }) as any),
             },
             printQRInTerminal: false,
-            logger: pino({ level: 'silent' }) as any,
+            logger: pino({ level: "silent" }) as any,
         });
 
         sessions.set(sessionId, sock);
 
-        sock.ev.on('connection.update', async (update) => {
+        sock.ev.on("connection.update", async (update) => {
             const { connection, lastDisconnect, qr } = update;
 
             if (qr) {
                 console.log(`QR Code generated for session ${sessionId}`);
                 try {
                     await supabaseAdmin
-                        .from('whatsapp_sessions')
+                        .from("whatsapp_sessions")
                         .update({
                             qr: qr,
                             is_ready: false,
                             updated_at: new Date().toISOString()
                         })
-                        .eq('id', sessionId);
+                        .eq("id", sessionId);
 
                     console.log(`QR Code for session ${sessionId} successfully updated in Supabase.`);
                 } catch (e) {
@@ -79,7 +79,7 @@ async function startSession(sessionId: string) {
                 }
             }
 
-            if (connection === 'close') {
+            if (connection === "close") {
                 const shouldReconnect = (lastDisconnect?.error as any)?.output?.statusCode !== DisconnectReason.loggedOut;
                 console.log(`Connection closed for ${sessionId}. Reconnecting: ${shouldReconnect}`);
 
@@ -92,42 +92,42 @@ async function startSession(sessionId: string) {
                     try {
                         // Delete all chats and messages for this session
                         await supabaseAdmin
-                            .from('chats')
+                            .from("chats")
                             .delete()
-                            .eq('session_id', sessionId);
+                            .eq("session_id", sessionId);
 
                         await supabaseAdmin
-                            .from('messages')
+                            .from("messages")
                             .delete()
-                            .eq('session_id', sessionId);
+                            .eq("session_id", sessionId);
 
                         console.log(`Deleted all chats for logged out session ${sessionId}`);
 
                         await supabaseAdmin
-                            .from('whatsapp_sessions')
+                            .from("whatsapp_sessions")
                             .update({
                                 is_ready: false,
-                                qr: '',
+                                qr: "",
                                 updated_at: new Date().toISOString()
                             })
-                            .eq('id', sessionId);
+                            .eq("id", sessionId);
 
                         console.log(`Session ${sessionId} logged out. Not restarting automatically to avoid loop.`);
                     } catch (e) {
                         console.error(`Error updating logout status for ${sessionId}:`, e);
                     }
                 }
-            } else if (connection === 'open') {
+            } else if (connection === "open") {
                 console.log(`Session ${sessionId} connected.`);
                 try {
                     await supabaseAdmin
-                        .from('whatsapp_sessions')
+                        .from("whatsapp_sessions")
                         .update({
                             is_ready: true,
-                            qr: '',
+                            qr: "",
                             updated_at: new Date().toISOString()
                         })
-                        .eq('id', sessionId);
+                        .eq("id", sessionId);
 
                     console.log(`Fetching chats for session ${sessionId}...`);
 
@@ -141,18 +141,18 @@ async function startSession(sessionId: string) {
                             const chat = groups[chatId];
                             try {
                                 await supabaseAdmin
-                                    .from('chats')
+                                    .from("chats")
                                     .upsert({
                                         id: chatId,
                                         session_id: sessionId,
                                         remote_id: chatId,
                                         name: chat.subject || chat.id,
-                                        type: 'GROUP',
+                                        type: "GROUP",
                                         is_group: true,
                                         last_message_at: new Date().toISOString(),
                                         updated_at: new Date().toISOString()
                                     }, {
-                                        onConflict: 'id'
+                                        onConflict: "id"
                                     });
                             } catch (e) {
                                 console.error(`Error saving group chat ${chatId}:`, e);
@@ -162,229 +162,214 @@ async function startSession(sessionId: string) {
                         console.log(`Could not fetch groups:`, e);
                     }
 
-                    console.log(`Finished loading chats for session ${sessionId}`)
+                    console.log(`Finished loading chats for session ${sessionId}`);
                 } catch (e) {
                     console.error(`Error updating connected status for ${sessionId}:`, e);
                 }
             }
         });
 
-        sock.ev.on('creds.update', saveCreds);
+        sock.ev.on("creds.update", saveCreds);
 
         // Handle incoming messages
-        sock.ev.on('messages.upsert', async ({ messages, type }) => {
-            if (type === 'notify' || type === 'append') {
-                for (const msg of messages) {
+        sock.ev.on("messages.upsert", async (m) => {
+            // Log messages.upsert for debugging, as requested by the user.
+            console.log("messages.upsert", JSON.stringify(m, null, 2));
+
+            if (m.type === "notify" || m.type === "append") {
+                for (const msg of m.messages) {
+                    // Skip if no message content
                     if (!msg.message) continue;
-                    const chatId = msg.key.remoteJid;
-                    if (!chatId) continue;
+
+                    const jid = msg.key.remoteJid!;
+                    if (!jid) continue;
 
                     // Ignore status broadcasts
-                    if (chatId === 'status@broadcast') continue;
+                    if (jid === "status@broadcast") continue;
 
                     const messageId = msg.key.id;
                     if (!messageId) continue;
 
-                    const isFromMe = msg.key.fromMe || false;
-                    const timestamp = typeof msg.messageTimestamp === 'number' ? new Date(msg.messageTimestamp * 1000).toISOString() : new Date().toISOString();
+                    const fromMe = msg.key.fromMe ?? false;
+                    const timestamp = typeof msg.messageTimestamp === "number" ? new Date(msg.messageTimestamp * 1000).toISOString() : new Date().toISOString();
 
-                    // Extract message content
-                    let text = '';
-                    let mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null = null;
+                    let body = "";
+                    let mediaType: "image" | "video" | "audio" | "document" | "sticker" | null = null;
                     let mediaUrl: string | null = null;
 
                     if (msg.message.conversation) {
-                        text = msg.message.conversation;
+                        body = msg.message.conversation;
                     } else if (msg.message.extendedTextMessage?.text) {
-                        text = msg.message.extendedTextMessage.text;
+                        body = msg.message.extendedTextMessage.text;
                     } else if (msg.message.imageMessage) {
-                        text = msg.message.imageMessage.caption || '📷 صورة';
-                        mediaType = 'image';
-                        mediaUrl = await downloadAndUploadMedia(msg, 'image', sessionId);
+                        body = msg.message.imageMessage.caption || "📷 صورة";
+                        mediaType = "image";
+                        mediaUrl = await downloadAndUploadMedia(msg, "image", sessionId);
                     } else if (msg.message.videoMessage) {
-                        text = msg.message.videoMessage.caption || '🎥 فيديو';
-                        mediaType = 'video';
-                        mediaUrl = await downloadAndUploadMedia(msg, 'video', sessionId);
+                        body = msg.message.videoMessage.caption || "🎥 فيديو";
+                        mediaType = "video";
+                        mediaUrl = await downloadAndUploadMedia(msg, "video", sessionId);
                     } else if (msg.message.audioMessage) {
                         const isPtt = msg.message.audioMessage.ptt;
-                        text = isPtt ? '🎤 رسالة صوتية' : '🎵 ملف صوتي';
-                        mediaType = 'audio';
-                        mediaUrl = await downloadAndUploadMedia(msg, 'audio', sessionId);
+                        body = isPtt ? "🎤 رسالة صوتية" : "🎵 ملف صوتي";
+                        mediaType = "audio";
+                        mediaUrl = await downloadAndUploadMedia(msg, "audio", sessionId);
                     } else if (msg.message.stickerMessage) {
-                        text = '🎨 ملصق';
-                        mediaType = 'sticker';
-                        mediaUrl = await downloadAndUploadMedia(msg, 'sticker', sessionId);
+                        body = "🎨 ملصق";
+                        mediaType = "sticker";
+                        mediaUrl = await downloadAndUploadMedia(msg, "sticker", sessionId);
                     } else if (msg.message.documentMessage) {
-                        const fileName = msg.message.documentMessage.fileName || 'ملف';
-                        text = `📎 ${fileName}`;
-                        mediaType = 'document';
-                        mediaUrl = await downloadAndUploadMedia(msg, 'document', sessionId);
+                        const fileName = msg.message.documentMessage.fileName || "ملف";
+                        body = `📎 ${fileName}`;
+                        mediaType = "document";
+                        mediaUrl = await downloadAndUploadMedia(msg, "document", sessionId);
                     }
 
-                    const messageData = {
-                        id: messageId,
-                        chat_id: chatId,
-                        session_id: sessionId,
-                        remote_id: chatId,
-                        sender: isFromMe ? 'me' : chatId,
-                        body: text,
-                        timestamp: timestamp,
-                        is_from_us: isFromMe,
-                        media_type: mediaType,
-                        media_url: mediaUrl,
-                        status: 'delivered' as const,
-                        created_at: timestamp,
-                    };
-
                     try {
-                        // Insert message
-                        await supabaseAdmin
-                            .from('messages')
-                            .upsert(messageData, {
-                                onConflict: 'id'
-                            });
+                        // Baileys -> Supabase Integration: Contacts, Chats, Messages
 
-                        // Update or create chat
-                        await supabaseAdmin
-                            .from('chats')
-                            .upsert({
-                                id: chatId,
-                                session_id: sessionId,
-                                remote_id: chatId,
-                                name: chatId.split('@')[0],
-                                type: 'INDIVIDUAL',
-                                last_message: text,
-                                last_message_at: timestamp,
-                                is_unread: !isFromMe,
-                                updated_at: new Date().toISOString()
-                            }, {
-                                onConflict: 'id'
-                            });
+                        // Upsert contact: Retrieve or create a contact entry
+                        const phone = jid.replace("@s.whatsapp.net", "");
+                        const { data: contact, error: contactError } = await supabaseAdmin
+                            .from("contacts")
+                            .upsert(
+                                { wa_jid: jid, phone },
+                                { onConflict: "wa_jid" }
+                            )
+                            .select()
+                            .single();
 
-                        console.log(`Saved message ${messageId} to chat ${chatId}`);
+                        if (contactError || !contact) {
+                            console.error(`Error upserting contact ${jid}:`, contactError);
+                            continue;
+                        }
+
+                        // Upsert chat: Retrieve or create a chat entry for the contact
+                        const { data: chat, error: chatError } = await supabaseAdmin
+                            .from("chats")
+                            .upsert(
+                                { contact_id: contact.id, session_id: sessionId, remote_id: jid, type: "INDIVIDUAL" },
+                                { onConflict: "contact_id" }
+                            )
+                            .select()
+                            .single();
+
+                        if (chatError || !chat) {
+                            console.error(`Error upserting chat for contact ${contact.id}:`, chatError);
+                            continue;
+                        }
+
+                        // Insert message: Add the new message to the messages table
+                        await supabaseAdmin.from("messages").insert({
+                            chat_id: chat.id,
+                            from_role: fromMe ? "agent" : "user",
+                            direction: fromMe ? "outgoing" : "incoming",
+                            type: mediaType || "text",
+                            body: body,
+                            wa_message_id: messageId,
+                            session_id: sessionId, // Important for session-specific messages
+                            created_at: timestamp,
+                        });
+
+                        // Update chat: Update last message, last message timestamp, and unread count
+                        await supabaseAdmin
+                            .from("chats")
+                            .update({
+                                last_message: body,
+                                last_message_at: new Date(),
+                                unread_count: fromMe ? chat.unread_count : (chat.unread_count || 0) + 1,
+                                updated_at: new Date().toISOString(),
+                            })
+                            .eq("id", chat.id);
+
+                        console.log(`Saved message ${messageId} to chat ${chat.id}`);
 
                         // AI Agent Logic - Only for incoming messages (not from us)
-                        if (!isFromMe && text && text.trim() !== '') {
+                        if (!fromMe && body && body.trim() !== "") {
                             try {
-                                // Get chat data
+                                // Get chat data (re-fetch for \'mode\' if it was just created or updated externally)
                                 const { data: chatData } = await supabaseAdmin
-                                    .from('chats')
-                                    .select('*')
-                                    .eq('id', chatId)
-                                    .single();
-
-                                // If chat doesn't exist or doesn't have mode field, create/update it
-                                if (!chatData || !chatData.mode) {
-                                    console.log(`[AI] Creating/updating chat ${chatId} with AI mode`);
-                                    await supabaseAdmin
-                                        .from('chats')
-                                        .upsert({
-                                            id: chatId,
-                                            session_id: sessionId,
-                                            remote_id: chatId,
-                                            name: chatId.split('@')[0],
-                                            type: 'INDIVIDUAL',
-                                            status: 'INBOX',
-                                            last_message: text,
-                                            last_message_at: timestamp,
-                                            assigned_to: null,
-                                            is_group: false,
-                                            is_read: false,
-                                            is_muted: false,
-                                            is_archived: false,
-                                            mode: 'ai',
-                                            needs_human: false,
-                                            created_at: new Date().toISOString(),
-                                            updated_at: new Date().toISOString(),
-                                        }, {
-                                            onConflict: 'id'
-                                        });
-                                }
-
-                                // Re-fetch to get updated data
-                                const { data: updatedChatData } = await supabaseAdmin
-                                    .from('chats')
-                                    .select('*')
-                                    .eq('id', chatId)
+                                    .from("chats")
+                                    .select("mode, unread_count")
+                                    .eq("id", chat.id)
                                     .single();
 
                                 // Check chat mode
-                                if (updatedChatData?.mode === 'human') {
-                                    console.log(`[AI] Chat ${chatId} is in human mode, skipping AI`);
+                                if (chatData?.mode === "human") {
+                                    console.log(`[AI] Chat ${chat.id} is in human mode, skipping AI`);
                                 } else {
-                                    // Mode is 'ai' - call AI agent
-                                    console.log(`[AI] Chat ${chatId} is in AI mode, calling AI agent...`);
+                                    // Mode is \'ai\' - call AI agent
+                                    console.log(`[AI] Chat ${chat.id} is in AI mode, calling AI agent...`);
 
                                     // Get conversation history (last 5 messages)
                                     const { data: messagesHistory } = await supabaseAdmin
-                                        .from('messages')
-                                        .select('*')
-                                        .eq('chat_id', chatId)
-                                        .order('timestamp', { ascending: false })
+                                        .from("messages")
+                                        .select("body, from_role")
+                                        .eq("chat_id", chat.id)
+                                        .order("created_at", { ascending: false })
                                         .limit(6);
 
                                     const conversationHistory = (messagesHistory || [])
                                         .reverse()
                                         .slice(0, -1)
                                         .map((msg: any) => ({
-                                            role: msg.is_from_us ? ('assistant' as const) : ('user' as const),
-                                            content: msg.body || '',
+                                            role: msg.from_role === "agent" ? ("assistant" as const) : ("user" as const),
+                                            content: msg.body || "",
                                         }))
-                                        .filter((m) => m.content.trim() !== '');
+                                        .filter((m) => m.content.trim() !== "");
 
                                     // Call AI
-                                    const aiResponse = await callAI(conversationHistory, text);
+                                    const aiResponse = await callAI(conversationHistory, body);
 
                                     // Send reply via WhatsApp
-                                    await sock.sendMessage(chatId, { text: aiResponse.reply });
-                                    console.log(`[AI] Sent reply to ${chatId}`);
+                                    await sock.sendMessage(jid, { text: aiResponse.reply });
+                                    console.log(`[AI] Sent reply to ${jid}`);
 
                                     // Save AI message to Supabase
                                     const aiMessageId = `ai_${Date.now()}`;
                                     await supabaseAdmin
-                                        .from('messages')
+                                        .from("messages")
                                         .insert({
                                             id: aiMessageId,
-                                            chat_id: chatId,
+                                            chat_id: chat.id,
                                             session_id: sessionId,
-                                            remote_id: chatId,
-                                            sender: 'bot',
+                                            wa_message_id: aiMessageId,
+                                            from_role: "agent",
+                                            direction: "outgoing",
+                                            type: "text",
                                             body: aiResponse.reply,
-                                            timestamp: new Date().toISOString(),
                                             created_at: new Date().toISOString(),
-                                            is_from_us: true,
-                                            media_type: null,
-                                            media_url: null,
-                                            status: 'sent',
                                         });
 
-                                    // Update chat's last message
+                                    // Update chat\'s last message and unread count for AI response
                                     await supabaseAdmin
-                                        .from('chats')
+                                        .from("chats")
                                         .update({
                                             last_message: aiResponse.reply,
                                             last_message_at: new Date().toISOString(),
+                                            // No change to unread_count for outgoing AI messages
+                                            updated_at: new Date().toISOString(),
                                         })
-                                        .eq('id', chatId);
+                                        .eq("id", chat.id);
 
                                     // Handle handoff if requested
                                     if (aiResponse.handoff) {
-                                        console.log(`[AI] Handoff requested for chat ${chatId}: ${aiResponse.handoff_reason}`);
+                                        console.log(`[AI] Handoff requested for chat ${chat.id}: ${aiResponse.handoff_reason}`);
 
                                         await supabaseAdmin
-                                            .from('chats')
+                                            .from("chats")
                                             .update({
-                                                mode: 'human',
+                                                mode: "human",
                                                 needs_human: true,
                                                 updated_at: new Date().toISOString(),
                                             })
-                                            .eq('id', chatId);
+                                            .eq("id", chat.id);
 
-                                        console.log(`[AI] Chat ${chatId} switched to human mode`);
+                                        console.log(`[AI] Chat ${chat.id} switched to human mode`);
                                     }
                                 }
                             } catch (aiError) {
-                                console.error(`[AI] Error processing AI for chat ${chatId}:`, aiError);
+                                console.error(`[AI] Error processing AI for chat ${chat.id}:`, aiError);
                             }
                         }
 
@@ -395,15 +380,15 @@ async function startSession(sessionId: string) {
             }
         });
 
-        // Handle chats
-        sock.ev.on('chats.upsert', async (chats) => {
+        // Handle chats (initial load, not related to messages.upsert)
+        sock.ev.on("chats.upsert", async (chats) => {
             console.log(`Received ${chats.length} chats for session ${sessionId}`);
             for (const chat of chats) {
                 const chatId = chat.id;
                 if (!chatId) continue;
                 try {
                     await supabaseAdmin
-                        .from('chats')
+                        .from("chats")
                         .upsert({
                             id: chatId,
                             session_id: sessionId,
@@ -411,7 +396,7 @@ async function startSession(sessionId: string) {
                             name: chat.name || null,
                             updated_at: new Date().toISOString()
                         }, {
-                            onConflict: 'id'
+                            onConflict: "id"
                         });
                 } catch (e) {
                     console.error(`Error saving chat ${chatId}:`, e);
@@ -425,18 +410,18 @@ async function startSession(sessionId: string) {
     }
 }
 
-console.log('Starting Worker with Supabase...');
+console.log("Starting Worker with Supabase...");
 
 // Listen for outgoing messages using Supabase Realtime
 supabaseAdmin
-    .channel('messages-channel')
+    .channel("messages-channel")
     .on(
-        'postgres_changes',
+        "postgres_changes",
         {
-            event: 'INSERT',
-            schema: 'public',
-            table: 'messages',
-            filter: 'status=eq.pending'
+            event: "INSERT",
+            schema: "public",
+            table: "messages",
+            filter: "status=eq.pending"
         },
         async (payload) => {
             const messageData = payload.new;
@@ -449,23 +434,23 @@ supabaseAdmin
                 const sock = sessions.get(sessionId);
                 console.log(`[Worker] Sending message ${messageId} to ${remoteId}`);
                 try {
-                    await sock.sendMessage(remoteId, { text: body || '' });
+                    await sock.sendMessage(remoteId, { text: body || "" });
 
                     await supabaseAdmin
-                        .from('messages')
+                        .from("messages")
                         .update({
-                            status: 'sent',
+                            status: "sent",
                             updated_at: new Date().toISOString()
                         })
-                        .eq('id', messageId);
+                        .eq("id", messageId);
 
                     console.log(`[Worker] ✅ Message ${messageId} sent successfully`);
                 } catch (e) {
                     console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
                     await supabaseAdmin
-                        .from('messages')
-                        .update({ status: 'failed' })
-                        .eq('id', messageId);
+                        .from("messages")
+                        .update({ status: "failed" })
+                        .eq("id", messageId);
                 }
             } else {
                 console.warn(`[Worker] ⚠️ Session ${sessionId} not found in active sessions`);
@@ -475,15 +460,15 @@ supabaseAdmin
     .subscribe();
 
 // Polling function to check for new sessions every 5 seconds
-console.log('[Worker] Setting up polling for new sessions (every 5 seconds)...');
+console.log("[Worker] Setting up polling for new sessions (every 5 seconds)...");
 setInterval(async () => {
     try {
         const { data: allSessions, error } = await supabaseAdmin
-            .from('whatsapp_sessions')
-            .select('*');
+            .from("whatsapp_sessions")
+            .select("*");
 
         if (error) {
-            console.error('[Polling] Error fetching sessions:', error);
+            console.error("[Polling] Error fetching sessions:", error);
             return;
         }
 
@@ -500,19 +485,19 @@ setInterval(async () => {
                 try {
                     // Delete all chats and messages
                     await supabaseAdmin
-                        .from('chats')
+                        .from("chats")
                         .delete()
-                        .eq('session_id', sessionId);
+                        .eq("session_id", sessionId);
 
                     await supabaseAdmin
-                        .from('messages')
+                        .from("messages")
                         .delete()
-                        .eq('session_id', sessionId);
+                        .eq("session_id", sessionId);
 
                     console.log(`Deleted all chats for session ${sessionId}`);
 
                     // Delete auth state files
-                    const authPath = path.join(process.cwd(), 'auth_info_baileys', sessionId);
+                    const authPath = path.join(process.cwd(), "auth_info_baileys", sessionId);
                     try {
                         if (fs.existsSync(authPath)) {
                             fs.rmSync(authPath, { recursive: true, force: true });
@@ -524,14 +509,14 @@ setInterval(async () => {
 
                     // Reset the session document
                     await supabaseAdmin
-                        .from('whatsapp_sessions')
+                        .from("whatsapp_sessions")
                         .update({
                             is_ready: false,
-                            qr: '',
+                            qr: "",
                             should_disconnect: false,
                             updated_at: new Date().toISOString()
                         })
-                        .eq('id', sessionId);
+                        .eq("id", sessionId);
 
                     console.log(`Logging out session ${sessionId}...`);
                     sock.logout();
@@ -547,19 +532,19 @@ setInterval(async () => {
             }
         }
     } catch (e) {
-        console.error('[Polling] Error in polling loop:', e);
+        console.error("[Polling] Error in polling loop:", e);
     }
 }, 5000);
 
 // Load existing sessions on startup
 (async () => {
-    console.log('[Worker] Querying existing sessions from whatsapp_sessions table...');
+    console.log("[Worker] Querying existing sessions from whatsapp_sessions table...");
     const { data: existingSessions, error } = await supabaseAdmin
-        .from('whatsapp_sessions')
-        .select('id');
+        .from("whatsapp_sessions")
+        .select("id");
 
     if (error) {
-        console.error('[Worker] ❌ Error querying sessions:', error);
+        console.error("[Worker] ❌ Error querying sessions:", error);
     } else if (existingSessions) {
         console.log(`[Worker] ✅ Found ${existingSessions.length} existing sessions:`, existingSessions);
         for (const session of existingSessions) {
@@ -567,13 +552,13 @@ setInterval(async () => {
             startSession(session.id);
         }
     } else {
-        console.log('[Worker] No existing sessions found in database');
+        console.log("[Worker] No existing sessions found in database");
     }
 })();
 
 // Keep the process alive
-process.on('SIGINT', () => {
-    console.log('Shutting down...');
+process.on("SIGINT", () => {
+    console.log("Shutting down...");
     sessions.forEach(sock => sock.end(undefined));
     process.exit(0);
 });

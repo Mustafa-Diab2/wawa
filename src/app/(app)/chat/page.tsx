@@ -1,3 +1,4 @@
+
 'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -82,7 +83,7 @@ export default function ChatPage() {
       try {
         const { data, error } = await supabase
           .from('chats')
-          .select('*')
+          .select('id, last_message, last_message_at, unread_count, contacts ( phone, display_name )')
           .eq('session_id', sessionId)
           .order('last_message_at', { ascending: false });
 
@@ -138,7 +139,7 @@ export default function ChatPage() {
           .from('messages')
           .select('*')
           .eq('chat_id', selectedChatId)
-          .order('timestamp', { ascending: true });
+          .order('created_at', { ascending: true });
 
         if (error) throw error;
 
