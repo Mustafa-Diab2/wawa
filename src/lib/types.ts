@@ -25,6 +25,8 @@ export interface Chat {
   isUnread?: boolean;
   lastMessage?: string;
   lastMessageAt: Date | string;
+  unread_count?: number; // Added unread_count
+  contacts?: { phone: string; display_name: string | null } | null; // Added nested contacts
   avatar?: string;
   assignedTo: string | null;
   isGroup: boolean;
