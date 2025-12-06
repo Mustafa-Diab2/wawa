@@ -43,11 +43,27 @@ export default function ConnectPage() {
 
         if (authSession?.user) {
           setUserId(authSession.user.id);
+
+          // Try to get cached sessionId from localStorage
+          const cachedSessionId = localStorage.getItem(`whatsapp_session_${authSession.user.id}`);
+          if (cachedSessionId) {
+            console.log('[initUser] Found cached sessionId:', cachedSessionId);
+            setSessionId(cachedSessionId);
+          }
         } else {
           // Sign in anonymously
           const { data, error } = await supabase.auth.signInAnonymously();
           if (error) throw error;
           setUserId(data.session?.user.id || null);
+
+          // Try to get cached sessionId from localStorage
+          if (data.session?.user.id) {
+            const cachedSessionId = localStorage.getItem(`whatsapp_session_${data.session.user.id}`);
+            if (cachedSessionId) {
+              console.log('[initUser] Found cached sessionId:', cachedSessionId);
+              setSessionId(cachedSessionId);
+            }
+          }
         }
       } catch (error) {
         console.error('Error initializing user:', error);
@@ -94,6 +110,8 @@ export default function ConnectPage() {
         });
         setSessionId(existingSession.id);
         setSession(existingSession);
+        // Cache sessionId in localStorage
+        localStorage.setItem(`whatsapp_session_${userId}`, existingSession.id);
       } else {
         // 2. No session found, create a new one
         console.log('[findOrCreateSession] No existing session, creating new session for user:', userId);
@@ -112,6 +130,8 @@ export default function ConnectPage() {
         console.log('[findOrCreateSession] New session created with ID:', newSession.id);
         setSessionId(newSession.id);
         setSession(newSession);
+        // Cache sessionId in localStorage
+        localStorage.setItem(`whatsapp_session_${userId}`, newSession.id);
       }
     } catch (error) {
       console.error("[findOrCreateSession] Error finding or creating session:", error);
@@ -179,17 +199,53 @@ export default function ConnectPage() {
 
       if (error) throw error;
       console.log('[disconnectSession] Session document updated successfully');
+
+      // Clear cached sessionId from localStorage
+      localStorage.removeItem(`whatsapp_session_${userId}`);
+
+      // Reset local state
+      setSessionId(null);
+      setSession(null);
     } catch (error) {
       console.error("[disconnectSession] Error disconnecting session:", error);
     }
   };
 
-  // Effect to find or create session when user is ready
+  // Effect to verify cached session or create new one
   useEffect(() => {
-    if (userId && !sessionId) {
+    const verifyOrCreateSession = async () => {
+      if (!userId || sessionId || isCreatingSession) return;
+
+      // If we have a cached sessionId, verify it exists in database
+      const cachedSessionId = localStorage.getItem(`whatsapp_session_${userId}`);
+      if (cachedSessionId) {
+        console.log('[verifyOrCreateSession] Verifying cached session:', cachedSessionId);
+        const { data: existingSession, error } = await supabase
+          .from('whatsapp_sessions')
+          .select('*')
+          .eq('id', cachedSessionId)
+          .eq('owner_id', userId)
+          .single();
+
+        if (!error && existingSession) {
+          console.log('[verifyOrCreateSession] Cached session is valid');
+          setSessionId(existingSession.id);
+          setSession(existingSession);
+          setIsLoading(false);
+          return;
+        } else {
+          console.log('[verifyOrCreateSession] Cached session is invalid, removing from cache');
+          localStorage.removeItem(`whatsapp_session_${userId}`);
+        }
+      }
+
+      // No valid cached session, create or find one
       findOrCreateSession();
-    }
-  }, [userId, sessionId, findOrCreateSession]);
+    };
+
+    verifyOrCreateSession();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
 
   // Effect to subscribe to session changes via Realtime
   useEffect(() => {
