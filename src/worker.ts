@@ -247,36 +247,27 @@ async function startSession(sessionId: string) {
                     }
 
                     try {
-                        // Baileys -> Supabase Integration: Contacts, Chats, Messages
+                        // Baileys -> Supabase Integration: Chats, Messages (contacts disabled temporarily)
 
-                        // Upsert contact: Retrieve or create a contact entry
-                        const phone = jid.replace("@s.whatsapp.net", "");
-                        const { data: contact, error: contactError } = await supabaseAdmin
-                            .from("contacts")
-                            .upsert(
-                                { wa_jid: jid, phone },
-                                { onConflict: "wa_jid" }
-                            )
-                            .select()
-                            .single();
-
-                        if (contactError || !contact) {
-                            console.error(`Error upserting contact ${jid}:`, contactError);
-                            continue;
-                        }
-
-                        // Upsert chat: Retrieve or create a chat entry for the contact
+                        // Upsert chat: Retrieve or create a chat entry directly
                         const { data: chat, error: chatError } = await supabaseAdmin
                             .from("chats")
                             .upsert(
-                                { contact_id: contact.id, session_id: sessionId, remote_id: jid, type: "INDIVIDUAL" },
-                                { onConflict: "contact_id" }
+                                {
+                                    id: jid,
+                                    session_id: sessionId,
+                                    remote_id: jid,
+                                    type: "INDIVIDUAL",
+                                    last_message_at: timestamp,
+                                    updated_at: new Date().toISOString()
+                                },
+                                { onConflict: "id" }
                             )
                             .select()
                             .single();
 
                         if (chatError || !chat) {
-                            console.error(`Error upserting chat for contact ${contact.id}:`, chatError);
+                            console.error(`Error upserting chat for ${jid}:`, chatError);
                             continue;
                         }
 

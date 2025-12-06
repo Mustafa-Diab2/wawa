@@ -83,7 +83,7 @@ export default function ChatPage() {
       try {
         const { data, error } = await supabase
           .from('chats')
-          .select('id, last_message, last_message_at, unread_count, contacts ( phone, display_name )')
+          .select('*')
           .eq('session_id', sessionId)
           .order('last_message_at', { ascending: false });
 
