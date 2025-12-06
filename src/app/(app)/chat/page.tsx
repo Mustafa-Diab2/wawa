@@ -290,7 +290,7 @@ export default function ChatPage() {
                 selectedChat || {
                   id: selectedChatId,
                   remoteId: selectedChatId,
-                  name: selectedChatId.split('@')[0],
+                  name: selectedChatId?.split('@')?.[0] || selectedChatId || 'Unknown',
                   type: 'INDIVIDUAL',
                   status: 'INBOX',
                   isGroup: false,

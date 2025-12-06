@@ -254,14 +254,13 @@ async function startSession(sessionId: string) {
                             .from("chats")
                             .upsert(
                                 {
-                                    id: jid,
                                     session_id: sessionId,
                                     remote_id: jid,
                                     type: "INDIVIDUAL",
                                     last_message_at: timestamp,
                                     updated_at: new Date().toISOString()
                                 },
-                                { onConflict: "id" }
+                                { onConflict: "remote_id,session_id" }
                             )
                             .select()
                             .single();
