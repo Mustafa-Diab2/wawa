@@ -1,0 +1,13 @@
+services:
+  - type: worker
+    name: whatsapp-worker
+    env: node
+    buildCommand: npm install
+    startCommand: npm run worker
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
