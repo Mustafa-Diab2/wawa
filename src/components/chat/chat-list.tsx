@@ -47,17 +47,21 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
     } else if (filter === 'DONE') {
       filtered = filtered.filter(chat => chat.status === 'DONE');
     } else if (filter === 'ARCHIVED') {
-      filtered = filtered.filter(chat => chat.isArchived);
+      filtered = filtered.filter(chat => (chat.is_archived ?? chat.isArchived));
     }
 
     // Apply search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(chat =>
-        (chat.name?.toLowerCase().includes(query)) ||
-        (chat.remoteId?.toLowerCase().includes(query)) ||
-        (chat.lastMessage?.toLowerCase().includes(query))
-      );
+      filtered = filtered.filter(chat => {
+        const remoteId = chat.remote_id ?? chat.remoteId;
+        const lastMessage = chat.last_message ?? chat.lastMessage;
+        return (
+          (chat.name?.toLowerCase().includes(query)) ||
+          (remoteId?.toLowerCase().includes(query)) ||
+          (lastMessage?.toLowerCase().includes(query))
+        );
+      });
     }
 
     return filtered;
@@ -191,21 +195,21 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
                 <Avatar className="h-10 w-10 border">
                   <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
                   <AvatarFallback>
-                    {chat.name ? chat.name.charAt(0) : (chat.remoteId || chat.id || '?').charAt(0)}
+                    {chat.name ? chat.name.charAt(0) : ((chat.remote_id ?? chat.remoteId) || chat.id || '?').charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 overflow-hidden">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold truncate">{chat.name || (chat.remoteId || chat.id || '').split('@')[0]}</h3>
+                    <h3 className="font-semibold truncate">{chat.name || ((chat.remote_id ?? chat.remoteId) || chat.id || '').split('@')[0]}</h3>
                     <p className="text-xs text-muted-foreground whitespace-nowrap">
-                      {getFormattedTimestamp(chat.lastMessageAt)}
+                      {getFormattedTimestamp(chat.last_message_at ?? chat.lastMessageAt)}
                     </p>
                   </div>
                   <p className="text-sm text-muted-foreground truncate">
-                    {chat.lastMessage}
+                    {chat.last_message ?? chat.lastMessage}
                   </p>
                 </div>
-                {chat.isUnread && (
+                {(chat.is_unread ?? chat.isUnread) && (
                   <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                     1
                   </div>

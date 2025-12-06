@@ -18,42 +18,62 @@ export interface WhatsAppSession {
 
 export interface Chat {
   id: string;
-  remoteId: string;
+  session_id: string;
+  remote_id: string;
   name: string | null;
   type: 'INDIVIDUAL' | 'GROUP';
   status: 'INBOX' | 'DONE' | 'ARCHIVED';
+  is_unread?: boolean;
+  last_message?: string;
+  last_message_at: Date | string;
+  unread_count?: number;
+  avatar?: string;
+  assigned_to: string | null;
+  is_group: boolean;
+  is_read: boolean;
+  is_muted: boolean;
+  is_archived: boolean;
+  mode: 'ai' | 'human';
+  needs_human: boolean;
+  created_at: Date | string;
+  updated_at: Date | string;
+  // Convenience aliases for backward compatibility
+  remoteId?: string;
   isUnread?: boolean;
   lastMessage?: string;
-  lastMessageAt: Date | string;
-  unread_count?: number; // Added unread_count
-  contacts?: { phone: string; display_name: string | null } | null; // Added nested contacts
-  avatar?: string;
-  assignedTo: string | null;
-  isGroup: boolean;
-  isRead: boolean;
-  isMuted: boolean;
-  isArchived: boolean;
-  sessionId: string;
-  mode: 'ai' | 'human';
-  needsHuman: boolean;
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  lastMessageAt?: Date | string;
+  assignedTo?: string | null;
+  isGroup?: boolean;
+  isRead?: boolean;
+  isMuted?: boolean;
+  isArchived?: boolean;
+  sessionId?: string;
+  needsHuman?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }
 
 export interface Message {
   id: string;
-  chatId: string;
-  remoteId: string; // WhatsApp JID (e.g., "201234567890@s.whatsapp.net")
+  chat_id: string;
+  session_id: string;
+  remote_id: string; // WhatsApp JID (e.g., "201234567890@s.whatsapp.net")
   sender: string;
   body: string | null;
   timestamp: Date | string;
-  isFromUs: boolean;
-  mediaType: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null;
-  mediaUrl: string | null;
+  is_from_us: boolean;
+  media_type: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null;
+  media_url: string | null;
   status: 'sent' | 'delivered' | 'read' | 'pending' | 'failed';
-  userId?: string;
-  sessionId: string;
-  createdAt: Date | string;
+  user_id?: string;
+  created_at: Date | string;
+  // Convenience aliases for backward compatibility
+  chatId?: string;
+  isFromUs?: boolean;
+  mediaType?: 'image' | 'video' | 'audio' | 'document' | 'sticker' | null;
+  mediaUrl?: string | null;
+  sessionId?: string;
+  createdAt?: Date | string;
 }
 
 export interface Contact {

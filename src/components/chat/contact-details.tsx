@@ -27,7 +27,7 @@ export default function ContactDetails({ chat }: ContactDetailsProps) {
             <h4 className="font-semibold">معلومات الاتصال</h4>
             <div className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>{chat.remoteId.split('@')[0]}</span>
+                <span>{(chat.remote_id ?? chat.remoteId ?? '').split('@')[0]}</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="h-4 w-4" />

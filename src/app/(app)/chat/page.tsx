@@ -289,21 +289,21 @@ export default function ChatPage() {
               chat={
                 selectedChat || {
                   id: selectedChatId,
-                  remoteId: selectedChatId,
+                  session_id: sessionId,
+                  remote_id: selectedChatId,
                   name: selectedChatId?.split('@')?.[0] || selectedChatId || 'Unknown',
                   type: 'INDIVIDUAL',
                   status: 'INBOX',
-                  isGroup: false,
-                  isRead: true,
-                  isMuted: false,
-                  isArchived: false,
-                  assignedTo: null,
-                  sessionId: sessionId,
+                  is_group: false,
+                  is_read: true,
+                  is_muted: false,
+                  is_archived: false,
+                  assigned_to: null,
                   mode: 'ai',
-                  needsHuman: false,
-                  createdAt: new Date() as any,
-                  updatedAt: new Date() as any,
-                  lastMessageAt: new Date() as any,
+                  needs_human: false,
+                  created_at: new Date() as any,
+                  updated_at: new Date() as any,
+                  last_message_at: new Date() as any,
                 }
               }
               messages={messages || []}

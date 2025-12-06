@@ -10,11 +10,11 @@ interface ChatMessageProps {
 }
 
 export default function ChatMessage({ message }: ChatMessageProps) {
-  const isFromUs = message.isFromUs;
+  const isFromUs = message.is_from_us ?? message.isFromUs ?? false;
 
-  const getFormattedTimestamp = (ts: Date | Timestamp) => {
+  const getFormattedTimestamp = (ts: Date | string) => {
     try {
-      const date = ts instanceof Timestamp ? ts.toDate() : ts;
+      const date = typeof ts === 'string' ? new Date(ts) : ts;
       if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
         return '';
       }
@@ -26,7 +26,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   };
 
   const getMediaIcon = () => {
-    switch (message.mediaType) {
+    const mediaType = message.media_type ?? message.mediaType;
+    switch (mediaType) {
       case 'image':
         return <ImageIcon className="h-4 w-4 inline mr-1" />;
       case 'video':
@@ -43,14 +44,16 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   };
 
   const renderMedia = () => {
-    if (!message.mediaUrl) return null;
+    const mediaUrl = message.media_url ?? message.mediaUrl;
+    const mediaType = message.media_type ?? message.mediaType;
+    if (!mediaUrl) return null;
 
-    switch (message.mediaType) {
+    switch (mediaType) {
       case 'image':
         return (
           <div className="mt-2">
             <img
-              src={message.mediaUrl}
+              src={mediaUrl}
               alt={message.body || 'Image'}
               className="rounded-lg max-w-full h-auto max-h-96 object-contain"
               loading="lazy"
@@ -64,7 +67,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       case 'sticker':
         return (
           <img
-            src={message.mediaUrl}
+            src={mediaUrl}
             alt="Sticker"
             className="w-32 h-32 object-contain"
             loading="lazy"
@@ -75,7 +78,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         return (
           <div className="mt-2">
             <audio controls className="max-w-full">
-              <source src={message.mediaUrl} type="audio/ogg" />
+              <source src={mediaUrl} type="audio/ogg" />
               متصفحك لا يدعم تشغيل الصوت
             </audio>
           </div>
@@ -85,7 +88,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         return (
           <div className="mt-2">
             <video controls className="rounded-lg max-w-full h-auto max-h-96">
-              <source src={message.mediaUrl} type="video/mp4" />
+              <source src={mediaUrl} type="video/mp4" />
               متصفحك لا يدعم تشغيل الفيديو
             </video>
             {message.body && message.body !== '🎥 فيديو' && (
@@ -97,7 +100,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       case 'document':
         return (
           <a
-            href={message.mediaUrl}
+            href={mediaUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm hover:underline"
@@ -112,6 +115,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     }
   };
 
+  const mediaType = message.media_type ?? message.mediaType;
+  const mediaUrl = message.media_url ?? message.mediaUrl;
+
   return (
     <div className={cn("flex items-end gap-2", isFromUs ? "justify-end" : "justify-start")}>
       <div
@@ -122,7 +128,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             : "bg-muted rounded-bl-none"
         )}
       >
-        {message.mediaType && message.mediaUrl ? (
+        {mediaType && mediaUrl ? (
           renderMedia()
         ) : (
           <p className="text-sm whitespace-pre-wrap flex items-center">

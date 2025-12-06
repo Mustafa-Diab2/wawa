@@ -71,18 +71,12 @@ async function startSession(sessionId: string) {
                 try {
                     const { error } = await (supabaseAdmin as any)
                         .from("whatsapp_sessions")
-                        .upsert(
-                            {
-                                session_id: sessionId,
-                                qr: qr,
-                                has_qr: true,
-                                qr_length: qr.length,
-                                status: "connecting",
-                                is_ready: false,
-                                updated_at: new Date().toISOString()
-                            },
-                            { onConflict: "session_id" }
-                        );
+                        .update({
+                            qr: qr,
+                            is_ready: false,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq("id", sessionId);
 
                     if (error) {
                         console.error(`Error updating whatsapp_sessions with QR for ${sessionId}:`, error);
@@ -122,13 +116,11 @@ async function startSession(sessionId: string) {
                             .from("whatsapp_sessions")
                             .update({
                                 is_ready: false,
-                                has_qr: false,
                                 qr: "",
-                                qr_length: 0,
-                                status: "disconnected",
+                                should_disconnect: false,
                                 updated_at: new Date().toISOString()
                             })
-                            .eq("session_id", sessionId);
+                            .eq("id", sessionId);
 
                         console.log(`Session ${sessionId} logged out. Not restarting automatically to avoid loop.`);
                     } catch (e) {
@@ -142,13 +134,10 @@ async function startSession(sessionId: string) {
                         .from("whatsapp_sessions")
                         .update({
                             is_ready: true,
-                            has_qr: false,
                             qr: "",
-                            qr_length: 0,
-                            status: "connected",
                             updated_at: new Date().toISOString()
                         })
-                        .eq("session_id", sessionId);
+                        .eq("id", sessionId);
 
                     console.log(`Fetching chats for session ${sessionId}...`);
 
@@ -273,12 +262,15 @@ async function startSession(sessionId: string) {
                         // Insert message: Add the new message to the messages table
                         await supabaseAdmin.from("messages").insert({
                             chat_id: chat.id,
-                            from_role: fromMe ? "agent" : "user",
-                            direction: fromMe ? "outgoing" : "incoming",
-                            type: mediaType || "text",
+                            session_id: sessionId,
+                            remote_id: jid,
+                            sender: fromMe ? "agent" : "user",
                             body: body,
-                            wa_message_id: messageId,
-                            session_id: sessionId, // Important for session-specific messages
+                            timestamp: timestamp,
+                            is_from_us: fromMe,
+                            media_type: mediaType,
+                            media_url: mediaUrl,
+                            status: fromMe ? "sent" : "delivered",
                             created_at: timestamp,
                         });
 
@@ -315,7 +307,7 @@ async function startSession(sessionId: string) {
                                     // Get conversation history (last 5 messages)
                                     const { data: messagesHistory } = await supabaseAdmin
                                         .from("messages")
-                                        .select("body, from_role")
+                                        .select("body, sender")
                                         .eq("chat_id", chat.id)
                                         .order("created_at", { ascending: false })
                                         .limit(6);
@@ -324,7 +316,7 @@ async function startSession(sessionId: string) {
                                         .reverse()
                                         .slice(0, -1)
                                         .map((msg: any) => ({
-                                            role: msg.from_role === "agent" ? ("assistant" as const) : ("user" as const),
+                                            role: msg.sender === "agent" ? ("assistant" as const) : ("user" as const),
                                             content: msg.body || "",
                                         }))
                                         .filter((m) => m.content.trim() !== "");
@@ -337,18 +329,19 @@ async function startSession(sessionId: string) {
                                     console.log(`[AI] Sent reply to ${jid}`);
 
                                     // Save AI message to Supabase
-                                    const aiMessageId = `ai_${Date.now()}`;
                                     await supabaseAdmin
                                         .from("messages")
                                         .insert({
-                                            id: aiMessageId,
                                             chat_id: chat.id,
                                             session_id: sessionId,
-                                            wa_message_id: aiMessageId,
-                                            from_role: "agent",
-                                            direction: "outgoing",
-                                            type: "text",
+                                            remote_id: jid,
+                                            sender: "agent",
                                             body: aiResponse.reply,
+                                            timestamp: new Date().toISOString(),
+                                            is_from_us: true,
+                                            media_type: null,
+                                            media_url: null,
+                                            status: "sent",
                                             created_at: new Date().toISOString(),
                                         });
 
@@ -523,14 +516,11 @@ setInterval(async () => {
                         .from("whatsapp_sessions")
                         .update({
                             is_ready: false,
-                            has_qr: false,
                             qr: "",
-                            qr_length: 0,
-                            status: "disconnected",
                             should_disconnect: false,
                             updated_at: new Date().toISOString()
                         })
-                        .eq("session_id", sessionId);
+                        .eq("id", sessionId);
 
                     console.log(`Logging out session ${sessionId}...`);
                     sock.logout();

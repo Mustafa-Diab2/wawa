@@ -69,7 +69,7 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
           </Avatar>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold">{chat.name || chat.remoteId.split('@')[0]}</h3>
+              <h3 className="font-semibold">{chat.name || (chat.remote_id ?? chat.remoteId ?? '').split('@')[0]}</h3>
               <Badge
                 variant={chat.mode === 'ai' ? 'default' : 'secondary'}
                 className="text-xs cursor-pointer"
@@ -84,7 +84,7 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
                 )}
                 {chat.mode === 'ai' ? 'ذكي' : 'يدوي'}
               </Badge>
-              {chat.needsHuman && (
+              {(chat.needs_human ?? chat.needsHuman) && (
                 <Badge variant="destructive" className="text-xs">
                   يحتاج خدمة عملاء
                 </Badge>
