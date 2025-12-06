@@ -43,27 +43,11 @@ export default function ConnectPage() {
 
         if (authSession?.user) {
           setUserId(authSession.user.id);
-
-          // Try to get cached sessionId from localStorage
-          const cachedSessionId = localStorage.getItem(`whatsapp_session_${authSession.user.id}`);
-          if (cachedSessionId) {
-            console.log('[initUser] Found cached sessionId:', cachedSessionId);
-            setSessionId(cachedSessionId);
-          }
         } else {
           // Sign in anonymously
           const { data, error } = await supabase.auth.signInAnonymously();
           if (error) throw error;
           setUserId(data.session?.user.id || null);
-
-          // Try to get cached sessionId from localStorage
-          if (data.session?.user.id) {
-            const cachedSessionId = localStorage.getItem(`whatsapp_session_${data.session.user.id}`);
-            if (cachedSessionId) {
-              console.log('[initUser] Found cached sessionId:', cachedSessionId);
-              setSessionId(cachedSessionId);
-            }
-          }
         }
       } catch (error) {
         console.error('Error initializing user:', error);
