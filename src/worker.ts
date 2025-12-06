@@ -38,10 +38,11 @@ async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: st
 
 async function startSession(sessionId: string) {
     if (sessions.has(sessionId)) {
+        console.log(`Session already running, skipping: ${sessionId}`);
         return;
     }
 
-    console.log(`Starting session manager for: ${sessionId}`);
+    console.log(`Starting session ${sessionId}`);
 
     try {
         // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -54,26 +55,39 @@ async function startSession(sessionId: string) {
             },
             printQRInTerminal: false,
             logger: pino({ level: "silent" }) as any,
+            browser: ["Chrome (Linux)", "", ""],
+            syncFullHistory: false,
         });
 
         sessions.set(sessionId, sock);
 
+        // Handle QR code generation
         sock.ev.on("connection.update", async (update) => {
             const { connection, lastDisconnect, qr } = update;
 
             if (qr) {
-                console.log(`QR Code generated for session ${sessionId}`);
+                console.log(`QR RECEIVED for session ${sessionId} len ${qr.length}`);
                 try {
-                    await supabaseAdmin
+                    const { error } = await supabaseAdmin
                         .from("whatsapp_sessions")
-                        .update({
-                            qr: qr,
-                            is_ready: false,
-                            updated_at: new Date().toISOString()
-                        })
-                        .eq("id", sessionId);
+                        .upsert(
+                            {
+                                session_id: sessionId,
+                                qr: qr,
+                                has_qr: true,
+                                qr_length: qr.length,
+                                status: "connecting",
+                                is_ready: false,
+                                updated_at: new Date().toISOString()
+                            },
+                            { onConflict: "session_id" }
+                        );
 
-                    console.log(`QR Code for session ${sessionId} successfully updated in Supabase.`);
+                    if (error) {
+                        console.error(`Error updating whatsapp_sessions with QR for ${sessionId}:`, error);
+                    } else {
+                        console.log(`✅ QR Code for session ${sessionId} successfully updated in Supabase (len: ${qr.length})`);
+                    }
                 } catch (e) {
                     console.error(`Error updating QR for ${sessionId}:`, e);
                 }
@@ -107,10 +121,13 @@ async function startSession(sessionId: string) {
                             .from("whatsapp_sessions")
                             .update({
                                 is_ready: false,
+                                has_qr: false,
                                 qr: "",
+                                qr_length: 0,
+                                status: "disconnected",
                                 updated_at: new Date().toISOString()
                             })
-                            .eq("id", sessionId);
+                            .eq("session_id", sessionId);
 
                         console.log(`Session ${sessionId} logged out. Not restarting automatically to avoid loop.`);
                     } catch (e) {
@@ -124,10 +141,13 @@ async function startSession(sessionId: string) {
                         .from("whatsapp_sessions")
                         .update({
                             is_ready: true,
+                            has_qr: false,
                             qr: "",
+                            qr_length: 0,
+                            status: "connected",
                             updated_at: new Date().toISOString()
                         })
-                        .eq("id", sessionId);
+                        .eq("session_id", sessionId);
 
                     console.log(`Fetching chats for session ${sessionId}...`);
 
@@ -512,11 +532,14 @@ setInterval(async () => {
                         .from("whatsapp_sessions")
                         .update({
                             is_ready: false,
+                            has_qr: false,
                             qr: "",
+                            qr_length: 0,
+                            status: "disconnected",
                             should_disconnect: false,
                             updated_at: new Date().toISOString()
                         })
-                        .eq("id", sessionId);
+                        .eq("session_id", sessionId);
 
                     console.log(`Logging out session ${sessionId}...`);
                     sock.logout();
