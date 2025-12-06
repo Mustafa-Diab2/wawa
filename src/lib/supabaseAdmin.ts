@@ -10,8 +10,12 @@ export type Database = {
       whatsapp_sessions: {
         Row: {
           id: string;
+          session_id: string;
           owner_id: string;
-          qr: string;
+          qr: string | null;
+          has_qr: boolean;
+          qr_length: number;
+          status: "connecting" | "connected" | "disconnected";
           is_ready: boolean;
           should_disconnect: boolean;
           created_at: string;
@@ -19,8 +23,12 @@ export type Database = {
         };
         Insert: {
           id?: string;
-          owner_id: string;
-          qr?: string;
+          session_id: string;
+          owner_id?: string;
+          qr?: string | null;
+          has_qr?: boolean;
+          qr_length?: number;
+          status?: "connecting" | "connected" | "disconnected";
           is_ready?: boolean;
           should_disconnect?: boolean;
           created_at?: string;
@@ -28,8 +36,12 @@ export type Database = {
         };
         Update: {
           id?: string;
+          session_id?: string;
           owner_id?: string;
-          qr?: string;
+          qr?: string | null;
+          has_qr?: boolean;
+          qr_length?: number;
+          status?: "connecting" | "connected" | "disconnected";
           is_ready?: boolean;
           should_disconnect?: boolean;
           created_at?: string;
@@ -131,8 +143,8 @@ export type Database = {
           id?: string;
           chat_id: string;
           session_id: string;
-          remote_id: string;
-          sender: string;
+          remote_id?: string;
+          sender?: string;
           body?: string | null;
           timestamp?: string;
           is_from_us?: boolean;
@@ -141,10 +153,10 @@ export type Database = {
           status?: "sent" | "delivered" | "read" | "pending" | "failed";
           user_id?: string | null;
           created_at?: string;
-          wa_message_id: string; // Added wa_message_id
-          from_role: "agent" | "user"; // Added from_role
-          direction: "incoming" | "outgoing"; // Added direction
-          type: "text" | "image" | "video" | "audio" | "document" | "sticker"; // Added type
+          wa_message_id?: string; // Added wa_message_id
+          from_role?: "agent" | "user"; // Added from_role
+          direction?: "incoming" | "outgoing"; // Added direction
+          type?: "text" | "image" | "video" | "audio" | "document" | "sticker"; // Added type
         };
         Update: {
           id?: string;
