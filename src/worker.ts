@@ -416,52 +416,124 @@ async function startSession(sessionId: string) {
 
 console.log("Starting Worker with Supabase...");
 
+// NOTE: Realtime subscription disabled - using polling instead to prevent duplicate sends
 // Listen for outgoing messages using Supabase Realtime
-supabaseAdmin
-    .channel("messages-channel")
-    .on(
-        "postgres_changes",
-        {
-            event: "INSERT",
-            schema: "public",
-            table: "messages",
-            filter: "status=eq.pending"
-        },
-        async (payload) => {
-            const messageData = payload.new;
-            const sessionId = messageData.session_id;
-            const remoteId = messageData.remote_id;
-            const body = messageData.body;
-            const messageId = messageData.id;
+// supabaseAdmin
+//     .channel("messages-channel")
+//     .on(
+//         "postgres_changes",
+//         {
+//             event: "INSERT",
+//             schema: "public",
+//             table: "messages",
+//             filter: "status=eq.pending"
+//         },
+//         async (payload) => {
+//             const messageData = payload.new;
+//             const sessionId = messageData.session_id;
+//             const remoteId = messageData.remote_id;
+//             const body = messageData.body;
+//             const messageId = messageData.id;
 
-            if (sessions.has(sessionId)) {
-                const sock = sessions.get(sessionId);
-                console.log(`[Worker] Sending message ${messageId} to ${remoteId}`);
-                try {
-                    await sock.sendMessage(remoteId, { text: body || "" });
+//             if (sessions.has(sessionId)) {
+//                 const sock = sessions.get(sessionId);
+//                 console.log(`[Worker] Sending message ${messageId} to ${remoteId}`);
+//                 try {
+//                     await sock.sendMessage(remoteId, { text: body || "" });
 
-                    await supabaseAdmin
-                        .from("messages")
-                        .update({
-                            status: "sent",
-                            updated_at: new Date().toISOString()
-                        })
-                        .eq("id", messageId);
+//                     await supabaseAdmin
+//                         .from("messages")
+//                         .update({
+//                             status: "sent"
+//                         })
+//                         .eq("id", messageId);
 
-                    console.log(`[Worker] ✅ Message ${messageId} sent successfully`);
-                } catch (e) {
-                    console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
-                    await supabaseAdmin
-                        .from("messages")
-                        .update({ status: "failed" })
-                        .eq("id", messageId);
+//                     console.log(`[Worker] ✅ Message ${messageId} sent successfully`);
+//                 } catch (e) {
+//                     console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
+//                     await supabaseAdmin
+//                         .from("messages")
+//                         .update({ status: "failed" })
+//                         .eq("id", messageId);
+//                 }
+//             } else {
+//                 console.warn(`[Worker] ⚠️ Session ${sessionId} not found in active sessions`);
+//             }
+//         }
+//     )
+//     .subscribe();
+
+// Keep track of messages being sent to prevent duplicates
+const sendingMessages = new Set<string>();
+
+// Polling function to check for pending messages every 3 seconds
+console.log("[Worker] Setting up polling for pending messages (every 3 seconds)...");
+setInterval(async () => {
+    try {
+        const { data: pendingMessages, error } = await supabaseAdmin
+            .from("messages")
+            .select("*")
+            .eq("status", "pending")
+            .limit(10);
+
+        if (error) {
+            console.error("[Polling] Error fetching pending messages:", error);
+            return;
+        }
+
+        if (pendingMessages && pendingMessages.length > 0) {
+            console.log(`[Polling] Found ${pendingMessages.length} pending messages`);
+            for (const messageData of pendingMessages) {
+                const sessionId = messageData.session_id;
+                const remoteId = messageData.remote_id;
+                const body = messageData.body;
+                const messageId = messageData.id;
+
+                // Skip if already being sent
+                if (sendingMessages.has(messageId)) {
+                    console.log(`[Worker] ⏭️ Skipping message ${messageId} - already being sent`);
+                    continue;
                 }
-            } else {
-                console.warn(`[Worker] ⚠️ Session ${sessionId} not found in active sessions`);
+
+                if (sessions.has(sessionId)) {
+                    sendingMessages.add(messageId);
+                    const sock = sessions.get(sessionId);
+                    console.log(`[Worker] Sending message ${messageId} to ${remoteId}`);
+                    try {
+                        await sock.sendMessage(remoteId, { text: body || "" });
+
+                        const { error: updateError } = await supabaseAdmin
+                            .from("messages")
+                            .update({
+                                status: "sent"
+                            })
+                            .eq("id", messageId)
+                            .eq("status", "pending"); // Only update if still pending
+
+                        if (updateError) {
+                            console.error(`[Worker] ❌ Error updating message status:`, updateError);
+                        } else {
+                            console.log(`[Worker] ✅ Message ${messageId} sent successfully and status updated`);
+                        }
+                    } catch (e) {
+                        console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
+                        await supabaseAdmin
+                            .from("messages")
+                            .update({ status: "failed" })
+                            .eq("id", messageId);
+                    } finally {
+                        // Keep message in set permanently to prevent re-sending
+                        // Only remove if update succeeded (checked above)
+                    }
+                } else {
+                    console.warn(`[Worker] ⚠️ Session ${sessionId} not found in active sessions`);
+                }
             }
         }
-    )
-    .subscribe();
+    } catch (e) {
+        console.error("[Polling] Error in message polling loop:", e);
+    }
+}, 3000);
 
 // Polling function to check for new sessions every 5 seconds
 console.log("[Worker] Setting up polling for new sessions (every 5 seconds)...");
