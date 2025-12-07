@@ -256,28 +256,11 @@ export default function ConnectPage() {
 
     setChannel(realtimeChannel);
 
-    // Fallback: Poll for updates every 5 seconds if realtime is not working
-    // Note: Realtime should handle most updates, this is just a backup
-    const pollInterval = setInterval(async () => {
-      try {
-        const { data, error } = await supabase
-          .from('whatsapp_sessions')
-          .select('*')
-          .eq('id', sessionId)
-          .single();
-
-        if (!error && data) {
-          // Only log if there's an actual change
-          setSession(data as SessionData);
-        }
-      } catch (err) {
-        // Silent error - realtime should be primary
-      }
-    }, 5000);
+    // Polling disabled - using Realtime only to reduce console spam
+    // If Realtime doesn't work, consider enabling polling with longer interval
 
     return () => {
       realtimeChannel.unsubscribe();
-      clearInterval(pollInterval);
     };
   }, [sessionId]);
 
