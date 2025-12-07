@@ -248,7 +248,7 @@ export default function ConnectPage() {
           filter: `id=eq.${sessionId}`,
         },
         (payload) => {
-          console.log('[ConnectPage] Session updated via Realtime:', payload.new);
+          // Update session state from realtime
           setSession(payload.new as SessionData);
         }
       )
@@ -256,7 +256,8 @@ export default function ConnectPage() {
 
     setChannel(realtimeChannel);
 
-    // Fallback: Poll for updates every 3 seconds if realtime is not working
+    // Fallback: Poll for updates every 5 seconds if realtime is not working
+    // Note: Realtime should handle most updates, this is just a backup
     const pollInterval = setInterval(async () => {
       try {
         const { data, error } = await supabase
@@ -266,33 +267,26 @@ export default function ConnectPage() {
           .single();
 
         if (!error && data) {
-          console.log('[ConnectPage] Polled session update:', data);
+          // Only log if there's an actual change
           setSession(data as SessionData);
         }
       } catch (err) {
-        console.error('[ConnectPage] Error polling session:', err);
+        // Silent error - realtime should be primary
       }
-    }, 3000);
+    }, 5000);
 
     return () => {
-      console.log('[ConnectPage] Cleaning up realtime subscription and polling');
       realtimeChannel.unsubscribe();
       clearInterval(pollInterval);
     };
   }, [sessionId]);
 
-  // Log session state changes
+  // Log only important session state changes
   useEffect(() => {
-    if (session) {
-      console.log('[ConnectPage] Session state updated:', {
-        sessionId,
-        isReady: session.is_ready,
-        hasQR: !!session.qr,
-        qrLength: session.qr?.length || 0,
-        shouldDisconnect: session.should_disconnect
-      });
+    if (session?.is_ready) {
+      console.log('[ConnectPage] ✅ Session connected:', sessionId);
     }
-  }, [session, sessionId]);
+  }, [session?.is_ready, sessionId]);
 
   const connectionStatus = session?.is_ready ? "connected" : "disconnected";
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(session?.qr || '')}`;
