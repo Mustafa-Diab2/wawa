@@ -297,8 +297,58 @@ async function startSession(sessionId: string) {
                                     .eq("id", chat.id)
                                     .single();
 
-                                // Check chat mode
-                                if (chatData?.mode === "human") {
+                                // Check for customer service keywords first
+                                const customerServiceKeywords = [
+                                    'عايز اكلم خدمة العملاء',
+                                    'حولني خدمة العملاء',
+                                    'اكلم خدمة العملاء',
+                                    'موظف',
+                                    'عايز موظف',
+                                    'تحويل خدمة العملاء',
+                                    'اتكلم مع موظف',
+                                    'عايز اتكلم مع شخص',
+                                ];
+
+                                const messageText = (body || '').toLowerCase().trim();
+                                const requestsHuman = customerServiceKeywords.some(keyword =>
+                                    messageText.includes(keyword.toLowerCase())
+                                );
+
+                                if (requestsHuman) {
+                                    console.log(`[AI] Customer requested human agent for chat ${chat.id}`);
+
+                                    // Switch to human mode
+                                    await supabaseAdmin
+                                        .from("chats")
+                                        .update({
+                                            mode: "human",
+                                            needs_human: true,
+                                        })
+                                        .eq("id", chat.id);
+
+                                    // Send confirmation message
+                                    const confirmationMessage = "تم تحويلك إلى خدمة العملاء. سيقوم أحد موظفينا بالرد عليك قريباً.";
+                                    await sock.sendMessage(jid, { text: confirmationMessage });
+
+                                    // Save confirmation message
+                                    await supabaseAdmin
+                                        .from("messages")
+                                        .insert({
+                                            chat_id: chat.id,
+                                            session_id: sessionId,
+                                            remote_id: jid,
+                                            sender: "agent",
+                                            body: confirmationMessage,
+                                            timestamp: new Date().toISOString(),
+                                            is_from_us: true,
+                                            media_type: null,
+                                            media_url: null,
+                                            status: "sent",
+                                            created_at: new Date().toISOString(),
+                                        });
+
+                                    console.log(`[AI] Chat ${chat.id} switched to human mode`);
+                                } else if (chatData?.mode === "human") {
                                     console.log(`[AI] Chat ${chat.id} is in human mode, skipping AI`);
                                 } else {
                                     // Mode is \'ai\' - call AI agent
@@ -370,6 +420,7 @@ async function startSession(sessionId: string) {
                                             .eq("id", chat.id);
 
                                         console.log(`[AI] Chat ${chat.id} switched to human mode`);
+                                    }
                                     }
                                 }
                             } catch (aiError) {

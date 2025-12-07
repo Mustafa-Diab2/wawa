@@ -256,9 +256,28 @@ export default function ConnectPage() {
 
     setChannel(realtimeChannel);
 
+    // Fallback: Poll for updates every 3 seconds if realtime is not working
+    const pollInterval = setInterval(async () => {
+      try {
+        const { data, error } = await supabase
+          .from('whatsapp_sessions')
+          .select('*')
+          .eq('id', sessionId)
+          .single();
+
+        if (!error && data) {
+          console.log('[ConnectPage] Polled session update:', data);
+          setSession(data as SessionData);
+        }
+      } catch (err) {
+        console.error('[ConnectPage] Error polling session:', err);
+      }
+    }, 3000);
+
     return () => {
-      console.log('[ConnectPage] Cleaning up realtime subscription');
+      console.log('[ConnectPage] Cleaning up realtime subscription and polling');
       realtimeChannel.unsubscribe();
+      clearInterval(pollInterval);
     };
   }, [sessionId]);
 
