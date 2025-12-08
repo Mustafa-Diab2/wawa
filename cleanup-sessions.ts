@@ -21,9 +21,9 @@ async function cleanup() {
 
   console.log(`📊 Found ${sessions.length} sessions`);
 
-  // Keep only the newest 3
-  const toKeep = sessions.slice(0, 3);
-  const toDelete = sessions.slice(3);
+  // Keep only the newest 1
+  const toKeep = sessions.slice(0, 1);
+  const toDelete = sessions.slice(1);
 
   console.log(`✅ Keeping ${toKeep.length} newest sessions:`);
   toKeep.forEach(s => console.log(`   - ${s.id}`));

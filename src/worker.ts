@@ -4,7 +4,7 @@ import { config } from "dotenv";
 import path from "path";
 config({ path: path.join(process.cwd(), ".env.local") });
 
-import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage } from "@whiskeysockets/baileys";
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, downloadMediaMessage, Browsers } from "@whiskeysockets/baileys";
 import { supabaseAdmin } from "./lib/supabaseAdmin";
 import pino from "pino";
 import fs from "fs";
@@ -56,8 +56,9 @@ async function startSession(sessionId: string) {
             },
             printQRInTerminal: false,
             logger: pino({ level: "silent" }) as any,
-            browser: ["Chrome (Linux)", "", ""],
+            browser: Browsers.ubuntu("Chrome"),
             syncFullHistory: false,
+            defaultQueryTimeoutMs: undefined,
         });
 
         sessions.set(sessionId, sock);
