@@ -58,7 +58,7 @@ export default function CRMPage() {
         .select(`
           id,
           name,
-          phone_number,
+          remote_id,
           created_at,
           updated_at
         `)
@@ -76,7 +76,7 @@ export default function CRMPage() {
 
           return {
             id: chat.id,
-            phone: chat.phone_number || '',
+            phone: chat.remote_id || '',
             name: chat.name || undefined,
             email: undefined,
             notes: undefined,
