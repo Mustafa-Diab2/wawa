@@ -421,7 +421,6 @@ async function startSession(sessionId: string) {
 
                                         console.log(`[AI] Chat ${chat.id} switched to human mode`);
                                     }
-                                    }
                                 }
                             } catch (aiError) {
                                 console.error(`[AI] Error processing AI for chat ${chat.id}:`, aiError);
