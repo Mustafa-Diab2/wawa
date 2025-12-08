@@ -90,15 +90,13 @@ async function startSession(sessionId: string) {
             }
 
             if (connection === "close") {
-                const shouldReconnect = (lastDisconnect?.error as any)?.output?.statusCode !== DisconnectReason.loggedOut;
-                console.log(`Connection closed for ${sessionId}. Reconnecting: ${shouldReconnect}`);
+                const isLoggedOut = (lastDisconnect?.error as any)?.output?.statusCode === DisconnectReason.loggedOut;
+                console.log(`Connection closed for ${sessionId}. Logged out: ${isLoggedOut}`);
 
                 sessions.delete(sessionId);
 
-                if (shouldReconnect) {
-                    startSession(sessionId);
-                } else {
-                    console.log(`Session ${sessionId} logged out. Clearing all chats...`);
+                if (isLoggedOut) {
+                    console.log(`Session ${sessionId} logged out. Clearing all chats and restarting...`);
                     try {
                         // Delete all chats and messages for this session
                         await supabaseAdmin
@@ -113,6 +111,7 @@ async function startSession(sessionId: string) {
 
                         console.log(`Deleted all chats for logged out session ${sessionId}`);
 
+                        // Clear QR and reset session to generate new QR
                         await (supabaseAdmin as any)
                             .from("whatsapp_sessions")
                             .update({
@@ -123,10 +122,19 @@ async function startSession(sessionId: string) {
                             })
                             .eq("id", sessionId);
 
-                        console.log(`Session ${sessionId} logged out. Not restarting automatically to avoid loop.`);
+                        console.log(`Session ${sessionId} reset. Restarting to generate new QR code...`);
+
+                        // Wait 2 seconds before restarting to avoid rapid loop
+                        setTimeout(() => {
+                            startSession(sessionId);
+                        }, 2000);
                     } catch (e) {
-                        console.error(`Error updating logout status for ${sessionId}:`, e);
+                        console.error(`Error handling logout for ${sessionId}:`, e);
                     }
+                } else {
+                    // Other connection errors - reconnect immediately
+                    console.log(`Connection error for ${sessionId}, reconnecting...`);
+                    startSession(sessionId);
                 }
             } else if (connection === "open") {
                 console.log(`Session ${sessionId} connected.`);
