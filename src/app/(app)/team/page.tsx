@@ -242,17 +242,17 @@ export default function TeamPage() {
             <CardHeader>
               <div className="flex items-center gap-4">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.email}`} />
-                  <AvatarFallback>{member.email[0].toUpperCase()}</AvatarFallback>
+                  <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.email || 'user'}`} />
+                  <AvatarFallback>{member.email?.[0]?.toUpperCase() || 'U'}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <CardTitle className="text-base">{member.email.split('@')[0]}</CardTitle>
+                    <CardTitle className="text-base">{member.email?.split('@')[0] || 'مستخدم'}</CardTitle>
                     {member.role === 'admin' && (
                       <Shield className="h-4 w-4 text-primary" />
                     )}
                   </div>
-                  <CardDescription className="text-sm">{member.email}</CardDescription>
+                  <CardDescription className="text-sm">{member.email || 'لا يوجد بريد إلكتروني'}</CardDescription>
                 </div>
               </div>
             </CardHeader>
