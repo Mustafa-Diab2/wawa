@@ -372,8 +372,17 @@ async function startSession(sessionId: string) {
                                         }))
                                         .filter((m) => m.content.trim() !== "");
 
-                                    // Call AI
-                                    const aiResponse = await callAI(conversationHistory, body);
+                                    // Get bot_id from chat if available
+                                    const botId = chatData?.bot_id || undefined;
+                                    if (botId) {
+                                        console.log(`[AI] Using bot ${botId} for chat ${chat.id}`);
+                                    }
+
+                                    // Call AI with bot context
+                                    const aiResponse = await callAI(conversationHistory, body, {
+                                        botId,
+                                        chatId: chat.id
+                                    });
 
                                     // Send reply via WhatsApp
                                     await sock.sendMessage(jid, { text: aiResponse.reply });

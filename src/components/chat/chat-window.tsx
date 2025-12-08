@@ -1,15 +1,24 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MoreVertical, Phone, Video, Loader2, Bot, User } from "lucide-react";
+import { MoreVertical, Phone, Video, Loader2, Bot as BotIcon, User } from "lucide-react";
 import ChatInput from "./chat-input";
 import ChatMessage from "./chat-message";
-import type { Chat, Message } from "@/lib/types";
+import type { Chat, Message, Bot } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface ChatWindowProps {
   chat: Chat;
@@ -21,6 +30,34 @@ interface ChatWindowProps {
 export default function ChatWindow({ chat, messages, messagesLoading, sessionId }: ChatWindowProps) {
   const { toast } = useToast();
   const [isTogglingMode, setIsTogglingMode] = useState(false);
+  const [bots, setBots] = useState<Bot[]>([]);
+  const [currentBot, setCurrentBot] = useState<Bot | null>(null);
+
+  // Fetch available bots
+  useEffect(() => {
+    const fetchBots = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('bots')
+          .select('*')
+          .eq('is_active', true)
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setBots(data || []);
+
+        // Set current bot if chat has one assigned
+        if ((chat as any).bot_id) {
+          const bot = data?.find((b: Bot) => b.id === (chat as any).bot_id);
+          setCurrentBot(bot || null);
+        }
+      } catch (error) {
+        console.error('Error fetching bots:', error);
+      }
+    };
+
+    fetchBots();
+  }, [chat]);
 
   const toggleMode = async () => {
     if (isTogglingMode) return;
@@ -59,6 +96,31 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
     }
   };
 
+  const assignBot = async (botId: string | null) => {
+    try {
+      const { error } = await supabase
+        .from('chats')
+        .update({ bot_id: botId })
+        .eq('id', chat.id);
+
+      if (error) throw error;
+
+      const bot = bots.find(b => b.id === botId);
+      setCurrentBot(bot || null);
+
+      toast({
+        title: botId ? 'تم تعيين البوت' : 'تم إلغاء تعيين البوت',
+        description: botId ? `تم تعيين ${bot?.name}` : 'سيتم استخدام الإعدادات الافتراضية',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'خطأ',
+        description: 'فشل تعيين البوت',
+        variant: 'destructive',
+      });
+    }
+  };
+
   return (
     <Card className="flex flex-col h-full">
       <div className="flex items-center p-4 border-b">
@@ -78,12 +140,34 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
                 {isTogglingMode ? (
                   <Loader2 className="h-3 w-3 animate-spin ml-1" />
                 ) : chat.mode === 'ai' ? (
-                  <Bot className="h-3 w-3 ml-1" />
+                  <BotIcon className="h-3 w-3 ml-1" />
                 ) : (
                   <User className="h-3 w-3 ml-1" />
                 )}
                 {chat.mode === 'ai' ? 'ذكي' : 'يدوي'}
               </Badge>
+              {chat.mode === 'ai' && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Badge variant="outline" className="text-xs cursor-pointer">
+                      {currentBot ? currentBot.name : 'افتراضي'}
+                    </Badge>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    <DropdownMenuLabel>اختر البوت</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => assignBot(null)}>
+                      افتراضي (بدون بوت)
+                    </DropdownMenuItem>
+                    {bots.map((bot) => (
+                      <DropdownMenuItem key={bot.id} onClick={() => assignBot(bot.id)}>
+                        <BotIcon className="h-3 w-3 ml-2" />
+                        {bot.name}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
               {(chat.needs_human ?? chat.needsHuman) && (
                 <Badge variant="destructive" className="text-xs">
                   يحتاج خدمة عملاء

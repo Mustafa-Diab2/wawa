@@ -1,5 +1,7 @@
 import OpenAI from 'openai';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { supabaseAdmin } from './supabaseAdmin';
+import type { Bot, BotKnowledge } from './types';
 
 // Determine which AI provider to use based on available API keys
 const AI_PROVIDER = process.env.GEMINI_API_KEY ? 'gemini' : 'openai';
@@ -23,7 +25,12 @@ interface ConversationMessage {
   content: string;
 }
 
-const SYSTEM_PROMPT = `أنت مساعد ذكي لخدمة عملاء شركة تسويق رقمي و CRM على واتساب.
+export interface AIOptions {
+  botId?: string;
+  chatId?: string;
+}
+
+const DEFAULT_SYSTEM_PROMPT = `أنت مساعد ذكي لخدمة عملاء شركة تسويق رقمي و CRM على واتساب.
 
 قواعد مهمة:
 - ردودك قصيرة وواضحة ومهذبة (جملتين كحد أقصى).
@@ -50,11 +57,104 @@ const SYSTEM_PROMPT = `أنت مساعد ذكي لخدمة عملاء شركة �
 }`;
 
 /**
+ * Fetch bot configuration and knowledge for a chat
+ */
+async function fetchBotContext(botId: string, userMessage: string): Promise<string> {
+  try {
+    // Fetch bot configuration
+    const { data: bot, error: botError } = await supabaseAdmin
+      .from('bots')
+      .select('*')
+      .eq('id', botId)
+      .eq('is_active', true)
+      .single();
+
+    if (botError || !bot) {
+      console.log('[AI Agent] Bot not found or inactive:', botId);
+      return '';
+    }
+
+    // Extract keywords from user message for knowledge search
+    const messageWords = userMessage
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(word => word.length > 2);
+
+    // Fetch relevant knowledge based on keywords
+    const { data: knowledge, error: knowledgeError } = await supabaseAdmin
+      .from('bot_knowledge')
+      .select('*')
+      .eq('bot_id', botId)
+      .eq('is_active', true)
+      .order('priority', { ascending: false });
+
+    if (knowledgeError) {
+      console.error('[AI Agent] Error fetching knowledge:', knowledgeError);
+    }
+
+    // Filter knowledge by relevance (matching keywords)
+    const relevantKnowledge = knowledge?.filter((k: BotKnowledge) => {
+      const allKeywords = [
+        ...k.keywords,
+        ...(k.title?.toLowerCase().split(/\s+/) || []),
+        ...(k.category?.toLowerCase().split(/\s+/) || [])
+      ];
+
+      return messageWords.some(word =>
+        allKeywords.some(keyword => keyword.includes(word) || word.includes(keyword))
+      );
+    }) || [];
+
+    // Build context string
+    let context = `شخصية البوت:\n${bot.personality}\n\n`;
+
+    if (relevantKnowledge.length > 0) {
+      context += `المعلومات المتاحة لديك:\n`;
+      relevantKnowledge.slice(0, 5).forEach((k: BotKnowledge) => {
+        context += `\n[${k.title}]\n${k.content}\n`;
+      });
+    }
+
+    return context;
+  } catch (error) {
+    console.error('[AI Agent] Error fetching bot context:', error);
+    return '';
+  }
+}
+
+/**
+ * Get bot configuration for temperature and max_tokens
+ */
+async function getBotConfig(botId: string): Promise<{ temperature: number; max_tokens: number } | null> {
+  try {
+    const { data: bot, error } = await supabaseAdmin
+      .from('bots')
+      .select('temperature, max_tokens')
+      .eq('id', botId)
+      .eq('is_active', true)
+      .single();
+
+    if (error || !bot) {
+      return null;
+    }
+
+    return {
+      temperature: bot.temperature || 0.7,
+      max_tokens: bot.max_tokens || 1000
+    };
+  } catch (error) {
+    console.error('[AI Agent] Error fetching bot config:', error);
+    return null;
+  }
+}
+
+/**
  * Call AI agent using Gemini
  */
 async function callGemini(
   conversationHistory: ConversationMessage[],
-  userMessage: string
+  userMessage: string,
+  options?: AIOptions
 ): Promise<AIResponse> {
   if (!genAI) {
     throw new Error('Gemini not initialized');
@@ -62,11 +162,29 @@ async function callGemini(
 
   console.log('[AI Agent] Using Gemini with', conversationHistory.length, 'history messages');
 
+  // Fetch bot context if botId provided
+  let systemPrompt = DEFAULT_SYSTEM_PROMPT;
+  let botConfig = { temperature: 0.7, maxOutputTokens: 200 };
+
+  if (options?.botId) {
+    const botContext = await fetchBotContext(options.botId, userMessage);
+    if (botContext) {
+      systemPrompt = botContext + '\n\n' + DEFAULT_SYSTEM_PROMPT;
+      console.log('[AI Agent] Using bot context for bot:', options.botId);
+    }
+
+    const config = await getBotConfig(options.botId);
+    if (config) {
+      botConfig.temperature = config.temperature;
+      botConfig.maxOutputTokens = config.max_tokens;
+    }
+  }
+
   const model = genAI.getGenerativeModel({
     model: 'gemini-2.0-flash-exp',
     generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 200,
+      temperature: botConfig.temperature,
+      maxOutputTokens: botConfig.maxOutputTokens,
       responseMimeType: 'application/json',
     },
   });
@@ -76,7 +194,7 @@ async function callGemini(
     .map(msg => `${msg.role === 'user' ? 'المستخدم' : 'المساعد'}: ${msg.content}`)
     .join('\n');
 
-  const prompt = `${SYSTEM_PROMPT}
+  const prompt = `${systemPrompt}
 
 المحادثة السابقة:
 ${conversationText}
@@ -112,7 +230,8 @@ ${conversationText}
  */
 async function callOpenAI(
   conversationHistory: ConversationMessage[],
-  userMessage: string
+  userMessage: string,
+  options?: AIOptions
 ): Promise<AIResponse> {
   if (!openai) {
     throw new Error('OpenAI not initialized');
@@ -120,8 +239,26 @@ async function callOpenAI(
 
   console.log('[AI Agent] Using OpenAI with', conversationHistory.length, 'history messages');
 
+  // Fetch bot context if botId provided
+  let systemPrompt = DEFAULT_SYSTEM_PROMPT;
+  let botConfig = { temperature: 0.7, max_tokens: 200 };
+
+  if (options?.botId) {
+    const botContext = await fetchBotContext(options.botId, userMessage);
+    if (botContext) {
+      systemPrompt = botContext + '\n\n' + DEFAULT_SYSTEM_PROMPT;
+      console.log('[AI Agent] Using bot context for bot:', options.botId);
+    }
+
+    const config = await getBotConfig(options.botId);
+    if (config) {
+      botConfig.temperature = config.temperature;
+      botConfig.max_tokens = config.max_tokens;
+    }
+  }
+
   const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'system', content: systemPrompt },
     ...conversationHistory.map((msg) => ({
       role: msg.role,
       content: msg.content,
@@ -133,8 +270,8 @@ async function callOpenAI(
     model: 'gpt-4o-mini',
     messages,
     response_format: { type: 'json_object' },
-    temperature: 0.7,
-    max_tokens: 200,
+    temperature: botConfig.temperature,
+    max_tokens: botConfig.max_tokens,
   });
 
   const content = response.choices[0].message.content || '{}';
@@ -159,11 +296,13 @@ async function callOpenAI(
  * Call AI agent to generate response (supports both OpenAI and Gemini)
  * @param conversationHistory - Array of previous messages
  * @param userMessage - The latest user message
+ * @param options - Optional bot configuration
  * @returns AI response with handoff flag
  */
 export async function callAI(
   conversationHistory: ConversationMessage[],
-  userMessage: string
+  userMessage: string,
+  options?: AIOptions
 ): Promise<AIResponse> {
   // Check if any API key is configured
   if (!process.env.OPENAI_API_KEY && !process.env.GEMINI_API_KEY) {
@@ -178,9 +317,9 @@ export async function callAI(
   try {
     // Call appropriate AI provider
     if (AI_PROVIDER === 'gemini') {
-      return await callGemini(conversationHistory, userMessage);
+      return await callGemini(conversationHistory, userMessage, options);
     } else {
-      return await callOpenAI(conversationHistory, userMessage);
+      return await callOpenAI(conversationHistory, userMessage, options);
     }
   } catch (error: any) {
     console.error(`[AI Agent] Error calling ${AI_PROVIDER}:`, error);

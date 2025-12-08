@@ -76,6 +76,33 @@ export interface Message {
   createdAt?: Date | string;
 }
 
+export interface Bot {
+  id: string;
+  name: string;
+  description: string | null;
+  personality: string;
+  avatar_url: string | null;
+  is_active: boolean;
+  temperature: number;
+  max_tokens: number;
+  user_id: string;
+  created_at: Date | string;
+  updated_at: Date | string;
+}
+
+export interface BotKnowledge {
+  id: string;
+  bot_id: string;
+  title: string;
+  content: string;
+  category: string | null;
+  keywords: string[];
+  is_active: boolean;
+  priority: number;
+  created_at: Date | string;
+  updated_at: Date | string;
+}
+
 export interface Contact {
   id: string;
   name: string;
@@ -91,18 +118,6 @@ export interface Contact {
 export interface Category {
   id: string;
   name: string;
-  userId: string;
-  createdAt: Date | string;
-  updatedAt: Date | string;
-}
-
-export interface Bot {
-  id: string;
-  name: string;
-  type: 'welcome' | 'auto' | 'survey' | 'ai';
-  isActive: boolean;
-  aiModel?: string;
-  aiPrompt?: string;
   userId: string;
   createdAt: Date | string;
   updatedAt: Date | string;
