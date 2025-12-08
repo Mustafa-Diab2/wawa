@@ -47,23 +47,16 @@ export default function TeamPage() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      // Get all users (this would normally be in a team/organization structure)
-      // For now, we'll just show the current user
-      const today = new Date().toISOString().split('T')[0];
-
-      // Get stats for current user
-      const { data: statsData } = await supabase
-        .from('agent_stats')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('date', today)
-        .single();
+      // Get total chats count
+      const { count: totalChats } = await supabase
+        .from('chats')
+        .select('*', { count: 'only', head: true });
 
       // Get today's message count
       const { count: todayMessages } = await supabase
         .from('messages')
         .select('*', { count: 'only', head: true })
-        .eq('from_me', true)
+        .eq('is_from_us', true)
         .gte('created_at', new Date(new Date().setHours(0, 0, 0, 0)).toISOString());
 
       const member: TeamMember = {
@@ -73,8 +66,8 @@ export default function TeamPage() {
         status: 'online',
         created_at: user.created_at,
         stats: {
-          total_chats: statsData?.total_chats || 0,
-          avg_response_time: statsData?.avg_response_time || 0,
+          total_chats: totalChats || 0,
+          avg_response_time: 0,
           messages_today: todayMessages || 0,
         },
       };
