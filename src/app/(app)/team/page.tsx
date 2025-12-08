@@ -34,6 +34,8 @@ export default function TeamPage() {
 
   const [inviteForm, setInviteForm] = useState({
     email: '',
+    password: '',
+    fullName: '',
     role: 'agent' as 'admin' | 'agent',
   });
 
@@ -87,17 +89,50 @@ export default function TeamPage() {
 
   const inviteTeamMember = async () => {
     try {
-      // TODO: Implement actual invite logic with Supabase
-      toast({
-        title: 'تم إرسال الدعوة',
-        description: `تم إرسال دعوة إلى ${inviteForm.email}`,
+      if (!inviteForm.email || !inviteForm.password || !inviteForm.fullName) {
+        toast({
+          title: 'خطأ',
+          description: 'يرجى ملء جميع الحقول',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      if (inviteForm.password.length < 6) {
+        toast({
+          title: 'خطأ',
+          description: 'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      // Create new user account
+      const { data, error } = await supabase.auth.admin.createUser({
+        email: inviteForm.email,
+        password: inviteForm.password,
+        email_confirm: true,
+        user_metadata: {
+          full_name: inviteForm.fullName,
+          role: inviteForm.role,
+        },
       });
+
+      if (error) throw error;
+
+      toast({
+        title: 'تم إضافة المستخدم بنجاح',
+        description: `تم إنشاء حساب لـ ${inviteForm.fullName}`,
+      });
+
       setIsInviteOpen(false);
-      setInviteForm({ email: '', role: 'agent' });
+      setInviteForm({ email: '', password: '', fullName: '', role: 'agent' });
+      fetchTeamMembers();
     } catch (error: any) {
+      console.error('Error creating user:', error);
       toast({
         title: 'خطأ',
-        description: 'فشل إرسال الدعوة',
+        description: error.message || 'فشل إضافة المستخدم',
         variant: 'destructive',
       });
     }
@@ -142,12 +177,22 @@ export default function TeamPage() {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>دعوة عضو جديد</DialogTitle>
+              <DialogTitle>إضافة عضو جديد</DialogTitle>
               <DialogDescription>
-                أرسل دعوة لإضافة عضو جديد للفريق
+                إنشاء حساب جديد لعضو في الفريق
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
+              <div>
+                <Label htmlFor="fullName">الاسم الكامل</Label>
+                <Input
+                  id="fullName"
+                  type="text"
+                  value={inviteForm.fullName}
+                  onChange={(e) => setInviteForm({ ...inviteForm, fullName: e.target.value })}
+                  placeholder="محمد أحمد"
+                />
+              </div>
               <div>
                 <Label htmlFor="email">البريد الإلكتروني</Label>
                 <Input
@@ -157,6 +202,18 @@ export default function TeamPage() {
                   onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })}
                   placeholder="user@example.com"
                 />
+              </div>
+              <div>
+                <Label htmlFor="password">كلمة المرور</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={inviteForm.password}
+                  onChange={(e) => setInviteForm({ ...inviteForm, password: e.target.value })}
+                  placeholder="••••••••"
+                  minLength={6}
+                />
+                <p className="text-xs text-muted-foreground mt-1">6 أحرف على الأقل</p>
               </div>
               <div>
                 <Label htmlFor="role">الدور</Label>
@@ -178,7 +235,7 @@ export default function TeamPage() {
               <Button variant="outline" onClick={() => setIsInviteOpen(false)}>
                 إلغاء
               </Button>
-              <Button onClick={inviteTeamMember}>إرسال الدعوة</Button>
+              <Button onClick={inviteTeamMember}>إضافة المستخدم</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   SidebarContent,
   SidebarHeader,
@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import WaCrmLogo from '../icons/wacrm-logo';
 import { supabase } from '@/lib/supabase';
+import { useToast } from '@/hooks/use-toast';
 
 const menuItems = [
   { href: '/dashboard', label: 'لوحة التحكم', icon: LayoutGrid },
@@ -41,13 +42,24 @@ const menuItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { toast } = useToast();
 
   const isActive = (href: string) => {
     return pathname === href || (href !== '/dashboard' && pathname.startsWith(href));
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: 'تم تسجيل الخروج',
+        description: 'وداعاً! نراك قريباً',
+      });
+      router.push('/login');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
 
