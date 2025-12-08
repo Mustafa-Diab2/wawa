@@ -34,3 +34,19 @@ ALTER TABLE public.chats ADD COLUMN IF NOT EXISTS bot_id UUID REFERENCES public.
 CREATE INDEX IF NOT EXISTS idx_bots_user_id ON public.bots(user_id);
 CREATE INDEX IF NOT EXISTS idx_bot_knowledge_bot_id ON public.bot_knowledge(bot_id);
 CREATE INDEX IF NOT EXISTS idx_bot_knowledge_keywords ON public.bot_knowledge USING GIN(keywords);
+
+-- Enable RLS
+ALTER TABLE public.bots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.bot_knowledge ENABLE ROW LEVEL SECURITY;
+
+-- Simple RLS Policies for bots (allow all for authenticated users)
+CREATE POLICY "bots_policy" ON public.bots
+FOR ALL
+USING (auth.role() = 'authenticated')
+WITH CHECK (auth.role() = 'authenticated');
+
+-- Simple RLS Policies for bot_knowledge (allow all for authenticated users)
+CREATE POLICY "bot_knowledge_policy" ON public.bot_knowledge
+FOR ALL
+USING (auth.role() = 'authenticated')
+WITH CHECK (auth.role() = 'authenticated');
