@@ -190,6 +190,12 @@ export default function ConnectPage() {
       // Reset local state
       setSessionId(null);
       setSession(null);
+
+      // Create new session after disconnect
+      console.log('[disconnectSession] Creating new session after disconnect...');
+      setTimeout(() => {
+        findOrCreateSession();
+      }, 2000); // Wait 2 seconds for worker to cleanup
     } catch (error) {
       console.error("[disconnectSession] Error disconnecting session:", error);
     }

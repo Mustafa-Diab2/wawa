@@ -633,20 +633,17 @@ setInterval(async () => {
                         console.error(`❌ Error deleting auth state for session ${sessionId}:`, err);
                     }
 
-                    // Reset the session document
-                    await (supabaseAdmin as any)
-                        .from("whatsapp_sessions")
-                        .update({
-                            is_ready: false,
-                            qr: "",
-                            should_disconnect: false,
-                            updated_at: new Date().toISOString()
-                        })
-                        .eq("id", sessionId);
-
                     console.log(`Logging out session ${sessionId}...`);
                     sock.logout();
                     sessions.delete(sessionId);
+
+                    // Delete the session document from database
+                    await supabaseAdmin
+                        .from("whatsapp_sessions")
+                        .delete()
+                        .eq("id", sessionId);
+
+                    console.log(`✅ Deleted session ${sessionId} from database`);
                 } catch (e) {
                     console.error(`Error during disconnect cleanup for ${sessionId}:`, e);
                 }
