@@ -18,6 +18,10 @@ import {
   Settings,
   CircleHelp,
   LogOut,
+  UserCog,
+  BarChart3,
+  Zap,
+  Send,
 } from 'lucide-react';
 import WaCrmLogo from '../icons/wacrm-logo';
 import { supabase } from '@/lib/supabase';
@@ -26,7 +30,11 @@ const menuItems = [
   { href: '/dashboard', label: 'لوحة التحكم', icon: LayoutGrid },
   { href: '/chat', label: 'المحادثات', icon: MessageSquare },
   { href: '/bots', label: 'البوتات', icon: Bot },
+  { href: '/responses', label: 'الردود السريعة', icon: Zap },
+  { href: '/campaigns', label: 'الحملات', icon: Send },
   { href: '/crm', label: 'إدارة العملاء', icon: Users },
+  { href: '/team', label: 'إدارة الفريق', icon: UserCog },
+  { href: '/reports', label: 'التقارير', icon: BarChart3 },
   { href: '/connect', label: 'ربط WhatsApp', icon: QrCode },
   { href: '/settings', label: 'الإعدادات', icon: Settings },
 ];
