@@ -24,7 +24,6 @@ export default function BotsPage() {
   // Form state
   const [formData, setFormData] = useState({
     name: '',
-    description: '',
     personality: 'أنت مساعد ذكي ومفيد. تجيب على أسئلة العملاء بشكل ودود ومحترف.',
     temperature: 0.7,
     max_tokens: 1000,
@@ -197,7 +196,6 @@ export default function BotsPage() {
   const resetForm = () => {
     setFormData({
       name: '',
-      description: '',
       personality: 'أنت مساعد ذكي ومفيد. تجيب على أسئلة العملاء بشكل ودود ومحترف.',
       temperature: 0.7,
       max_tokens: 1000,
@@ -245,16 +243,6 @@ export default function BotsPage() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="مثال: بوت خدمة العملاء"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="description">الوصف</Label>
-                <Input
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="وصف مختصر للبوت"
                 />
               </div>
 
@@ -333,9 +321,6 @@ export default function BotsPage() {
                     </div>
                   </div>
                 </div>
-                {bot.description && (
-                  <CardDescription className="mt-2">{bot.description}</CardDescription>
-                )}
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm">
