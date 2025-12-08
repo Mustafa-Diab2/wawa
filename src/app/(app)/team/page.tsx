@@ -43,49 +43,50 @@ export default function TeamPage() {
 
   const fetchTeamMembers = async () => {
     try {
-      // Mock data for now - replace with actual Supabase query
-      const mockMembers: TeamMember[] = [
-        {
-          id: '1',
-          email: 'admin@example.com',
-          role: 'admin',
-          status: 'online',
-          created_at: new Date().toISOString(),
-          stats: {
-            total_chats: 145,
-            avg_response_time: 120,
-            messages_today: 34,
-          },
-        },
-        {
-          id: '2',
-          email: 'agent1@example.com',
-          role: 'agent',
-          status: 'online',
-          created_at: new Date().toISOString(),
-          stats: {
-            total_chats: 89,
-            avg_response_time: 180,
-            messages_today: 21,
-          },
-        },
-        {
-          id: '3',
-          email: 'agent2@example.com',
-          role: 'agent',
-          status: 'away',
-          created_at: new Date().toISOString(),
-          stats: {
-            total_chats: 56,
-            avg_response_time: 150,
-            messages_today: 12,
-          },
-        },
-      ];
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
 
-      setMembers(mockMembers);
+      // Get all users (this would normally be in a team/organization structure)
+      // For now, we'll just show the current user
+      const today = new Date().toISOString().split('T')[0];
+
+      // Get stats for current user
+      const { data: statsData } = await supabase
+        .from('agent_stats')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('date', today)
+        .single();
+
+      // Get today's message count
+      const { count: todayMessages } = await supabase
+        .from('messages')
+        .select('*', { count: 'only', head: true })
+        .eq('from_me', true)
+        .gte('created_at', new Date(new Date().setHours(0, 0, 0, 0)).toISOString());
+
+      const member: TeamMember = {
+        id: user.id,
+        email: user.email || '',
+        role: 'admin',
+        status: 'online',
+        created_at: user.created_at,
+        stats: {
+          total_chats: statsData?.total_chats || 0,
+          avg_response_time: statsData?.avg_response_time || 0,
+          messages_today: todayMessages || 0,
+        },
+      };
+
+      setMembers([member]);
     } catch (error) {
       console.error('Error fetching team:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحميل بيانات الفريق',
+        variant: 'destructive',
+      });
     } finally {
       setLoading(false);
     }

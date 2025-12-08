@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,8 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Send, Plus, Eye, Users, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
 interface Campaign {
   id: string;
@@ -27,7 +29,11 @@ interface Campaign {
 
 export default function CampaignsPage() {
   const { toast } = useToast();
+  const router = useRouter();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     message: '',
@@ -36,46 +42,41 @@ export default function CampaignsPage() {
     scheduled_at: '',
   });
 
-  // Mock data
-  const [campaigns, setCampaigns] = useState<Campaign[]>([
-    {
-      id: '1',
-      name: 'عرض الربيع 2024',
-      message: 'عرض خاص! خصم 30% على جميع المنتجات حتى نهاية الشهر',
-      status: 'completed',
-      target_audience: 'الكل',
-      recipients_count: 1250,
-      sent_count: 1250,
-      delivered_count: 1198,
-      failed_count: 52,
-      created_at: '2024-03-01',
-    },
-    {
-      id: '2',
-      name: 'تذكير بالدفع',
-      message: 'تذكير ودي: لديك فاتورة مستحقة الدفع',
-      status: 'sending',
-      target_audience: 'العملاء المستحقين',
-      recipients_count: 89,
-      sent_count: 45,
-      delivered_count: 43,
-      failed_count: 2,
-      created_at: '2024-03-15',
-    },
-    {
-      id: '3',
-      name: 'إطلاق منتج جديد',
-      message: 'نقدم لكم منتجنا الجديد! اطلبه الآن',
-      status: 'scheduled',
-      target_audience: 'عملاء VIP',
-      recipients_count: 234,
-      sent_count: 0,
-      delivered_count: 0,
-      failed_count: 0,
-      scheduled_at: '2024-03-20 10:00',
-      created_at: '2024-03-14',
-    },
-  ]);
+  // Check auth and load data
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+    setUserId(user.id);
+    loadCampaigns(user.id);
+  };
+
+  const loadCampaigns = async (uid: string) => {
+    setIsLoading(true);
+    const { data, error } = await supabase
+      .from('campaigns')
+      .select('*')
+      .eq('user_id', uid)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error loading campaigns:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحميل الحملات',
+        variant: 'destructive',
+      });
+    } else {
+      setCampaigns(data || []);
+    }
+    setIsLoading(false);
+  };
 
   const getStatusBadge = (status: Campaign['status']) => {
     const variants: Record<Campaign['status'], any> = {
@@ -95,22 +96,33 @@ export default function CampaignsPage() {
     return <Badge variant={variants[status]}>{labels[status]}</Badge>;
   };
 
-  const createCampaign = () => {
-    const newCampaign: Campaign = {
-      id: Date.now().toString(),
-      name: formData.name,
-      message: formData.message,
-      status: formData.schedule_type === 'now' ? 'sending' : 'scheduled',
-      target_audience: formData.target_audience,
-      recipients_count: 0, // Will be calculated based on target
-      sent_count: 0,
-      delivered_count: 0,
-      failed_count: 0,
-      scheduled_at: formData.schedule_type === 'scheduled' ? formData.scheduled_at : undefined,
-      created_at: new Date().toISOString(),
-    };
+  const createCampaign = async () => {
+    if (!userId) return;
 
-    setCampaigns([newCampaign, ...campaigns]);
+    const { data, error } = await supabase
+      .from('campaigns')
+      .insert({
+        user_id: userId,
+        name: formData.name,
+        message: formData.message,
+        status: formData.schedule_type === 'now' ? 'sending' : 'scheduled',
+        target_audience: formData.target_audience,
+        scheduled_at: formData.schedule_type === 'scheduled' ? formData.scheduled_at : null,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating campaign:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل إنشاء الحملة',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setCampaigns([data, ...campaigns]);
     setFormData({ name: '', message: '', target_audience: 'all', schedule_type: 'now', scheduled_at: '' });
     setIsCreateOpen(false);
 
@@ -124,6 +136,17 @@ export default function CampaignsPage() {
     if (campaign.sent_count === 0) return 0;
     return Math.round((campaign.delivered_count / campaign.sent_count) * 100);
   };
+
+  if (isLoading) {
+    return (
+      <div className="p-6 flex items-center justify-center h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">جاري التحميل...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 space-y-6">

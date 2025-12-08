@@ -1,27 +1,123 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BarChart3, TrendingUp, Clock, MessageSquare, Users, Download, Calendar } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
 
 export default function ReportsPage() {
+  const router = useRouter();
+  const { toast } = useToast();
   const [timeRange, setTimeRange] = useState('7d');
+  const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
 
-  // Mock data - replace with real data from Supabase
-  const stats = {
-    totalMessages: 1247,
-    avgResponseTime: 145, // seconds
-    totalChats: 89,
-    activeAgents: 5,
-    peakHours: '14:00 - 16:00',
-    commonTags: [
-      { name: 'شكوى', count: 45 },
-      { name: 'استفسار', count: 89 },
-      { name: 'طلب', count: 156 },
-      { name: 'VIP', count: 23 },
-    ],
+  const [stats, setStats] = useState({
+    totalMessages: 0,
+    avgResponseTime: 0,
+    totalChats: 0,
+    activeAgents: 0,
+    peakHours: '--:-- - --:--',
+    commonTags: [] as { name: string; count: number }[],
+  });
+
+  // Check auth and load data
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      loadStats();
+    }
+  }, [userId, timeRange]);
+
+  const checkUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+    setUserId(user.id);
+  };
+
+  const loadStats = async () => {
+    if (!userId) return;
+
+    setIsLoading(true);
+
+    // Calculate date range
+    const now = new Date();
+    let startDate = new Date();
+    switch (timeRange) {
+      case '24h':
+        startDate.setHours(startDate.getHours() - 24);
+        break;
+      case '7d':
+        startDate.setDate(startDate.getDate() - 7);
+        break;
+      case '30d':
+        startDate.setDate(startDate.getDate() - 30);
+        break;
+      case '90d':
+        startDate.setDate(startDate.getDate() - 90);
+        break;
+    }
+
+    try {
+      // Load chats count
+      const { count: chatsCount } = await supabase
+        .from('chats')
+        .select('*', { count: 'only', head: true })
+        .gte('updated_at', startDate.toISOString());
+
+      // Load messages count
+      const { count: messagesCount } = await supabase
+        .from('messages')
+        .select('*', { count: 'only', head: true })
+        .gte('created_at', startDate.toISOString());
+
+      // Load tags
+      const { data: tagsData } = await supabase
+        .from('chat_tag_relations')
+        .select('tag_id, chat_tags(name)')
+        .gte('created_at', startDate.toISOString());
+
+      const tagCounts: Record<string, number> = {};
+      tagsData?.forEach((rel: any) => {
+        const tagName = rel.chat_tags?.name;
+        if (tagName) {
+          tagCounts[tagName] = (tagCounts[tagName] || 0) + 1;
+        }
+      });
+
+      const commonTags = Object.entries(tagCounts)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 4);
+
+      setStats({
+        totalMessages: messagesCount || 0,
+        avgResponseTime: 145, // TODO: Calculate from actual data
+        totalChats: chatsCount || 0,
+        activeAgents: 0, // TODO: Calculate from agent_stats
+        peakHours: '14:00 - 16:00', // TODO: Calculate from messages timestamps
+        commonTags,
+      });
+    } catch (error) {
+      console.error('Error loading stats:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحميل الإحصائيات',
+        variant: 'destructive',
+      });
+    }
+
+    setIsLoading(false);
   };
 
   const responseTimeData = [
@@ -42,6 +138,17 @@ export default function ReportsPage() {
     { day: 'الخميس', count: 245 },
     { day: 'الجمعة', count: 156 },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="p-6 flex items-center justify-center h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">جاري التحميل...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 space-y-6">

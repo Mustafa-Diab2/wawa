@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { MessageSquare, Plus, Edit, Trash2, Copy, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
 interface CannedResponse {
   id: string;
@@ -22,8 +24,12 @@ interface CannedResponse {
 
 export default function ResponsesPage() {
   const { toast } = useToast();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [responses, setResponses] = useState<CannedResponse[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     shortcut: '',
@@ -31,45 +37,42 @@ export default function ResponsesPage() {
     category: '',
   });
 
-  // Mock data - replace with Supabase
-  const [responses, setResponses] = useState<CannedResponse[]>([
-    {
-      id: '1',
-      title: 'رسالة ترحيب',
-      shortcut: '/welcome',
-      content: 'مرحباً بك! كيف يمكنني مساعدتك اليوم؟',
-      category: 'عام',
-      usage_count: 245,
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: '2',
-      title: 'أوقات العمل',
-      shortcut: '/hours',
-      content: 'أوقات العمل لدينا من الأحد إلى الخميس من 9 صباحاً حتى 6 مساءً.',
-      category: 'معلومات',
-      usage_count: 189,
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: '3',
-      title: 'طلب معلومات إضافية',
-      shortcut: '/info',
-      content: 'لكي أساعدك بشكل أفضل، هل يمكنك تزويدي ببعض التفاصيل الإضافية؟',
-      category: 'استفسار',
-      usage_count: 156,
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: '4',
-      title: 'شكر العميل',
-      shortcut: '/thanks',
-      content: 'شكراً لتواصلك معنا! سعداء بخدمتك.',
-      category: 'عام',
-      usage_count: 312,
-      created_at: new Date().toISOString(),
-    },
-  ]);
+  // Check auth and load data
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+    setUserId(user.id);
+    loadResponses(user.id);
+  };
+
+  const loadResponses = async (uid: string) => {
+    setIsLoading(true);
+    const { data, error } = await supabase
+      .from('canned_responses')
+      .select('*')
+      .eq('user_id', uid)
+      .eq('is_active', true)
+      .order('usage_count', { ascending: false });
+
+    if (error) {
+      console.error('Error loading responses:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحميل الردود السريعة',
+        variant: 'destructive',
+      });
+    } else {
+      setResponses(data || []);
+    }
+    setIsLoading(false);
+  };
 
   const filteredResponses = responses.filter(
     (r) =>
@@ -78,15 +81,34 @@ export default function ResponsesPage() {
       r.shortcut.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const createResponse = () => {
-    const newResponse: CannedResponse = {
-      id: Date.now().toString(),
-      ...formData,
-      usage_count: 0,
-      created_at: new Date().toISOString(),
-    };
+  const createResponse = async () => {
+    if (!userId) return;
 
-    setResponses([newResponse, ...responses]);
+    const { data, error } = await supabase
+      .from('canned_responses')
+      .insert({
+        user_id: userId,
+        title: formData.title,
+        shortcut: formData.shortcut,
+        content: formData.content,
+        category: formData.category,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating response:', error);
+      toast({
+        title: 'خطأ',
+        description: error.message.includes('unique')
+          ? 'هذا الاختصار موجود بالفعل'
+          : 'فشل إنشاء الرد السريع',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setResponses([data, ...responses]);
     setFormData({ title: '', shortcut: '', content: '', category: '' });
     setIsCreateOpen(false);
 
@@ -96,8 +118,24 @@ export default function ResponsesPage() {
     });
   };
 
-  const deleteResponse = (id: string) => {
+  const deleteResponse = async (id: string) => {
     if (!confirm('هل أنت متأكد من حذف هذا الرد؟')) return;
+
+    const { error } = await supabase
+      .from('canned_responses')
+      .update({ is_active: false })
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting response:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل حذف الرد السريع',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setResponses(responses.filter((r) => r.id !== id));
     toast({
       title: 'تم الحذف',
@@ -114,6 +152,17 @@ export default function ResponsesPage() {
   };
 
   const categories = Array.from(new Set(responses.map((r) => r.category)));
+
+  if (isLoading) {
+    return (
+      <div className="p-6 flex items-center justify-center h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">جاري التحميل...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 space-y-6">
