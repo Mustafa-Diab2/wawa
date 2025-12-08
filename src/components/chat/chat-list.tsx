@@ -1,11 +1,13 @@
 'use client';
 import { useState, useMemo } from 'react';
-import { Search, Inbox, CheckCircle, Archive, MessageSquarePlus } from 'lucide-react';
+import { Search, Inbox, CheckCircle, Archive, MessageSquarePlus, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Badge } from '@/components/ui/badge';
 import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
@@ -34,6 +36,7 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
   const [searchQuery, setSearchQuery] = useState('');
   const [newChatOpen, setNewChatOpen] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [selectedChats, setSelectedChats] = useState<Set<string>>(new Set());
 
   // Filter chats based on status and search
   const filteredChats = useMemo(() => {
@@ -94,8 +97,57 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
     }
   };
 
+  const toggleChatSelection = (chatId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newSelected = new Set(selectedChats);
+    if (newSelected.has(chatId)) {
+      newSelected.delete(chatId);
+    } else {
+      newSelected.add(chatId);
+    }
+    setSelectedChats(newSelected);
+  };
+
+  const clearSelection = () => {
+    setSelectedChats(new Set());
+  };
+
+  const selectAll = () => {
+    if (!filteredChats) return;
+    const allIds = new Set(filteredChats.map(chat => chat.id));
+    setSelectedChats(allIds);
+  };
+
   return (
     <div className="flex h-full flex-col">
+      {selectedChats.size > 0 && (
+        <div className="bg-primary text-primary-foreground p-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="bg-white text-primary">
+              {selectedChats.size}
+            </Badge>
+            <span className="text-sm font-medium">محادثات محددة</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={selectAll}
+              className="text-primary-foreground hover:text-primary-foreground/80"
+            >
+              تحديد الكل
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={clearSelection}
+              className="text-primary-foreground hover:text-primary-foreground/80"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
       <div className="p-4 space-y-4">
         <h2 className="text-xl font-bold font-headline">المحادثات</h2>
         <div className="flex gap-2">
@@ -184,14 +236,19 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
             </div>
           ) : (
             filteredChats.map((chat) => (
-              <button
+              <div
                 key={chat.id}
-                onClick={() => onSelectChat(chat.id)}
                 className={cn(
-                  'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50',
+                  'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50 cursor-pointer',
                   selectedChatId === chat.id && 'bg-muted'
                 )}
+                onClick={() => onSelectChat(chat.id)}
               >
+                <Checkbox
+                  checked={selectedChats.has(chat.id)}
+                  onCheckedChange={(checked) => toggleChatSelection(chat.id, {} as any)}
+                  onClick={(e) => e.stopPropagation()}
+                />
                 <Avatar className="h-10 w-10 border">
                   <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
                   <AvatarFallback>
@@ -214,7 +271,7 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
                     1
                   </div>
                 )}
-              </button>
+              </div>
             ))
           )}
         </div>

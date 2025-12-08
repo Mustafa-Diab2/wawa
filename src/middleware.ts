@@ -1,30 +1,25 @@
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
-  const supabase = createMiddlewareClient({ req, res });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
   // Public routes that don't require authentication
   const publicRoutes = ['/login', '/signup'];
   const isPublicRoute = publicRoutes.some(route => req.nextUrl.pathname.startsWith(route));
 
-  // If user is not logged in and trying to access protected route
-  if (!session && !isPublicRoute) {
+  // Get session token from cookies
+  const sessionToken = req.cookies.get('sb-access-token') || req.cookies.get('sb-refresh-token');
+
+  // If no session token and trying to access protected route
+  if (!sessionToken && !isPublicRoute) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  // If user is logged in and trying to access login/signup
-  if (session && isPublicRoute) {
+  // If has session token and trying to access login/signup
+  if (sessionToken && isPublicRoute) {
     return NextResponse.redirect(new URL('/chat', req.url));
   }
 
-  return res;
+  return NextResponse.next();
 }
 
 export const config = {
