@@ -1,20 +1,67 @@
 
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
-Error: Transform failed with 1 error:
-/home/user/studio/src/worker.ts:426:28: ERROR: Expected "finally" but found "}"
-    at failureErrorWithLog (/home/user/studio/node_modules/esbuild/lib/main.js:1467:15)
-    at /home/user/studio/node_modules/esbuild/lib/main.js:736:50
-    at responseCallbacks.<computed> (/home/user/studio/node_modules/esbuild/lib/main.js:603:9)
-    at handleIncomingPacket (/home/user/studio/node_modules/esbuild/lib/main.js:658:12)
-    at Socket.readFromStdout (/home/user/studio/node_modules/esbuild/lib/main.js:581:7)
-    at Socket.emit (node:events:524:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-    at Readable.push (node:internal/streams/readable:392:5)
-    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23) {
-  name: 'TransformError'
-}
+> nextn@0.1.0 worker
+> tsx src/worker.ts
 
-Node.js v20.19.1
+Starting Worker with Supabase...
+[Worker] Setting up polling for pending messages (every 3 seconds)...
+[Worker] Setting up polling for new sessions (every 5 seconds)...
+[Worker] Querying existing sessions from whatsapp_sessions table...
+[Worker] ✅ Found 3 existing sessions: [
+  { id: 'd090a26b-d657-4ade-84e0-4fe85a476457' },
+  { id: 'a18bce41-fe7b-468e-944d-888ac9bfa912' },
+  { id: '2dd15d79-94fd-41f5-8c68-b681c865c92a' }
+]
+[Worker] Starting session from DB: d090a26b-d657-4ade-84e0-4fe85a476457
+Starting session d090a26b-d657-4ade-84e0-4fe85a476457
+[Worker] Starting session from DB: a18bce41-fe7b-468e-944d-888ac9bfa912
+Starting session a18bce41-fe7b-468e-944d-888ac9bfa912
+[Worker] Starting session from DB: 2dd15d79-94fd-41f5-8c68-b681c865c92a
+Starting session 2dd15d79-94fd-41f5-8c68-b681c865c92a
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+Connection closed for d090a26b-d657-4ade-84e0-4fe85a476457. Reconnecting: true
+Starting session d090a26b-d657-4ade-84e0-4fe85a476457
+Connection closed for a18bce41-fe7b-468e-944d-888ac9bfa912. Reconnecting: true
+Starting session a18bce41-fe7b-468e-944d-888ac9bfa912
+Connection closed for 2dd15d79-94fd-41f5-8c68-b681c865c92a. Reconnecting: true
+Starting session 2dd15d79-94fd-41f5-8c68-b681c865c92a
+QR RECEIVED for session 2dd15d79-94fd-41f5-8c68-b681c865c92a len 237
+✅ QR Code for session 2dd15d79-94fd-41f5-8c68-b681c865c92a successfully updated in Supabase (len: 237)
+QR RECEIVED for session d090a26b-d657-4ade-84e0-4fe85a476457 len 237
+✅ QR Code for session d090a26b-d657-4ade-84e0-4fe85a476457 successfully updated in Supabase (len: 237)
+QR RECEIVED for session a18bce41-fe7b-468e-944d-888ac9bfa912 len 237
+✅ QR Code for session a18bce41-fe7b-468e-944d-888ac9bfa912 successfully updated in Supabase (len: 237)
