@@ -53,10 +53,21 @@ export default function SignupPage() {
           data: {
             full_name: formData.fullName,
           },
+          emailRedirectTo: undefined,
         },
       });
 
       if (error) throw error;
+
+      // If email confirmation is required
+      if (data.user && !data.session) {
+        toast({
+          title: 'تم إنشاء الحساب',
+          description: 'يرجى تأكيد بريدك الإلكتروني. تحقق من صندوق الوارد.',
+        });
+        router.push('/login');
+        return;
+      }
 
       toast({
         title: 'تم إنشاء الحساب بنجاح',

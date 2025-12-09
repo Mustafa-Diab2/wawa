@@ -39,9 +39,17 @@ export default function LoginPage() {
 
       router.push('/chat');
     } catch (error: any) {
+      let errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+
+      if (error.message?.includes('Email not confirmed')) {
+        errorMessage = 'يرجى تأكيد بريدك الإلكتروني أولاً. تحقق من صندوق الوارد.';
+      } else if (error.message?.includes('Invalid login credentials')) {
+        errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+      }
+
       toast({
         title: 'خطأ في تسجيل الدخول',
-        description: error.message || 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
+        description: error.message || errorMessage,
         variant: 'destructive',
       });
     } finally {
