@@ -32,12 +32,22 @@ export default function LoginPage() {
 
       if (error) throw error;
 
+      if (!data.session) {
+        throw new Error('لم يتم إنشاء الجلسة');
+      }
+
+      console.log('Login successful, session:', data.session);
+
       toast({
         title: 'تم تسجيل الدخول بنجاح',
         description: 'مرحباً بك في WaCRM',
       });
 
-      router.push('/chat');
+      // Wait a bit for cookies to be set
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Force reload to ensure middleware picks up the new session
+      window.location.href = '/chat';
     } catch (error: any) {
       let errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
 
@@ -52,7 +62,6 @@ export default function LoginPage() {
         description: error.message || errorMessage,
         variant: 'destructive',
       });
-    } finally {
       setLoading(false);
     }
   };

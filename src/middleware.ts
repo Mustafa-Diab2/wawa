@@ -6,8 +6,10 @@ export async function middleware(req: NextRequest) {
   const publicRoutes = ['/login', '/signup'];
   const isPublicRoute = publicRoutes.some(route => req.nextUrl.pathname.startsWith(route));
 
-  // Get session token from cookies
-  const sessionToken = req.cookies.get('sb-access-token') || req.cookies.get('sb-refresh-token');
+  // Get session token from cookies - check multiple possible Supabase cookie names
+  const sessionToken = req.cookies.get('sb-access-token') ||
+                       req.cookies.get('sb-refresh-token') ||
+                       req.cookies.get(`sb-${process.env.NEXT_PUBLIC_SUPABASE_URL?.split('//')[1]?.split('.')[0]}-auth-token`);
 
   // If no session token and trying to access protected route
   if (!sessionToken && !isPublicRoute) {
