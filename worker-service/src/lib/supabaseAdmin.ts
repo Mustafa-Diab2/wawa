@@ -214,8 +214,11 @@ let _supabaseAdmin: ReturnType<typeof createClient<Database>> | null = null;
 function getSupabaseAdmin() {
   if (_supabaseAdmin) return _supabaseAdmin;
 
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable");
+  // Support both NEXT_PUBLIC_SUPABASE_URL and SUPABASE_URL
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+
+  if (!supabaseUrl) {
+    throw new Error("Missing SUPABASE_URL environment variable");
   }
 
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
@@ -223,7 +226,7 @@ function getSupabaseAdmin() {
   }
 
   _supabaseAdmin = createClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    supabaseUrl,
     process.env.SUPABASE_SERVICE_ROLE_KEY,
     {
       auth: {
