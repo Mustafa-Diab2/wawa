@@ -38,39 +38,49 @@ export default function RecentActivity() {
       const activitiesList: Activity[] = [];
 
       // Get recent chats
-      const { data: recentChats } = await supabase
-        .from('chats')
-        .select('contact_name, created_at')
-        .order('created_at', { ascending: false })
-        .limit(3);
+      try {
+        const { data: recentChats } = await supabase
+          .from('chats')
+          .select('remote_jid, created_at')
+          .order('created_at', { ascending: false })
+          .limit(3);
 
-      if (recentChats) {
-        recentChats.forEach(chat => {
-          activitiesList.push({
-            icon: MessageSquare,
-            text: 'محادثة جديدة مع:',
-            subject: chat.contact_name || 'جهة اتصال',
-            time: formatTimeAgo(chat.created_at),
+        if (recentChats) {
+          recentChats.forEach(chat => {
+            // Extract phone number or contact name from remote_jid
+            const contactName = chat.remote_jid?.split('@')[0] || 'جهة اتصال';
+            activitiesList.push({
+              icon: MessageSquare,
+              text: 'محادثة جديدة مع:',
+              subject: contactName,
+              time: formatTimeAgo(chat.created_at),
+            });
           });
-        });
+        }
+      } catch (error) {
+        console.log('Error fetching chats:', error);
       }
 
-      // Get recent bots
-      const { data: recentBots } = await supabase
-        .from('bots')
-        .select('name, created_at')
-        .order('created_at', { ascending: false })
-        .limit(2);
+      // Get recent bots (skip if table doesn't exist)
+      try {
+        const { data: recentBots } = await supabase
+          .from('bots')
+          .select('name, created_at')
+          .order('created_at', { ascending: false })
+          .limit(2);
 
-      if (recentBots) {
-        recentBots.forEach(bot => {
-          activitiesList.push({
-            icon: Bot,
-            text: 'تم إنشاء بوت:',
-            subject: bot.name,
-            time: formatTimeAgo(bot.created_at),
+        if (recentBots) {
+          recentBots.forEach(bot => {
+            activitiesList.push({
+              icon: Bot,
+              text: 'تم إنشاء بوت:',
+              subject: bot.name,
+              time: formatTimeAgo(bot.created_at),
+            });
           });
-        });
+        }
+      } catch (error) {
+        console.log('Bots table not found');
       }
 
       // Get recent campaigns

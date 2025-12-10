@@ -65,11 +65,17 @@ export default function DashboardPage() {
       // Get completed chats (assuming we have a status field, otherwise use all chats - active)
       const completedChats = (totalChats || 0) - (activeChats || 0);
 
-      // Get active bots
-      const { count: activeBots } = await supabase
-        .from('bots')
-        .select('*', { count: 'exact', head: true })
-        .eq('active', true);
+      // Get active bots (set to 0 if table doesn't exist)
+      let activeBots = 0;
+      try {
+        const { count } = await supabase
+          .from('bots')
+          .select('*', { count: 'exact', head: true })
+          .eq('active', true);
+        activeBots = count || 0;
+      } catch (error) {
+        console.log('Bots table not found, setting to 0');
+      }
 
       // Get last month's chats for comparison
       const { count: lastMonthChats } = await supabase
@@ -87,7 +93,7 @@ export default function DashboardPage() {
         totalChats: totalChats || 0,
         activeChats: activeChats || 0,
         completedChats: completedChats || 0,
-        activeBots: activeBots || 0,
+        activeBots: activeBots,
         lastMonthChats: lastMonthChats || 0,
         lastWeekChats: lastWeekChats || 0,
       });
