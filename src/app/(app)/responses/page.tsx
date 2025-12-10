@@ -36,6 +36,8 @@ export default function ResponsesPage() {
     content: '',
     category: '',
   });
+  const [editingResponse, setEditingResponse] = useState<CannedResponse | null>(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   // Check auth and load data
   useEffect(() => {
@@ -148,6 +150,53 @@ export default function ResponsesPage() {
     toast({
       title: 'تم النسخ',
       description: 'تم نسخ الرد إلى الحافظة',
+    });
+  };
+
+  const editResponse = (response: CannedResponse) => {
+    setEditingResponse(response);
+    setFormData({
+      title: response.title,
+      shortcut: response.shortcut,
+      content: response.content,
+      category: response.category,
+    });
+    setIsEditOpen(true);
+  };
+
+  const updateResponse = async () => {
+    if (!editingResponse) return;
+
+    const { error } = await supabase
+      .from('canned_responses')
+      .update({
+        title: formData.title,
+        shortcut: formData.shortcut,
+        content: formData.content,
+        category: formData.category,
+      })
+      .eq('id', editingResponse.id);
+
+    if (error) {
+      console.error('Error updating response:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحديث الرد السريع',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setResponses(responses.map(r =>
+      r.id === editingResponse.id ? { ...r, ...formData } : r
+    ));
+    setFormData({ title: '', shortcut: '', content: '', category: '' });
+    setIsEditOpen(false);
+    setEditingResponse(null);
+
+    toast({
+      title: 'تم التحديث',
+      description: 'تم تحديث الرد السريع بنجاح',
     });
   };
 
@@ -278,6 +327,72 @@ export default function ResponsesPage() {
         ))}
       </div>
 
+      {/* Edit Dialog */}
+      <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>تعديل الرد السريع</DialogTitle>
+            <DialogDescription>
+              عدّل بيانات الرد السريع
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="edit-title">العنوان</Label>
+              <Input
+                id="edit-title"
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                placeholder="مثال: رسالة ترحيب"
+              />
+            </div>
+            <div>
+              <Label htmlFor="edit-shortcut">الاختصار</Label>
+              <Input
+                id="edit-shortcut"
+                value={formData.shortcut}
+                onChange={(e) => setFormData({ ...formData, shortcut: e.target.value })}
+                placeholder="مثال: /welcome"
+              />
+            </div>
+            <div>
+              <Label htmlFor="edit-category">الفئة</Label>
+              <Input
+                id="edit-category"
+                value={formData.category}
+                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                placeholder="مثال: عام، استفسار، شكوى"
+              />
+            </div>
+            <div>
+              <Label htmlFor="edit-content">المحتوى</Label>
+              <Textarea
+                id="edit-content"
+                value={formData.content}
+                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                placeholder="اكتب نص الرد هنا..."
+                rows={6}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => {
+              setIsEditOpen(false);
+              setEditingResponse(null);
+              setFormData({ title: '', shortcut: '', content: '', category: '' });
+            }}>
+              إلغاء
+            </Button>
+            <Button
+              onClick={updateResponse}
+              disabled={!formData.title || !formData.content || !formData.shortcut}
+            >
+              حفظ التعديلات
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Responses List */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredResponses.map((response) => (
@@ -311,7 +426,11 @@ export default function ResponsesPage() {
                   >
                     <Copy className="h-3 w-3" />
                   </Button>
-                  <Button variant="ghost" size="sm">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => editResponse(response)}
+                  >
                     <Edit className="h-3 w-3" />
                   </Button>
                   <Button
