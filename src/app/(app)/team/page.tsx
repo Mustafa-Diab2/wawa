@@ -30,6 +30,7 @@ export default function TeamPage() {
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [isInviteOpen, setIsInviteOpen] = useState(false);
+  const [userId, setUserId] = useState<string>('');
   const { toast } = useToast();
 
   const [inviteForm, setInviteForm] = useState({
@@ -45,9 +46,19 @@ export default function TeamPage() {
 
   const fetchTeamMembers = async () => {
     try {
-      // Get current user
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      // Get current user to verify authentication
+      const { data: { user: currentUser } } = await supabase.auth.getUser();
+      if (!currentUser) return;
+
+      setUserId(currentUser.id);
+
+      // Fetch all users from API
+      const response = await fetch('/api/team/list-users');
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'فشل تحميل الأعضاء');
+      }
 
       // Get total chats count
       const { count: totalChats } = await supabase
@@ -61,25 +72,26 @@ export default function TeamPage() {
         .eq('is_from_us', true)
         .gte('created_at', new Date(new Date().setHours(0, 0, 0, 0)).toISOString());
 
-      const member: TeamMember = {
+      // Transform users to team members
+      const teamMembers: TeamMember[] = result.users.map((user: any) => ({
         id: user.id,
         email: user.email || '',
-        role: 'admin',
-        status: 'online',
+        role: user.user_metadata?.role || 'agent',
+        status: user.id === currentUser.id ? 'online' : 'offline',
         created_at: user.created_at,
         stats: {
-          total_chats: totalChats || 0,
+          total_chats: user.id === currentUser.id ? (totalChats || 0) : 0,
           avg_response_time: 0,
-          messages_today: todayMessages || 0,
+          messages_today: user.id === currentUser.id ? (todayMessages || 0) : 0,
         },
-      };
+      }));
 
-      setMembers([member]);
-    } catch (error) {
+      setMembers(teamMembers);
+    } catch (error: any) {
       console.error('Error fetching team:', error);
       toast({
         title: 'خطأ',
-        description: 'فشل تحميل بيانات الفريق',
+        description: error.message || 'فشل تحميل بيانات الفريق',
         variant: 'destructive',
       });
     } finally {
@@ -339,6 +351,61 @@ export default function TeamPage() {
                     <span className="text-sm font-medium">{member.stats.messages_today}</span>
                   </div>
                 </>
+              )}
+              {/* Action Buttons - Only show for other members */}
+              {member.id !== userId && (
+                <div className="flex gap-2 pt-3 border-t">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => {
+                      // TODO: Implement change role functionality
+                      toast({
+                        title: 'قريباً',
+                        description: 'ميزة تغيير الدور قريباً',
+                      });
+                    }}
+                  >
+                    <Shield className="ml-1 h-3 w-3" />
+                    تغيير الدور
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={async () => {
+                      if (!confirm(`هل أنت متأكد من حذف ${member.email?.split('@')[0]}؟`)) return;
+
+                      try {
+                        const response = await fetch('/api/team/delete-user', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({ userId: member.id }),
+                        });
+
+                        if (!response.ok) {
+                          throw new Error('فشل حذف العضو');
+                        }
+
+                        setMembers(members.filter(m => m.id !== member.id));
+                        toast({
+                          title: 'تم الحذف',
+                          description: 'تم حذف العضو من الفريق',
+                        });
+                      } catch (error: any) {
+                        toast({
+                          title: 'خطأ',
+                          description: error.message || 'فشل حذف العضو',
+                          variant: 'destructive',
+                        });
+                      }
+                    }}
+                  >
+                    <UserMinus className="h-3 w-3" />
+                  </Button>
+                </div>
               )}
             </CardContent>
           </Card>
