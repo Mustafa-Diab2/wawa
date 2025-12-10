@@ -52,8 +52,18 @@ export default function TeamPage() {
 
       setUserId(currentUser.id);
 
+      // Get session for auth token
+      const { data: { session } } = await supabase.auth.getSession();
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+
       // Fetch all users from API
-      const response = await fetch('/api/team/list-users');
+      const response = await fetch('/api/team/list-users', { headers });
       const result = await response.json();
 
       if (!response.ok) {
@@ -119,12 +129,20 @@ export default function TeamPage() {
         return;
       }
 
+      // Get session for auth token
+      const { data: { session } } = await supabase.auth.getSession();
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+
       // Call API to create new user
       const response = await fetch('/api/team/create-user', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           email: inviteForm.email,
           password: inviteForm.password,
@@ -377,11 +395,19 @@ export default function TeamPage() {
                       if (!confirm(`هل أنت متأكد من حذف ${member.email?.split('@')[0]}؟`)) return;
 
                       try {
+                        // Get session for auth token
+                        const { data: { session } } = await supabase.auth.getSession();
+                        const headers: HeadersInit = {
+                          'Content-Type': 'application/json',
+                        };
+
+                        if (session?.access_token) {
+                          headers['Authorization'] = `Bearer ${session.access_token}`;
+                        }
+
                         const response = await fetch('/api/team/delete-user', {
                           method: 'POST',
-                          headers: {
-                            'Content-Type': 'application/json',
-                          },
+                          headers,
                           body: JSON.stringify({ userId: member.id }),
                         });
 

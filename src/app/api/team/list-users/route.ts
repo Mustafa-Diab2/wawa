@@ -22,14 +22,35 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Get current user from cookies
-    const cookieStore = await import('next/headers').then(m => m.cookies());
-    const authCookie = cookieStore.get('sb-access-token') || cookieStore.get('sb-localhost-auth-token');
+    // Get current user from authorization header
+    const authHeader = request.headers.get('authorization');
+    const token = authHeader?.replace('Bearer ', '');
 
     let currentUserId: string | null = null;
-    if (authCookie) {
-      const { data: { user } } = await supabaseAdmin.auth.getUser(authCookie.value);
+    if (token) {
+      const { data: { user } } = await supabaseAdmin.auth.getUser(token);
       currentUserId = user?.id || null;
+    }
+
+    // If no token in header, try cookies
+    if (!currentUserId) {
+      const cookieStore = await import('next/headers').then(m => m.cookies());
+      const cookies = cookieStore.getAll();
+
+      // Try to find Supabase auth token in cookies
+      for (const cookie of cookies) {
+        if (cookie.name.includes('auth-token') || cookie.name.includes('sb-')) {
+          try {
+            const { data: { user } } = await supabaseAdmin.auth.getUser(cookie.value);
+            if (user) {
+              currentUserId = user.id;
+              break;
+            }
+          } catch (e) {
+            // Continue to next cookie
+          }
+        }
+      }
     }
 
     if (!currentUserId) {
