@@ -4,7 +4,8 @@ import { supabaseAdmin } from './supabaseAdmin';
 import type { Bot, BotKnowledge } from './types';
 
 // Determine which AI provider to use based on available API keys
-const AI_PROVIDER = process.env.GEMINI_API_KEY ? 'gemini' : 'openai';
+const GEMINI_KEY = process.env.GOOGLE_AI_API_KEY || process.env.GEMINI_API_KEY;
+const AI_PROVIDER = GEMINI_KEY ? 'gemini' : 'openai';
 
 // Initialize OpenAI client (if using OpenAI)
 const openai = AI_PROVIDER === 'openai' ? new OpenAI({
@@ -12,7 +13,7 @@ const openai = AI_PROVIDER === 'openai' ? new OpenAI({
 }) : null;
 
 // Initialize Gemini client (if using Gemini)
-const genAI = AI_PROVIDER === 'gemini' ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '') : null;
+const genAI = AI_PROVIDER === 'gemini' ? new GoogleGenerativeAI(GEMINI_KEY || '') : null;
 
 export interface AIResponse {
   reply: string;
