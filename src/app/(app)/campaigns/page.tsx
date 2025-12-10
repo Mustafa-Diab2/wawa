@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Send, Plus, Eye, Users, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Send, Plus, Eye, Users, CheckCircle, XCircle, Clock, Edit, Trash2, Pause, Play } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
@@ -41,6 +41,8 @@ export default function CampaignsPage() {
     schedule_type: 'now',
     scheduled_at: '',
   });
+  const [editingCampaign, setEditingCampaign] = useState<Campaign | null>(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   // Check auth and load data
   useEffect(() => {
@@ -135,6 +137,107 @@ export default function CampaignsPage() {
   const getSuccessRate = (campaign: Campaign) => {
     if (campaign.sent_count === 0) return 0;
     return Math.round((campaign.delivered_count / campaign.sent_count) * 100);
+  };
+
+  const editCampaign = (campaign: Campaign) => {
+    setEditingCampaign(campaign);
+    setFormData({
+      name: campaign.name,
+      message: campaign.message,
+      target_audience: campaign.target_audience,
+      schedule_type: campaign.scheduled_at ? 'scheduled' : 'now',
+      scheduled_at: campaign.scheduled_at || '',
+    });
+    setIsEditOpen(true);
+  };
+
+  const updateCampaign = async () => {
+    if (!editingCampaign) return;
+
+    const { error } = await supabase
+      .from('campaigns')
+      .update({
+        name: formData.name,
+        message: formData.message,
+        target_audience: formData.target_audience,
+        scheduled_at: formData.schedule_type === 'scheduled' ? formData.scheduled_at : null,
+      })
+      .eq('id', editingCampaign.id);
+
+    if (error) {
+      console.error('Error updating campaign:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحديث الحملة',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setCampaigns(campaigns.map(c =>
+      c.id === editingCampaign.id ? { ...c, ...formData } : c
+    ));
+    setFormData({ name: '', message: '', target_audience: 'all', schedule_type: 'now', scheduled_at: '' });
+    setIsEditOpen(false);
+    setEditingCampaign(null);
+
+    toast({
+      title: 'تم التحديث',
+      description: 'تم تحديث الحملة بنجاح',
+    });
+  };
+
+  const togglePauseCampaign = async (campaign: Campaign) => {
+    const newStatus = campaign.status === 'sending' ? 'draft' : 'sending';
+
+    const { error } = await supabase
+      .from('campaigns')
+      .update({ status: newStatus })
+      .eq('id', campaign.id);
+
+    if (error) {
+      console.error('Error toggling campaign:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تغيير حالة الحملة',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setCampaigns(campaigns.map(c =>
+      c.id === campaign.id ? { ...c, status: newStatus } : c
+    ));
+
+    toast({
+      title: newStatus === 'sending' ? 'تم التشغيل' : 'تم الإيقاف',
+      description: newStatus === 'sending' ? 'تم تشغيل الحملة' : 'تم إيقاف الحملة مؤقتاً',
+    });
+  };
+
+  const deleteCampaign = async (id: string) => {
+    if (!confirm('هل أنت متأكد من حذف هذه الحملة؟')) return;
+
+    const { error } = await supabase
+      .from('campaigns')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting campaign:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل حذف الحملة',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setCampaigns(campaigns.filter(c => c.id !== id));
+    toast({
+      title: 'تم الحذف',
+      description: 'تم حذف الحملة بنجاح',
+    });
   };
 
   if (isLoading) {
@@ -251,6 +354,100 @@ export default function CampaignsPage() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+
+        {/* Edit Dialog */}
+        <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>تعديل الحملة</DialogTitle>
+              <DialogDescription>
+                عدّل بيانات الحملة
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="edit-name">اسم الحملة</Label>
+                <Input
+                  id="edit-name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="مثال: عرض الصيف"
+                />
+              </div>
+              <div>
+                <Label htmlFor="edit-target">الجمهور المستهدف</Label>
+                <Select
+                  value={formData.target_audience}
+                  onValueChange={(value) => setFormData({ ...formData, target_audience: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">جميع العملاء</SelectItem>
+                    <SelectItem value="vip">عملاء VIP</SelectItem>
+                    <SelectItem value="new">عملاء جدد</SelectItem>
+                    <SelectItem value="inactive">عملاء غير نشطين</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="edit-message">نص الرسالة</Label>
+                <Textarea
+                  id="edit-message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="اكتب رسالتك هنا..."
+                  rows={6}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  {formData.message.length} / 1000 حرف
+                </p>
+              </div>
+              <div>
+                <Label htmlFor="edit-schedule">وقت الإرسال</Label>
+                <Select
+                  value={formData.schedule_type}
+                  onValueChange={(value) => setFormData({ ...formData, schedule_type: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="now">إرسال الآن</SelectItem>
+                    <SelectItem value="scheduled">جدولة للإرسال</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              {formData.schedule_type === 'scheduled' && (
+                <div>
+                  <Label htmlFor="edit-scheduled_at">تاريخ ووقت الإرسال</Label>
+                  <Input
+                    id="edit-scheduled_at"
+                    type="datetime-local"
+                    value={formData.scheduled_at}
+                    onChange={(e) => setFormData({ ...formData, scheduled_at: e.target.value })}
+                  />
+                </div>
+              )}
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => {
+                setIsEditOpen(false);
+                setEditingCampaign(null);
+                setFormData({ name: '', message: '', target_audience: 'all', schedule_type: 'now', scheduled_at: '' });
+              }}>
+                إلغاء
+              </Button>
+              <Button
+                onClick={updateCampaign}
+                disabled={!formData.name || !formData.message}
+              >
+                حفظ التعديلات
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Stats */}
@@ -313,8 +510,35 @@ export default function CampaignsPage() {
                   <CardDescription>{campaign.target_audience}</CardDescription>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    <Eye className="h-4 w-4" />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => editCampaign(campaign)}
+                    title="تعديل"
+                  >
+                    <Edit className="h-4 w-4" />
+                  </Button>
+                  {(campaign.status === 'sending' || campaign.status === 'draft') && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => togglePauseCampaign(campaign)}
+                      title={campaign.status === 'sending' ? 'إيقاف' : 'تشغيل'}
+                    >
+                      {campaign.status === 'sending' ? (
+                        <Pause className="h-4 w-4" />
+                      ) : (
+                        <Play className="h-4 w-4" />
+                      )}
+                    </Button>
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => deleteCampaign(campaign.id)}
+                    title="حذف"
+                  >
+                    <Trash2 className="h-4 w-4 text-red-500" />
                   </Button>
                 </div>
               </div>

@@ -154,6 +154,7 @@ export default function ResponsesPage() {
   };
 
   const editResponse = (response: CannedResponse) => {
+    console.log('Editing response:', response);
     setEditingResponse(response);
     setFormData({
       title: response.title,
@@ -162,6 +163,7 @@ export default function ResponsesPage() {
       category: response.category,
     });
     setIsEditOpen(true);
+    console.log('Edit dialog should open now');
   };
 
   const updateResponse = async () => {
