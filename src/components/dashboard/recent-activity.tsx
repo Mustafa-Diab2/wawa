@@ -1,40 +1,129 @@
+'use client';
+import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bot, CheckCircle, MessageSquare, UserPlus } from "lucide-react";
+import { Bot, CheckCircle, MessageSquare, UserPlus, Send } from "lucide-react";
+import { supabase } from '@/lib/supabase';
 
-const activities = [
-  {
-    icon: UserPlus,
-    text: "تمت إضافة جهة اتصال جديدة:",
-    subject: "ناصر الخليفي",
-    time: "قبل 5 دقائق",
-  },
-  {
-    icon: CheckCircle,
-    text: "اكتملت محادثة مع:",
-    subject: "متجر الأزياء",
-    time: "قبل 15 دقيقة",
-  },
-  {
-    icon: MessageSquare,
-    text: "رسالة جديدة من:",
-    subject: "عميل محتمل",
-    time: "قبل ساعة",
-  },
-  {
-    icon: Bot,
-    text: "تم إنشاء بوت جديد:",
-    subject: "بوت استطلاع الرأي",
-    time: "قبل 3 ساعات",
-  },
-  {
-    icon: CheckCircle,
-    text: "اكتملت محادثة مع:",
-    subject: "فاطمة أحمد",
-    time: "قبل 5 ساعات",
-  },
-];
+interface Activity {
+  icon: any;
+  text: string;
+  subject: string;
+  time: string;
+}
+
+function formatTimeAgo(date: string) {
+  const now = new Date();
+  const past = new Date(date);
+  const diffMs = now.getTime() - past.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+
+  if (diffMins < 1) return 'الآن';
+  if (diffMins < 60) return `قبل ${diffMins} دقيقة`;
+  if (diffHours < 24) return `قبل ${diffHours} ساعة`;
+  return `قبل ${diffDays} يوم`;
+}
 
 export default function RecentActivity() {
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchRecentActivities();
+  }, []);
+
+  const fetchRecentActivities = async () => {
+    try {
+      const activitiesList: Activity[] = [];
+
+      // Get recent chats
+      const { data: recentChats } = await supabase
+        .from('chats')
+        .select('contact_name, created_at')
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+      if (recentChats) {
+        recentChats.forEach(chat => {
+          activitiesList.push({
+            icon: MessageSquare,
+            text: 'محادثة جديدة مع:',
+            subject: chat.contact_name || 'جهة اتصال',
+            time: formatTimeAgo(chat.created_at),
+          });
+        });
+      }
+
+      // Get recent bots
+      const { data: recentBots } = await supabase
+        .from('bots')
+        .select('name, created_at')
+        .order('created_at', { ascending: false })
+        .limit(2);
+
+      if (recentBots) {
+        recentBots.forEach(bot => {
+          activitiesList.push({
+            icon: Bot,
+            text: 'تم إنشاء بوت:',
+            subject: bot.name,
+            time: formatTimeAgo(bot.created_at),
+          });
+        });
+      }
+
+      // Get recent campaigns
+      const { data: recentCampaigns } = await supabase
+        .from('campaigns')
+        .select('name, created_at')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (recentCampaigns) {
+        recentCampaigns.forEach(campaign => {
+          activitiesList.push({
+            icon: Send,
+            text: 'تم إنشاء حملة:',
+            subject: campaign.name,
+            time: formatTimeAgo(campaign.created_at),
+          });
+        });
+      }
+
+      // Sort by time and take first 5
+      activitiesList.sort((a, b) => {
+        const aTime = a.time.includes('الآن') ? 0 : parseInt(a.time.match(/\d+/)?.[0] || '999');
+        const bTime = b.time.includes('الآن') ? 0 : parseInt(b.time.match(/\d+/)?.[0] || '999');
+        return aTime - bTime;
+      });
+
+      setActivities(activitiesList.slice(0, 5));
+    } catch (error) {
+      console.error('Error fetching recent activities:', error);
+      // Set empty activities on error
+      setActivities([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <p className="text-sm text-muted-foreground">جاري التحميل...</p>
+      </div>
+    );
+  }
+
+  if (activities.length === 0) {
+    return (
+      <div className="space-y-6">
+        <p className="text-sm text-muted-foreground">لا توجد نشاطات حديثة</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {activities.map((activity, index) => (

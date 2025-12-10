@@ -1,19 +1,16 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 import {
   ChartContainer,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { supabase } from '@/lib/supabase';
 
-const data = [
-  { date: 'قبل 7 أيام', conversations: 186 },
-  { date: 'قبل 6 أيام', conversations: 305 },
-  { date: 'قبل 5 أيام', conversations: 237 },
-  { date: 'قبل 4 أيام', conversations: 273 },
-  { date: 'قبل 3 أيام', conversations: 209 },
-  { date: 'أمس', conversations: 214 },
-  { date: 'اليوم', conversations: 321 },
-];
+interface ChartData {
+  date: string;
+  conversations: number;
+}
 
 const chartConfig = {
   conversations: {
@@ -22,7 +19,68 @@ const chartConfig = {
   },
 };
 
+const arabicDays = [
+  'اليوم',
+  'أمس',
+  'قبل يومين',
+  'قبل 3 أيام',
+  'قبل 4 أيام',
+  'قبل 5 أيام',
+  'قبل 6 أيام',
+];
+
 export default function ConversationsChart() {
+  const [data, setData] = useState<ChartData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchChartData();
+  }, []);
+
+  const fetchChartData = async () => {
+    try {
+      const chartData: ChartData[] = [];
+      const now = new Date();
+
+      // Fetch data for last 7 days
+      for (let i = 6; i >= 0; i--) {
+        const date = new Date(now);
+        date.setDate(date.getDate() - i);
+        date.setHours(0, 0, 0, 0);
+
+        const nextDate = new Date(date);
+        nextDate.setDate(nextDate.getDate() + 1);
+
+        const { count } = await supabase
+          .from('chats')
+          .select('*', { count: 'exact', head: true })
+          .gte('created_at', date.toISOString())
+          .lt('created_at', nextDate.toISOString());
+
+        chartData.push({
+          date: arabicDays[i] || `قبل ${i} أيام`,
+          conversations: count || 0,
+        });
+      }
+
+      setData(chartData);
+    } catch (error) {
+      console.error('Error fetching chart data:', error);
+      // Set empty data on error
+      setData(arabicDays.map(day => ({ date: day, conversations: 0 })));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="h-[250px] w-full flex items-center justify-center">
+        <p className="text-muted-foreground">جاري التحميل...</p>
+      </div>
+    );
+  }
+
   return (
     <ChartContainer config={chartConfig} className="h-[250px] w-full">
       <ResponsiveContainer width="100%" height="100%">
