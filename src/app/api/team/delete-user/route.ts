@@ -32,6 +32,35 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Get current user from cookies
+    const cookieStore = await import('next/headers').then(m => m.cookies());
+    const authCookie = cookieStore.get('sb-access-token') || cookieStore.get('sb-localhost-auth-token');
+
+    let currentUserId: string | null = null;
+    if (authCookie) {
+      const { data: { user } } = await supabaseAdmin.auth.getUser(authCookie.value);
+      currentUserId = user?.id || null;
+    }
+
+    if (!currentUserId) {
+      return NextResponse.json(
+        { error: 'غير مصرح' },
+        { status: 401 }
+      );
+    }
+
+    // Delete from team_members table first
+    const { error: teamMemberError } = await supabaseAdmin
+      .from('team_members')
+      .delete()
+      .eq('user_id', userId)
+      .eq('added_by', currentUserId);
+
+    if (teamMemberError) {
+      console.error('Error deleting team member:', teamMemberError);
+      // Continue with user deletion even if this fails
+    }
+
     // Delete user
     const { data, error } = await supabaseAdmin.auth.admin.deleteUser(userId);
 

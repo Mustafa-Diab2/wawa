@@ -22,6 +22,48 @@ export async function GET(request: NextRequest) {
       },
     });
 
+    // Get current user from cookies
+    const cookieStore = await import('next/headers').then(m => m.cookies());
+    const authCookie = cookieStore.get('sb-access-token') || cookieStore.get('sb-localhost-auth-token');
+
+    let currentUserId: string | null = null;
+    if (authCookie) {
+      const { data: { user } } = await supabaseAdmin.auth.getUser(authCookie.value);
+      currentUserId = user?.id || null;
+    }
+
+    if (!currentUserId) {
+      return NextResponse.json(
+        { error: 'غير مصرح' },
+        { status: 401 }
+      );
+    }
+
+    // Get team members added by current user
+    const { data: teamMembers, error: teamError } = await supabaseAdmin
+      .from('team_members')
+      .select('user_id, role')
+      .eq('added_by', currentUserId);
+
+    if (teamError) {
+      console.error('Error fetching team members:', teamError);
+      return NextResponse.json(
+        { error: teamError.message },
+        { status: 400 }
+      );
+    }
+
+    if (!teamMembers || teamMembers.length === 0) {
+      // No team members added by this user
+      return NextResponse.json({
+        success: true,
+        users: [],
+      });
+    }
+
+    // Get user IDs
+    const userIds = teamMembers.map(tm => tm.user_id);
+
     // List all users
     const { data, error } = await supabaseAdmin.auth.admin.listUsers();
 
@@ -33,8 +75,11 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Filter users to only include those added by current user
+    const filteredUsers = data.users.filter(user => userIds.includes(user.id));
+
     // Return users with simplified data
-    const users = data.users.map(user => ({
+    const users = filteredUsers.map(user => ({
       id: user.id,
       email: user.email,
       created_at: user.created_at,

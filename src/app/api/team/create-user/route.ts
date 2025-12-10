@@ -39,6 +39,23 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Get current user from cookies
+    const cookieStore = await import('next/headers').then(m => m.cookies());
+    const authCookie = cookieStore.get('sb-access-token') || cookieStore.get('sb-localhost-auth-token');
+
+    let currentUserId: string | null = null;
+    if (authCookie) {
+      const { data: { user } } = await supabaseAdmin.auth.getUser(authCookie.value);
+      currentUserId = user?.id || null;
+    }
+
+    if (!currentUserId) {
+      return NextResponse.json(
+        { error: 'غير مصرح' },
+        { status: 401 }
+      );
+    }
+
     // Create new user
     const { data, error } = await supabaseAdmin.auth.admin.createUser({
       email,
@@ -56,6 +73,21 @@ export async function POST(request: NextRequest) {
         { error: error.message },
         { status: 400 }
       );
+    }
+
+    // Add record to team_members table
+    const { error: teamMemberError } = await supabaseAdmin
+      .from('team_members')
+      .insert({
+        user_id: data.user.id,
+        added_by: currentUserId,
+        role,
+      });
+
+    if (teamMemberError) {
+      console.error('Error adding to team_members:', teamMemberError);
+      // Don't fail the request, just log the error
+      // User was created successfully
     }
 
     return NextResponse.json({
