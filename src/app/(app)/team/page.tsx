@@ -107,22 +107,29 @@ export default function TeamPage() {
         return;
       }
 
-      // Create new user account
-      const { data, error } = await supabase.auth.admin.createUser({
-        email: inviteForm.email,
-        password: inviteForm.password,
-        email_confirm: true,
-        user_metadata: {
-          full_name: inviteForm.fullName,
-          role: inviteForm.role,
+      // Call API to create new user
+      const response = await fetch('/api/team/create-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          email: inviteForm.email,
+          password: inviteForm.password,
+          fullName: inviteForm.fullName,
+          role: inviteForm.role,
+        }),
       });
 
-      if (error) throw error;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'فشل إضافة المستخدم');
+      }
 
       toast({
         title: 'تم إضافة المستخدم بنجاح',
-        description: `تم إنشاء حساب لـ ${inviteForm.fullName}`,
+        description: result.message,
       });
 
       setIsInviteOpen(false);
