@@ -29,24 +29,38 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
     setIsSending(true);
 
     try {
+      // Extract phone number from remote_id or remoteId
+      const remoteJid = chat.remote_id || chat.remoteId || '';
+
       // Send message via API
       const response = await fetch('/api/messages/manual-send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sessionId,
-          chatId: chat.id,
-          message: message.trim(),
+          to: remoteJid, // Use remote_jid instead of chatId
+          text: message.trim(), // API expects 'text' not 'message'
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setMessage('');
+        toast({
+          title: 'تم إرسال الرسالة',
+          description: 'تم إرسال رسالتك بنجاح',
+        });
       } else {
-        console.error('Failed to send message');
+        throw new Error(data.error || 'Failed to send message');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending message:', error);
+      toast({
+        title: 'خطأ',
+        description: error.message || 'فشل إرسال الرسالة',
+        variant: 'destructive',
+      });
     } finally {
       setIsSending(false);
     }
