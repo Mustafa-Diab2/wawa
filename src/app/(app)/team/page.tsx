@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Users, UserPlus, Shield, Activity, Clock, MessageSquare } from 'lucide-react';
+import { Users, UserPlus, Shield, Activity, Clock, MessageSquare, UserMinus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface TeamMember {
