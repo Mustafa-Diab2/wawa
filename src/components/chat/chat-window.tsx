@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
+import { dedupeMessages, messageKeys } from '@/lib/message-utils';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,20 +38,8 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
   const displayNumber = (phoneOrRemote || '').split('@')[0];
   const displayName = chat.name || displayNumber;
 
-  const uniqueMessages = useMemo(() => {
-    const seen = new Set<string>();
-    return (messages || []).filter((msg) => {
-      const key =
-        (msg as any).provider_message_id ||
-        (msg as any).client_request_id ||
-        (msg as any).providerMessageId ||
-        msg.id;
-      if (!key) return true;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-  }, [messages]);
+  const uniqueMessages = useMemo(() => dedupeMessages(messages || []), [messages]);
+  const getMessageKey = (msg: Message) => messageKeys(msg)[0] || (msg as any).id;
 
   // Fetch available bots (once)
   useEffect(() => {
@@ -218,10 +207,10 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
         ) : (
           <div className="space-y-4">
               {uniqueMessages.map((message) => (
-                  <ChatMessage
-                    key={(message as any).provider_message_id || (message as any).client_request_id || message.id}
-                    message={message}
-                  />
+                <ChatMessage
+                  key={getMessageKey(message)}
+                  message={message}
+                />
               ))}
           </div>
         )}

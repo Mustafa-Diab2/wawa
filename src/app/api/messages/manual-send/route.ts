@@ -1,6 +1,7 @@
+import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
-import { normalizeJid, upsertChat,isPhoneJid } from '@/lib/chat-utils';
+import { normalizeJid, upsertChat, isPhoneJid } from '@/lib/chat-utils';
 
 /**
  * Manual Send Message API
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { sessionId, to, text, assignedTo, clientRequestId: rawClientRequestId } = body;
-    const clientRequestId = rawClientRequestId || body.client_request_id || null;
+    const clientRequestId = rawClientRequestId || body.client_request_id || randomUUID();
 
     if (!sessionId || !to || !text) {
       return NextResponse.json(
@@ -103,19 +104,6 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (messageError) {
-      console.error('[manual-send] insert messageError:', messageError);
-      return NextResponse.json(
-        {
-          error: messageError.message,
-          code: messageError.code,
-          details: messageError.details,
-          hint: messageError.hint,
-        },
-        { status: 500 }
-      );
-    }
-
-    if (messageError) {
       if (messageError.code === '23505' && clientRequestId) {
         const { data: existingAfterInsert } = await supabaseAdmin
           .from('messages')
@@ -132,11 +120,21 @@ export async function POST(request: NextRequest) {
             deduped: true,
             chatId: existingAfterInsert.chat_id,
             messageId: existingAfterInsert.id,
+            clientRequestId,
           });
         }
       }
-      console.error('[manual-send] Error creating message:', messageError);
-      throw new Error('Failed to create message');
+
+      console.error('[manual-send] insert messageError:', messageError);
+      return NextResponse.json(
+        {
+          error: messageError.message,
+          code: messageError.code,
+          details: messageError.details,
+          hint: messageError.hint,
+        },
+        { status: 500 }
+      );
     }
 
     await supabaseAdmin
@@ -152,6 +150,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
+      deduped: false,
       chatId,
       messageId: message.id,
       clientRequestId,

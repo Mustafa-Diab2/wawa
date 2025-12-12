@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import type { Chat, Message } from '@/lib/types';
+import { dedupeMessages, upsertMessage } from '@/lib/message-utils';
 import { Card } from "@/components/ui/card";
 import ChatList from "@/components/chat/chat-list";
 import ChatWindow from "@/components/chat/chat-window";
@@ -20,20 +21,6 @@ export default function ChatPage() {
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [messagesLoading, setMessagesLoading] = useState(false);
-
-  const dedupeMessages = (list: Message[]) => {
-    const seen = new Set<string>();
-    return (list || []).filter((msg) => {
-      const key =
-        (msg as any).provider_message_id ||
-        (msg as any).client_request_id ||
-        (msg as any).providerMessageId ||
-        msg.id;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-  };
 
   useEffect(() => {
     const initUser = async () => {
@@ -152,25 +139,8 @@ export default function ChatPage() {
         table: 'messages',
         filter: `chat_id=eq.${selectedChatId}`,
       }, (payload) => {
-        const incoming: any = payload.new;
-
-        if (payload.eventType === 'INSERT') {
-          setMessages((prev) => dedupeMessages([...prev, payload.new as Message]));
-        } else if (payload.eventType === 'UPDATE') {
-          setMessages((prev) =>
-            prev.map((msg) => {
-              const isSameId = (msg as any).id === (payload.new as any).id;
-              const sameProvider =
-                (msg as any).provider_message_id &&
-                (payload.new as any)?.provider_message_id &&
-                (msg as any).provider_message_id === (payload.new as any).provider_message_id;
-              const sameClient =
-                (msg as any).client_request_id &&
-                (payload.new as any)?.client_request_id &&
-                (msg as any).client_request_id === (payload.new as any).client_request_id;
-              return isSameId || sameProvider || sameClient ? (payload.new as Message) : msg;
-            })
-          );
+        if (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') {
+          setMessages((prev) => upsertMessage(prev, payload.new as Message));
         } else if (payload.eventType === 'DELETE') {
           setMessages((prev) => prev.filter((msg: any) => msg.id !== (payload.old as any).id));
         }

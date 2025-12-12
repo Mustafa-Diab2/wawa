@@ -257,6 +257,7 @@ async function startSession(sessionId: string) {
                 .eq("is_from_us", true)
                 .is("provider_message_id", null)
                 .in("status", ["pending", "sent"])
+                .eq("body", body)
                 .gte("created_at", windowStartIso)
                 .order("created_at", { ascending: false })
                 .limit(1)
@@ -451,6 +452,8 @@ setInterval(async () => {
       .from("messages")
       .select("*")
       .eq("status", "pending")
+      .is("provider_message_id", null)
+      .order("created_at", { ascending: true })
       .limit(10);
 
     if (error) {
@@ -534,6 +537,8 @@ setInterval(async () => {
           } catch (e) {
             console.error(`[Worker] ❌ Error sending message ${messageId}:`, e);
             await supabaseAdmin.from("messages").update({ status: "failed" }).eq("id", messageId);
+          } finally {
+            sendingMessages.delete(messageId);
           }
         }
       }
