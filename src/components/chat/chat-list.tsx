@@ -57,13 +57,12 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(chat => {
-        const remoteId = chat.remote_id ?? chat.remoteId;
+        const remoteId = (chat as any).phone_jid || chat.remote_id || chat.remoteId;
         const lastMessage = chat.last_message ?? chat.lastMessage;
-        return (
-          (chat.name?.toLowerCase().includes(query)) ||
-          (remoteId?.toLowerCase().includes(query)) ||
-          (lastMessage?.toLowerCase().includes(query))
-        );
+        const nameMatch = chat.name?.toLowerCase().includes(query);
+        const remoteMatch = remoteId?.toLowerCase().includes(query);
+        const lastMatch = lastMessage?.toLowerCase().includes(query);
+        return Boolean(nameMatch || remoteMatch || lastMatch);
       });
     }
 
@@ -235,44 +234,52 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
               <p>لا توجد محادثات</p>
             </div>
           ) : (
-            filteredChats.map((chat) => (
-              <div
-                key={chat.id}
-                className={cn(
-                  'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50 cursor-pointer',
-                  selectedChatId === chat.id && 'bg-muted'
-                )}
-                onClick={() => onSelectChat(chat.id)}
-              >
-                <Checkbox
-                  checked={selectedChats.has(chat.id)}
-                  onCheckedChange={(checked) => toggleChatSelection(chat.id, {} as any)}
-                  onClick={(e) => e.stopPropagation()}
-                />
-                <Avatar className="h-10 w-10 border">
-                  <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
-                  <AvatarFallback>
-                    {chat.name ? chat.name.charAt(0) : ((chat.remote_id ?? chat.remoteId) || chat.id || '?').charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 overflow-hidden">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold truncate">{chat.name || ((chat.remote_id ?? chat.remoteId) || chat.id || '').split('@')[0]}</h3>
-                    <p className="text-xs text-muted-foreground whitespace-nowrap">
-                      {getFormattedTimestamp(chat.last_message_at ?? chat.lastMessageAt)}
+            filteredChats.map((chat) => {
+              const phoneOrRemote = (chat as any).phone_jid || chat.remote_id || chat.remoteId || chat.id || '';
+              const displayNumber = phoneOrRemote.split('@')[0];
+              const displayName = chat.name || displayNumber || 'Chat';
+
+              return (
+                <div
+                  key={chat.id}
+                  className={cn(
+                    'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50 cursor-pointer',
+                    selectedChatId === chat.id && 'bg-muted'
+                  )}
+                  onClick={() => onSelectChat(chat.id)}
+                >
+                  <Checkbox
+                    checked={selectedChats.has(chat.id)}
+                    onCheckedChange={(checked) => toggleChatSelection(chat.id, {} as any)}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                  <Avatar className="h-10 w-10 border">
+                    <AvatarImage src={chat.avatar} alt={displayName} />
+                      <AvatarFallback>
+                        {displayName.charAt(0) || 'C'}
+                      </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 overflow-hidden">
+                    <div className="flex items-center justify-between">
+                        <h3 className="font-semibold truncate">
+                          {displayName}
+                        </h3>
+                      <p className="text-xs text-muted-foreground whitespace-nowrap">
+                        {getFormattedTimestamp(chat.last_message_at ?? chat.lastMessageAt)}
+                      </p>
+                    </div>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {chat.last_message ?? chat.lastMessage}
                     </p>
                   </div>
-                  <p className="text-sm text-muted-foreground truncate">
-                    {chat.last_message ?? chat.lastMessage}
-                  </p>
+                  {(chat.is_unread ?? chat.isUnread) && (
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                      1
+                    </div>
+                  )}
                 </div>
-                {(chat.is_unread ?? chat.isUnread) && (
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
-                    1
-                  </div>
-                )}
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </ScrollArea>

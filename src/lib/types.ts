@@ -7,19 +7,23 @@ export interface User {
 }
 
 export interface WhatsAppSession {
-    id: string;
-    ownerId: string;
-    qr: string;
-    isReady: boolean;
-    shouldDisconnect?: boolean;
-    createdAt: Date | string;
-    updatedAt: Date | string;
+  id: string;
+  ownerId: string;
+  qr: string;
+  isReady: boolean;
+  shouldDisconnect?: boolean;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface Chat {
   id: string;
   session_id: string;
   remote_id: string;
+
+  // ✅ NEW: preserves phone JID when remote_id becomes LID
+  phone_jid?: string | null;
+
   name: string | null;
   type: 'INDIVIDUAL' | 'GROUP';
   status: 'INBOX' | 'DONE' | 'ARCHIVED';
@@ -37,6 +41,7 @@ export interface Chat {
   needs_human: boolean;
   created_at: Date | string;
   updated_at: Date | string;
+
   // Convenience aliases for backward compatibility
   remoteId?: string;
   isUnread?: boolean;
@@ -57,7 +62,7 @@ export interface Message {
   id: string;
   chat_id: string;
   session_id: string;
-  remote_id: string; // WhatsApp JID (e.g., "201234567890@s.whatsapp.net")
+  remote_id: string; // WhatsApp JID (phone JID or LID JID)
   sender: string;
   body: string | null;
   timestamp: Date | string;
@@ -67,6 +72,11 @@ export interface Message {
   status: 'sent' | 'delivered' | 'read' | 'pending' | 'failed';
   user_id?: string;
   created_at: Date | string;
+
+  // ✅ NEW: WhatsApp provider message id (Baileys msg.key.id / sendResult.key.id)
+  provider_message_id?: string | null;
+  client_request_id?: string | null;
+
   // Convenience aliases for backward compatibility
   chatId?: string;
   isFromUs?: boolean;

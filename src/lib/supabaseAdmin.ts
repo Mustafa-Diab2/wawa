@@ -54,6 +54,7 @@ export type Database = {
           session_id: string;
           remote_id: string;
           name: string | null;
+          bot_id: string | null;
           type: "INDIVIDUAL" | "GROUP";
           status: "INBOX" | "DONE" | "ARCHIVED";
           is_unread: boolean;
@@ -77,6 +78,7 @@ export type Database = {
           session_id: string;
           remote_id: string;
           name?: string | null;
+          bot_id?: string | null;
           type?: "INDIVIDUAL" | "GROUP";
           status?: "INBOX" | "DONE" | "ARCHIVED";
           is_unread?: boolean;
@@ -100,6 +102,7 @@ export type Database = {
           session_id?: string;
           remote_id?: string;
           name?: string | null;
+          bot_id?: string | null;
           type?: "INDIVIDUAL" | "GROUP";
           status?: "INBOX" | "DONE" | "ARCHIVED";
           is_unread?: boolean;
@@ -209,7 +212,7 @@ export type Database = {
 };
 
 // Lazy initialization to allow environment variables to be loaded first (especially in worker)
-let _supabaseAdmin: ReturnType<typeof createClient<Database>> | null = null;
+let _supabaseAdmin: any = null;
 
 function getSupabaseAdmin() {
   if (_supabaseAdmin) return _supabaseAdmin;
@@ -236,9 +239,9 @@ function getSupabaseAdmin() {
   return _supabaseAdmin;
 }
 
-export const supabaseAdmin = new Proxy({} as ReturnType<typeof createClient<Database>>, {
+export const supabaseAdmin: any = new Proxy({} as any, {
   get(target, prop) {
-    return getSupabaseAdmin()[prop as keyof ReturnType<typeof createClient<Database>>];
+    return getSupabaseAdmin()[prop as any];
   }
 });
 

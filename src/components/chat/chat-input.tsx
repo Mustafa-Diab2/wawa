@@ -1,5 +1,7 @@
+// src/components/chat/chat-input.tsx
 'use client';
-import { useState, useRef } from 'react';
+
+import { useState, useRef, useCallback } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Paperclip, Smile, Mic, Send, Bot, Loader2, StopCircle } from 'lucide-react';
@@ -8,6 +10,14 @@ import type { Chat } from '@/lib/types';
 import { respondToInquiry } from '@/ai/flows/respond-to-customer-inquiries';
 import { useToast } from '@/hooks/use-toast';
 
+/**
+ * Global send lock (shared across multiple mounted ChatInput instances).
+ * Fixes duplicate manual-send when the input is rendered twice (desktop/mobile layouts)
+ * or when two handlers race.
+ */
+const globalSendLocks = new Map<string, boolean>();
+const globalLastSendAt = new Map<string, number>();
+
 interface ChatInputProps {
   chat: Chat;
   sessionId: string;
@@ -15,63 +25,103 @@ interface ChatInputProps {
 
 export default function ChatInput({ chat, sessionId }: ChatInputProps) {
   const { toast } = useToast();
+
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isAiResponding, setIsAiResponding] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
-  const handleSendMessage = async () => {
-    if (!message.trim() || !chat || !sessionId) return;
+  // Local lock (per instance) + in-flight request id
+  const sendingRef = useRef(false);
+  const inflightClientRequestIdRef = useRef<string | null>(null);
 
+  const getLockKey = () => `${sessionId}:${chat?.id || 'nochat'}`;
+
+  const handleSendMessage = useCallback(async () => {
+    const text = message.trim();
+    if (!text || !chat || !sessionId) return;
+
+    const lockKey = getLockKey();
+
+    // Extra protection: tiny throttle (prevents ultra-fast double triggers)
+    const now = Date.now();
+    const lastAt = globalLastSendAt.get(lockKey) || 0;
+    if (now - lastAt < 600) return;
+
+    // Global lock across any ChatInput instances
+    if (globalSendLocks.get(lockKey)) return;
+
+    // Local lock for this instance
+    if (sendingRef.current) return;
+
+    // Lock immediately (no waiting for React state)
+    globalSendLocks.set(lockKey, true);
+    globalLastSendAt.set(lockKey, now);
+    sendingRef.current = true;
     setIsSending(true);
 
-    try {
-      // Extract phone number from remote_id or remoteId
-      const remoteJid = chat.remote_id || chat.remoteId || '';
+    // IMPORTANT: use the same clientRequestId for this in-flight send
+    // so even if something somehow re-enters, it won't generate a new id.
+    const clientRequestId =
+      inflightClientRequestIdRef.current || crypto.randomUUID();
+    inflightClientRequestIdRef.current = clientRequestId;
 
-      // Send message via API
+    try {
+      // Prefer phone_jid if present (avoid LID surprises)
+      const remoteJid = (chat as any).phone_jid || chat.remote_id || (chat as any).remoteId || '';
+
       const response = await fetch('/api/messages/manual-send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sessionId,
-          to: remoteJid, // Use remote_jid instead of chatId
-          text: message.trim(), // API expects 'text' not 'message'
+          to: remoteJid,
+          text,
+          clientRequestId,
         }),
       });
 
       const data = await response.json();
 
-      if (response.ok) {
-        setMessage('');
-        toast({
-          title: 'تم إرسال الرسالة',
-          description: 'تم إرسال رسالتك بنجاح',
-        });
-      } else {
-        throw new Error(data.error || 'Failed to send message');
+      if (!response.ok) {
+        throw new Error(data?.error || 'Failed to send message');
       }
+
+      setMessage('');
+      toast({
+        title: 'تم إرسال الرسالة',
+        description: data?.deduped
+          ? 'تم منع إرسال مكرر (Idempotency)'
+          : 'تم إرسال رسالتك بنجاح',
+      });
     } catch (error: any) {
       console.error('Error sending message:', error);
       toast({
         title: 'خطأ',
-        description: error.message || 'فشل إرسال الرسالة',
+        description: error?.message || 'فشل إرسال الرسالة',
         variant: 'destructive',
       });
     } finally {
+      inflightClientRequestIdRef.current = null;
       setIsSending(false);
+      sendingRef.current = false;
+      globalSendLocks.delete(lockKey);
     }
-  };
+  }, [message, chat, sessionId, toast]);
 
   const handleAiRespond = async () => {
     if (!chat || !sessionId) return;
 
     setIsAiResponding(true);
     try {
-      const result = await respondToInquiry({ chatId: chat.id, sessionId });
+      const result = await respondToInquiry({
+        message: message || '',
+        chatContext: String(chat.id || sessionId),
+      });
       console.log('AI Response:', result);
     } catch (error) {
       console.error('Error getting AI response:', error);
@@ -80,9 +130,21 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Ignore IME composition (Arabic/emoji/IME can cause duplicate Enter behaviors)
+    // @ts-ignore
+    if (e.isComposing) return;
+
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
+
+      // Prevent held-key repeat
+      if (e.repeat) return;
+
+      // If already sending (any instance)
+      const lockKey = getLockKey();
+      if (globalSendLocks.get(lockKey) || sendingRef.current) return;
+
       handleSendMessage();
     }
   };
@@ -100,12 +162,11 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
       description: 'سيتم إضافة إرسال الملفات قريباً',
     });
 
-    // TODO: Implement file upload
     e.target.value = '';
   };
 
   const handleEmojiSelect = (emoji: string) => {
-    setMessage(message + emoji);
+    setMessage((prev) => prev + emoji);
     setShowEmojiPicker(false);
   };
 
@@ -121,14 +182,13 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
       };
 
       mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        // TODO: Implement audio upload and send
+        // const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
         toast({
           title: 'قريباً',
           description: 'سيتم إضافة إرسال الرسائل الصوتية قريباً',
         });
 
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       };
 
       mediaRecorder.start();
@@ -150,7 +210,6 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
     }
   };
 
-  // Common emojis for quick access
   const commonEmojis = ['😊', '👍', '❤️', '😂', '🙏', '👋', '✅', '🎉', '🔥', '💯'];
 
   return (
@@ -162,13 +221,9 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
         onChange={handleFileChange}
         accept="image/*,video/*,audio/*,.pdf,.doc,.docx"
       />
+
       <div className="flex items-end gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleFileSelect}
-          title="إرفاق ملف"
-        >
+        <Button variant="ghost" size="icon" onClick={handleFileSelect} title="إرفاق ملف">
           <Paperclip className="h-5 w-5" />
         </Button>
 
@@ -197,7 +252,7 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
         <Textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
           placeholder="اكتب رسالتك هنا..."
           className="min-h-[40px] max-h-[120px] resize-none"
           disabled={isSending}
@@ -210,11 +265,7 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
           disabled={isAiResponding || chat.mode === 'human'}
           title="رد تلقائي بالذكاء الاصطناعي"
         >
-          {isAiResponding ? (
-            <Loader2 className="h-5 w-5 animate-spin" />
-          ) : (
-            <Bot className="h-5 w-5" />
-          )}
+          {isAiResponding ? <Loader2 className="h-5 w-5 animate-spin" /> : <Bot className="h-5 w-5" />}
         </Button>
 
         <Button
@@ -224,23 +275,11 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
           className={isRecording ? 'text-red-500' : ''}
           title={isRecording ? 'إيقاف التسجيل' : 'تسجيل رسالة صوتية'}
         >
-          {isRecording ? (
-            <StopCircle className="h-5 w-5 animate-pulse" />
-          ) : (
-            <Mic className="h-5 w-5" />
-          )}
+          {isRecording ? <StopCircle className="h-5 w-5 animate-pulse" /> : <Mic className="h-5 w-5" />}
         </Button>
 
-        <Button
-          onClick={handleSendMessage}
-          disabled={!message.trim() || isSending}
-          size="icon"
-        >
-          {isSending ? (
-            <Loader2 className="h-5 w-5 animate-spin" />
-          ) : (
-            <Send className="h-5 w-5" />
-          )}
+        <Button onClick={handleSendMessage} disabled={!message.trim() || isSending} size="icon">
+          {isSending ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
         </Button>
       </div>
     </div>

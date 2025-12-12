@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+
 import Link from "next/link";
 import {
   Bell,
@@ -28,6 +30,7 @@ import { supabase } from "@/lib/supabase";
 
 export default function AppHeader() {
   const isMobile = useIsMobile();
+  const menuId = React.useId();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -59,7 +62,7 @@ export default function AppHeader() {
           <span className="sr-only">Toggle notifications</span>
         </Button>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger asChild id={menuId}>
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar className="h-8 w-8">
                 <AvatarImage src={mockUser.avatar} alt={mockUser.name} />

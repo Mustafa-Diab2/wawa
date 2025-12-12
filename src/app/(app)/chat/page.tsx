@@ -1,8 +1,7 @@
-
 'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import type { Chat, Message, WhatsAppSession } from '@/lib/types';
+import type { Chat, Message } from '@/lib/types';
 import { Card } from "@/components/ui/card";
 import ChatList from "@/components/chat/chat-list";
 import ChatWindow from "@/components/chat/chat-window";
@@ -22,7 +21,20 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [messagesLoading, setMessagesLoading] = useState(false);
 
-  // Get or create anonymous user
+  const dedupeMessages = (list: Message[]) => {
+    const seen = new Set<string>();
+    return (list || []).filter((msg) => {
+      const key =
+        (msg as any).provider_message_id ||
+        (msg as any).client_request_id ||
+        (msg as any).providerMessageId ||
+        msg.id;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  };
+
   useEffect(() => {
     const initUser = async () => {
       try {
@@ -31,7 +43,6 @@ export default function ChatPage() {
         if (authSession?.user) {
           setUserId(authSession.user.id);
         } else {
-          // Sign in anonymously
           const { data, error } = await supabase.auth.signInAnonymously();
           if (error) throw error;
           setUserId(data.session?.user.id || null);
@@ -44,7 +55,6 @@ export default function ChatPage() {
     initUser();
   }, []);
 
-  // Fetch user's session
   useEffect(() => {
     if (!userId) return;
 
@@ -57,14 +67,8 @@ export default function ChatPage() {
           .limit(1)
           .single();
 
-        if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
-          console.error('Error fetching session:', error);
-          return;
-        }
-
-        if (data) {
-          setSessionId(data.id);
-        }
+        if (error && (error as any).code !== 'PGRST116') return;
+        if (data) setSessionId((data as any).id);
       } catch (error) {
         console.error('Error fetching session:', error);
       } finally {
@@ -75,7 +79,6 @@ export default function ChatPage() {
     fetchSession();
   }, [userId]);
 
-  // Fetch chats for the active session
   useEffect(() => {
     if (!sessionId) return;
 
@@ -88,7 +91,6 @@ export default function ChatPage() {
           .order('last_message_at', { ascending: false });
 
         if (error) throw error;
-
         setChats(data || []);
       } catch (error) {
         console.error('Error fetching chats:', error);
@@ -97,37 +99,27 @@ export default function ChatPage() {
 
     fetchChats();
 
-    // Subscribe to chat changes
     const channel = supabase
       .channel(`chats-${sessionId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'chats',
-          filter: `session_id=eq.${sessionId}`,
-        },
-        (payload) => {
-          if (payload.eventType === 'INSERT') {
-            setChats((prev) => [payload.new as Chat, ...prev]);
-          } else if (payload.eventType === 'UPDATE') {
-            setChats((prev) =>
-              prev.map((chat) => (chat.id === payload.new.id ? (payload.new as Chat) : chat))
-            );
-          } else if (payload.eventType === 'DELETE') {
-            setChats((prev) => prev.filter((chat) => chat.id !== payload.old.id));
-          }
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'chats',
+        filter: `session_id=eq.${sessionId}`,
+      }, (payload) => {
+        if (payload.eventType === 'INSERT') {
+          setChats((prev) => [payload.new as Chat, ...prev]);
+        } else if (payload.eventType === 'UPDATE') {
+          setChats((prev) => prev.map((c) => (c.id === (payload.new as any).id ? (payload.new as Chat) : c)));
+        } else if (payload.eventType === 'DELETE') {
+          setChats((prev) => prev.filter((c) => c.id !== (payload.old as any).id));
         }
-      )
+      })
       .subscribe();
 
-    return () => {
-      channel.unsubscribe();
-    };
+    return () => { channel.unsubscribe(); };
   }, [sessionId]);
 
-  // Fetch messages for selected chat
   useEffect(() => {
     if (!sessionId || !selectedChatId) return;
 
@@ -142,8 +134,7 @@ export default function ChatPage() {
           .order('created_at', { ascending: true });
 
         if (error) throw error;
-
-        setMessages(data || []);
+        setMessages(dedupeMessages(data || []));
       } catch (error) {
         console.error('Error fetching messages:', error);
       } finally {
@@ -153,87 +144,76 @@ export default function ChatPage() {
 
     fetchMessages();
 
-    // Subscribe to message changes
     const channel = supabase
       .channel(`messages-${selectedChatId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'messages',
-          filter: `chat_id=eq.${selectedChatId}`,
-        },
-        (payload) => {
-          if (payload.eventType === 'INSERT') {
-            setMessages((prev) => [...prev, payload.new as Message]);
-          } else if (payload.eventType === 'UPDATE') {
-            setMessages((prev) =>
-              prev.map((msg) => (msg.id === payload.new.id ? (payload.new as Message) : msg))
-            );
-          } else if (payload.eventType === 'DELETE') {
-            setMessages((prev) => prev.filter((msg) => msg.id !== payload.old.id));
-          }
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'messages',
+        filter: `chat_id=eq.${selectedChatId}`,
+      }, (payload) => {
+        const incoming: any = payload.new;
+
+        if (payload.eventType === 'INSERT') {
+          setMessages((prev) => dedupeMessages([...prev, payload.new as Message]));
+        } else if (payload.eventType === 'UPDATE') {
+          setMessages((prev) =>
+            prev.map((msg) => {
+              const isSameId = (msg as any).id === (payload.new as any).id;
+              const sameProvider =
+                (msg as any).provider_message_id &&
+                (payload.new as any)?.provider_message_id &&
+                (msg as any).provider_message_id === (payload.new as any).provider_message_id;
+              const sameClient =
+                (msg as any).client_request_id &&
+                (payload.new as any)?.client_request_id &&
+                (msg as any).client_request_id === (payload.new as any).client_request_id;
+              return isSameId || sameProvider || sameClient ? (payload.new as Message) : msg;
+            })
+          );
+        } else if (payload.eventType === 'DELETE') {
+          setMessages((prev) => prev.filter((msg: any) => msg.id !== (payload.old as any).id));
         }
-      )
+      })
       .subscribe();
 
-    return () => {
-      channel.unsubscribe();
-    };
+    return () => { channel.unsubscribe(); };
   }, [sessionId, selectedChatId]);
 
-  // Auto-select the first chat when the list loads
   useEffect(() => {
-    if (!selectedChatId && chats && chats.length > 0) {
-      setSelectedChatId(chats[0].id);
-    }
+    if (!selectedChatId && chats.length > 0) setSelectedChatId(chats[0].id);
   }, [chats, selectedChatId]);
 
   const selectedChat = useMemo(
-    () => chats?.find((c) => c.id === selectedChatId) || null,
+    () => chats.find((c) => c.id === selectedChatId) || null,
     [chats, selectedChatId]
   );
 
-  const handleNewChat = () => {
-    setNewChatModalOpen(true);
-  };
+  const handleNewChat = () => setNewChatModalOpen(true);
 
   const handleSendMessage = async (data: { phone: string; jid: string; message: string }) => {
-    try {
-      const response = await fetch('/api/messages/manual-send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sessionId: sessionId,
-          to: data.jid,
-          text: data.message,
-          assignedTo: userId || null,
-        }),
-      });
+    const clientRequestId = crypto.randomUUID();
+    const response = await fetch('/api/messages/manual-send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        to: data.jid,
+        text: data.message,
+        assignedTo: userId || null,
+        clientRequestId,
+      }),
+    });
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'فشل إرسال الرسالة');
-      }
-
-      const result = await response.json();
-
-      // Select the newly created chat
-      setSelectedChatId(result.chatId);
-
-      toast({
-        title: 'تم إرسال الرسالة',
-        description: 'تم إنشاء المحادثة بنجاح',
-      });
-    } catch (error: any) {
-      toast({
-        title: 'خطأ',
-        description: error.message || 'حدث خطأ أثناء إرسال الرسالة',
-        variant: 'destructive',
-      });
-      throw error;
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'فشل إرسال الرسالة');
     }
+
+    const result = await response.json();
+    setSelectedChatId(result.chatId);
+
+    toast({ title: 'تم إرسال الرسالة', description: 'تم إنشاء المحادثة بنجاح' });
   };
 
   if (isLoading) {
@@ -250,8 +230,7 @@ export default function ChatPage() {
       <div className="flex flex-col items-center justify-center h-full text-center">
         <h2 className="text-2xl font-bold mb-2">لم يتم ربط حساب WhatsApp</h2>
         <p className="text-muted-foreground">
-          يرجى الذهاب إلى صفحة <a href="/connect" className="text-primary underline">ربط WhatsApp</a>{' '}
-          لمسح رمز الاستجابة السريعة والبدء.
+          يرجى الذهاب إلى صفحة <a href="/connect" className="text-primary underline">ربط WhatsApp</a> لمسح QR والبدء.
         </p>
       </div>
     );
@@ -274,6 +253,7 @@ export default function ChatPage() {
         onSendMessage={handleSendMessage}
         sessionId={sessionId}
       />
+
       <div className="grid h-[calc(100vh-8rem)] w-full grid-cols-1 md:grid-cols-10 gap-4">
         <Card className="md:col-span-3 lg:col-span-3">
           <ChatList
@@ -283,29 +263,11 @@ export default function ChatPage() {
             onNewChat={handleNewChat}
           />
         </Card>
+
         <div className="md:col-span-7 lg:col-span-4 flex flex-col h-full">
-          {selectedChatId && sessionId ? (
+          {selectedChat ? (
             <ChatWindow
-              chat={
-                selectedChat || {
-                  id: selectedChatId,
-                  session_id: sessionId,
-                  remote_id: selectedChatId,
-                  name: selectedChatId?.split('@')?.[0] || selectedChatId || 'Unknown',
-                  type: 'INDIVIDUAL',
-                  status: 'INBOX',
-                  is_group: false,
-                  is_read: true,
-                  is_muted: false,
-                  is_archived: false,
-                  assigned_to: null,
-                  mode: 'ai',
-                  needs_human: false,
-                  created_at: new Date() as any,
-                  updated_at: new Date() as any,
-                  last_message_at: new Date() as any,
-                }
-              }
+              chat={selectedChat}
               messages={messages || []}
               messagesLoading={messagesLoading}
               sessionId={sessionId}
@@ -316,6 +278,7 @@ export default function ChatPage() {
             </div>
           )}
         </div>
+
         <Card className="hidden lg:block lg:col-span-3">
           {selectedChat ? (
             <ContactDetails chat={selectedChat} />

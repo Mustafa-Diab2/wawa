@@ -41,3 +41,47 @@ export function isValidPhone(phone: string): boolean {
   const digits = phone.replace(/\D/g, '');
   return digits.length >= 10 && digits.length <= 15;
 }
+
+/**
+ * Check if a JID is a phone-based JID (not LID)
+ * Phone JIDs: 10-15 digits followed by @s.whatsapp.net
+ * LID JIDs: longer numbers or different format
+ * @param jid - WhatsApp JID to check
+ * @returns true if phone-based JID, false if LID or other format
+ */
+export function isPhoneJid(jid: string): boolean {
+  if (!jid) return false;
+  const match = jid.match(/^(\d+)@s\.whatsapp\.net$/);
+  if (!match) return false;
+  const digits = match[1];
+  // Phone numbers are typically 10-15 digits
+  // LIDs are typically longer (15+ digits) and start with different patterns
+  return digits.length >= 10 && digits.length <= 15;
+}
+
+/**
+ * Check if a JID is a LID (Local ID) format
+ * LIDs are typically longer numbers used by WhatsApp instead of phone numbers
+ * @param jid - WhatsApp JID to check
+ * @returns true if LID format
+ */
+export function isLidJid(jid: string): boolean {
+  if (!jid) return false;
+  // LID format: ends with @lid or is a long number at @s.whatsapp.net
+  if (jid.endsWith('@lid')) return true;
+  const match = jid.match(/^(\d+)@s\.whatsapp\.net$/);
+  if (!match) return false;
+  const digits = match[1];
+  // LIDs are typically longer than phone numbers (15+ digits)
+  return digits.length > 15;
+}
+
+/**
+ * Extract the numeric part from a JID
+ * @param jid - WhatsApp JID
+ * @returns numeric part of the JID
+ */
+export function extractJidNumber(jid: string): string {
+  if (!jid) return '';
+  return jid.split('@')[0];
+}

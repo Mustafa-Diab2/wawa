@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MoreVertical, Phone, Video, Loader2, Bot as BotIcon, User } from "lucide-react";
@@ -32,9 +32,31 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
   const [isTogglingMode, setIsTogglingMode] = useState(false);
   const [bots, setBots] = useState<Bot[]>([]);
   const [currentBot, setCurrentBot] = useState<Bot | null>(null);
+  const botsFetchedRef = useRef(false);
+  const phoneOrRemote = (chat as any).phone_jid || chat.remote_id || chat.remoteId || chat.id || '';
+  const displayNumber = (phoneOrRemote || '').split('@')[0];
+  const displayName = chat.name || displayNumber;
 
-  // Fetch available bots
+  const uniqueMessages = useMemo(() => {
+    const seen = new Set<string>();
+    return (messages || []).filter((msg) => {
+      const key =
+        (msg as any).provider_message_id ||
+        (msg as any).client_request_id ||
+        (msg as any).providerMessageId ||
+        msg.id;
+      if (!key) return true;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }, [messages]);
+
+  // Fetch available bots (once)
   useEffect(() => {
+    if (botsFetchedRef.current) return;
+    botsFetchedRef.current = true;
+
     const fetchBots = async () => {
       try {
         const { data, error } = await supabase
@@ -45,19 +67,23 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
 
         if (error) throw error;
         setBots(data || []);
-
-        // Set current bot if chat has one assigned
-        if ((chat as any).bot_id) {
-          const bot = data?.find((b: Bot) => b.id === (chat as any).bot_id);
-          setCurrentBot(bot || null);
-        }
       } catch (error) {
         console.error('Error fetching bots:', error);
       }
     };
 
     fetchBots();
-  }, [chat]);
+  }, []);
+
+  // Set current bot when chat changes or bots are loaded
+  useEffect(() => {
+    if ((chat as any).bot_id && bots.length > 0) {
+      const bot = bots.find((b: Bot) => b.id === (chat as any).bot_id);
+      setCurrentBot(bot || null);
+    } else {
+      setCurrentBot(null);
+    }
+  }, [chat, bots]);
 
   const toggleMode = async () => {
     if (isTogglingMode) return;
@@ -98,9 +124,9 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
 
   const assignBot = async (botId: string | null) => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('chats')
-        .update({ bot_id: botId })
+        .update({ bot_id: botId } as any)
         .eq('id', chat.id);
 
       if (error) throw error;
@@ -125,13 +151,13 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
     <Card className="flex flex-col h-full">
       <div className="flex items-center p-4 border-b">
         <div className="flex items-center gap-3 flex-1">
-          <Avatar className="h-10 w-10 border">
+            <Avatar className="h-10 w-10 border">
             <AvatarImage src={chat.avatar} alt={chat.name || "Chat"} />
-            <AvatarFallback>{chat.name ? chat.name.charAt(0) : "C"}</AvatarFallback>
+            <AvatarFallback>{displayName ? displayName.charAt(0) : 'C'}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold">{chat.name || (chat.remote_id ?? chat.remoteId ?? '').split('@')[0]}</h3>
+              <h3 className="font-semibold">{displayName}</h3>
               <Badge
                 variant={chat.mode === 'ai' ? 'default' : 'secondary'}
                 className="text-xs cursor-pointer"
@@ -191,8 +217,11 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
           </div>
         ) : (
           <div className="space-y-4">
-              {messages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
+              {uniqueMessages.map((message) => (
+                  <ChatMessage
+                    key={(message as any).provider_message_id || (message as any).client_request_id || message.id}
+                    message={message}
+                  />
               ))}
           </div>
         )}

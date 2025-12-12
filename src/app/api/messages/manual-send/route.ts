@@ -1,12 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { normalizeJid, upsertChat,isPhoneJid } from '@/lib/chat-utils';
 
+/**
+ * Manual Send Message API
+ *
+ * POST /api/messages/manual-send
+ * Body: { sessionId, to, text, assignedTo? }
+ *
+ * Creates a pending message for the worker to send.
+ * IMPORTANT: chatId is DB UUID (NOT WhatsApp messageId)
+ */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { sessionId, to, text, assignedTo } = body;
+    const { sessionId, to, text, assignedTo, clientRequestId: rawClientRequestId } = body;
+    const clientRequestId = rawClientRequestId || body.client_request_id || null;
 
-    // Validation
     if (!sessionId || !to || !text) {
       return NextResponse.json(
         { error: 'Missing required fields: sessionId, to, text' },
@@ -14,7 +24,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if session exists and is ready
     const { data: session, error: sessionError } = await supabaseAdmin
       .from('whatsapp_sessions')
       .select('*')
@@ -22,93 +31,114 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (sessionError || !session) {
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
+    }
+
+    let normalizedJid: string;
+    try {
+      normalizedJid = normalizeJid(to);
+    } catch (e: any) {
       return NextResponse.json(
-        { error: 'Session not found' },
-        { status: 404 }
+        { error: `Invalid phone/JID: ${e.message}` },
+        { status: 400 }
       );
     }
 
-    // Skip is_ready check in development mode
-    // if (!session.is_ready) {
-    //   return NextResponse.json(
-    //     { error: 'WhatsApp not connected. Please connect first.' },
-    //     { status: 400 }
-    //   );
-    // }
+    console.log(`[manual-send] sessionId=${sessionId}, to=${to}, normalizedJid=${normalizedJid}, clientRequestId=${clientRequestId || 'none'}`);
 
-    // Normalize JID (should already be in format: 201234567890@s.whatsapp.net)
-    const jid = to.includes('@') ? to : `${to}@s.whatsapp.net`;
+    if (clientRequestId) {
+      const { data: existing } = await supabaseAdmin
+        .from('messages')
+        .select('id, chat_id')
+        .eq('session_id', sessionId)
+        .eq('client_request_id', clientRequestId)
+        .limit(1)
+        .maybeSingle();
 
-    // Create or get existing chat
-    const { data: existingChats } = await supabaseAdmin
-      .from('chats')
-      .select('*')
-      .eq('session_id', sessionId)
-      .eq('remote_id', jid)
-      .limit(1);
-
-    let chatId: string;
-    let chatData: any;
-
-    if (existingChats && existingChats.length > 0) {
-      chatData = existingChats[0];
-      chatId = chatData.id;
-    } else {
-      // Create new chat
-      const { data: newChat, error: chatError } = await supabaseAdmin
-        .from('chats')
-        .insert({
-          session_id: sessionId,
-          remote_id: jid,
-          name: jid.split('@')[0], // Use phone number as name initially
-          type: 'INDIVIDUAL',
-          status: 'INBOX',
-          is_unread: false,
-          last_message: text,
-          last_message_at: new Date().toISOString(),
-          assigned_to: assignedTo || null,
-          is_group: false,
-          is_read: true,
-          is_muted: false,
-          is_archived: false,
-          mode: 'ai', // Default to AI mode
-          needs_human: false,
-        })
-        .select()
-        .single();
-
-      if (chatError || !newChat) {
-        throw new Error('Failed to create chat');
+      if (existing?.id && existing.chat_id) {
+        console.log(`[manual-send] deduped existing message ${existing.id} for clientRequestId=${clientRequestId}`);
+        return NextResponse.json({
+          success: true,
+          deduped: true,
+          chatId: existing.chat_id,
+          messageId: existing.id,
+        });
       }
-
-      chatData = newChat;
-      chatId = newChat.id;
     }
 
-    // Create message document with status 'pending'
-    // The worker will pick it up and send it via Baileys
+    const phoneJidParam = isPhoneJid(normalizedJid) ? normalizedJid : undefined;
+
+    const { chat, isNew } = await upsertChat(sessionId, normalizedJid, phoneJidParam, {
+      name: (phoneJidParam || normalizedJid).split('@')[0],
+      lastMessage: text,
+    });
+
+    const chatId = chat.id;
+    console.log(`[manual-send] chat.id=${chatId}, isNew=${isNew}`);
+
+    if (assignedTo) {
+      await supabaseAdmin.from('chats').update({ assigned_to: assignedTo }).eq('id', chatId);
+    }
+
+    // Use phone_jid for sending (worker will discover LID from response)
+    const sendToJid = chat.phone_jid || normalizedJid;
+
     const { data: message, error: messageError } = await supabaseAdmin
       .from('messages')
       .insert({
         chat_id: chatId,
         session_id: sessionId,
-        remote_id: jid, // Add JID for worker to send via Baileys
+        remote_id: sendToJid,
         sender: 'agent',
         body: text,
         timestamp: new Date().toISOString(),
         is_from_us: true,
         media_type: null,
         media_url: null,
-        status: 'pending', // Worker will change this to 'sent' after sending
+        status: 'pending',
+        client_request_id: clientRequestId,
+        provider_message_id: null, // filled after Baileys sendMessage in worker
       })
       .select()
       .single();
 
     if (messageError) {
+      console.error('[manual-send] insert messageError:', messageError);
+      return NextResponse.json(
+        {
+          error: messageError.message,
+          code: messageError.code,
+          details: messageError.details,
+          hint: messageError.hint,
+        },
+        { status: 500 }
+      );
+    }
+
+    if (messageError) {
+      if (messageError.code === '23505' && clientRequestId) {
+        const { data: existingAfterInsert } = await supabaseAdmin
+          .from('messages')
+          .select('id, chat_id')
+          .eq('session_id', sessionId)
+          .eq('client_request_id', clientRequestId)
+          .limit(1)
+          .maybeSingle();
+
+        if (existingAfterInsert?.id && existingAfterInsert.chat_id) {
+          console.log(`[manual-send] deduped on unique index for clientRequestId=${clientRequestId}`);
+          return NextResponse.json({
+            success: true,
+            deduped: true,
+            chatId: existingAfterInsert.chat_id,
+            messageId: existingAfterInsert.id,
+          });
+        }
+      }
+      console.error('[manual-send] Error creating message:', messageError);
       throw new Error('Failed to create message');
     }
 
-    // Update chat's last message
     await supabaseAdmin
       .from('chats')
       .update({
@@ -118,14 +148,23 @@ export async function POST(request: NextRequest) {
       })
       .eq('id', chatId);
 
+    console.log(`[manual-send] SUCCESS: chatId=${chatId}, messageId=${message.id}, clientRequestId=${clientRequestId || 'none'}`);
+
     return NextResponse.json({
       success: true,
       chatId,
       messageId: message.id,
-      chat: chatData,
+      clientRequestId,
+      remoteId: chat.remote_id,
+      chat: {
+        id: chat.id,
+        remote_id: chat.remote_id,
+        phone_jid: chat.phone_jid,
+        name: chat.name,
+      },
     });
   } catch (error: any) {
-    console.error('Error in manual-send API:', error);
+    console.error('[manual-send] Error:', error);
     return NextResponse.json(
       { error: error.message || 'Internal server error' },
       { status: 500 }
