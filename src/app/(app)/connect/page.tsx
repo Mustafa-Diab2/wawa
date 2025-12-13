@@ -273,11 +273,18 @@ export default function ConnectPage() {
           .single();
 
         if (!error && data) {
-          console.log('[ConnectPage] Fetched session:', {
-            hasQR: !!data.qr,
-            qrLength: data.qr?.length || 0,
-            isReady: data.is_ready
-          });
+          // Only log when QR or connection status changes
+          const hasChanged =
+            (data.qr && data.qr !== session?.qr) ||
+            (data.is_ready !== session?.is_ready);
+
+          if (hasChanged) {
+            console.log('[ConnectPage] Session updated:', {
+              hasQR: !!data.qr,
+              qrLength: data.qr?.length || 0,
+              isReady: data.is_ready
+            });
+          }
 
           // Keep last valid QR code
           if (data.qr && data.qr.length > 0) {
@@ -294,8 +301,8 @@ export default function ConnectPage() {
     // Fetch immediately
     fetchSession();
 
-    // Polling as backup for Realtime
-    const pollInterval = setInterval(fetchSession, 2000); // Poll every 2 seconds
+    // Poll every 5 seconds (reduced frequency to minimize load)
+    const pollInterval = setInterval(fetchSession, 5000);
 
     return () => {
       realtimeChannel.unsubscribe();
