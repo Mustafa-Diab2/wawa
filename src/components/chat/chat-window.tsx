@@ -34,9 +34,17 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
   const [bots, setBots] = useState<Bot[]>([]);
   const [currentBot, setCurrentBot] = useState<Bot | null>(null);
   const botsFetchedRef = useRef(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const phoneOrRemote = (chat as any).phone_jid || chat.remote_id || chat.remoteId || chat.id || '';
   const displayNumber = (phoneOrRemote || '').split('@')[0];
   const displayName = chat.name || displayNumber;
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    if (messagesEndRef.current && !messagesLoading) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, messagesLoading]);
 
   const uniqueMessages = useMemo(() => dedupeMessages(messages || []), [messages]);
   const getMessageKey = (msg: Message) => messageKeys(msg)[0] || (msg as any).id;
@@ -212,6 +220,7 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
                   message={message}
                 />
               ))}
+              <div ref={messagesEndRef} />
           </div>
         )}
       </ScrollArea>

@@ -60,7 +60,7 @@ async function startSession(sessionId: string) {
       printQRInTerminal: false,
       logger: pino({ level: "silent" }) as any,
       browser: Browsers.ubuntu("Chrome"),
-      syncFullHistory: false,
+      syncFullHistory: true, // Enable full history sync to load old chats
       defaultQueryTimeoutMs: undefined,
     });
 
@@ -152,6 +152,106 @@ async function startSession(sessionId: string) {
     });
 
     sock.ev.on("creds.update", saveCreds);
+
+    // ==========================
+    // chats.set - Load existing chats from WhatsApp
+    // ==========================
+    sock.ev.on("chats.set", async ({ chats: waChats }) => {
+      console.log(`[Worker:ChatsSet] Received ${waChats.length} chats from WhatsApp for session ${sessionId}`);
+
+      for (const waChat of waChats) {
+        try {
+          const jid = waChat.id;
+          if (!jid || jid === "status@broadcast") continue;
+
+          const isGroup = jid.endsWith("@g.us");
+          const phoneJidParam = isPhoneJid(jid) ? jid : undefined;
+
+          await upsertChat(sessionId, jid, phoneJidParam, {
+            type: isGroup ? "GROUP" : "INDIVIDUAL",
+            name: waChat.name || (waChat as any).subject || jid.split("@")[0],
+            lastMessage: (waChat as any).lastMessage?.message?.conversation ||
+                         (waChat as any).lastMessage?.message?.extendedTextMessage?.text || "",
+          });
+        } catch (e) {
+          console.error(`[Worker:ChatsSet] Error saving chat ${waChat.id}:`, e);
+        }
+      }
+      console.log(`[Worker:ChatsSet] Finished syncing ${waChats.length} chats for session ${sessionId}`);
+    });
+
+    // ==========================
+    // chats.upsert - Handle new/updated chats
+    // ==========================
+    sock.ev.on("chats.upsert", async (waChats) => {
+      console.log(`[Worker:ChatsUpsert] Received ${waChats.length} chat updates for session ${sessionId}`);
+
+      for (const waChat of waChats) {
+        try {
+          const jid = waChat.id;
+          if (!jid || jid === "status@broadcast") continue;
+
+          const isGroup = jid.endsWith("@g.us");
+          const phoneJidParam = isPhoneJid(jid) ? jid : undefined;
+
+          await upsertChat(sessionId, jid, phoneJidParam, {
+            type: isGroup ? "GROUP" : "INDIVIDUAL",
+            name: waChat.name || (waChat as any).subject || jid.split("@")[0],
+          });
+        } catch (e) {
+          console.error(`[Worker:ChatsUpsert] Error saving chat ${waChat.id}:`, e);
+        }
+      }
+    });
+
+    // ==========================
+    // contacts.set - Get contact names
+    // ==========================
+    sock.ev.on("contacts.set", async ({ contacts }) => {
+      console.log(`[Worker:ContactsSet] Received ${contacts.length} contacts for session ${sessionId}`);
+
+      for (const contact of contacts) {
+        try {
+          const jid = contact.id;
+          if (!jid || jid === "status@broadcast") continue;
+
+          // Update chat name if we have a contact name
+          const name = contact.name || contact.notify || contact.verifiedName;
+          if (name) {
+            await supabaseAdmin
+              .from("chats")
+              .update({ name, updated_at: new Date().toISOString() })
+              .eq("session_id", sessionId)
+              .eq("remote_id", jid);
+          }
+        } catch (e) {
+          console.error(`[Worker:ContactsSet] Error updating contact ${contact.id}:`, e);
+        }
+      }
+    });
+
+    // ==========================
+    // contacts.upsert - Handle new/updated contacts
+    // ==========================
+    sock.ev.on("contacts.upsert", async (contacts) => {
+      for (const contact of contacts) {
+        try {
+          const jid = contact.id;
+          if (!jid || jid === "status@broadcast") continue;
+
+          const name = contact.name || contact.notify || contact.verifiedName;
+          if (name) {
+            await supabaseAdmin
+              .from("chats")
+              .update({ name, updated_at: new Date().toISOString() })
+              .eq("session_id", sessionId)
+              .eq("remote_id", jid);
+          }
+        } catch (e) {
+          console.error(`[Worker:ContactsUpsert] Error updating contact ${contact.id}:`, e);
+        }
+      }
+    });
 
     // ==========================
     // messages.upsert (SOURCE OF TRUTH)

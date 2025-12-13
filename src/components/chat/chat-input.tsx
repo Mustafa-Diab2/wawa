@@ -213,7 +213,7 @@ export default function ChatInput({ chat, sessionId }: ChatInputProps) {
   const commonEmojis = ['😊', '👍', '❤️', '😂', '🙏', '👋', '✅', '🎉', '🔥', '💯'];
 
   return (
-    <div className="border-t bg-background p-4">
+    <div className="bg-background">
       <input
         ref={fileInputRef}
         type="file"
