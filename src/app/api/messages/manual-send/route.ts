@@ -3,6 +3,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import { normalizeJid, upsertChat, isPhoneJid } from '@/lib/chat-utils';
 
+const SCHEMA_MIGRATION_MESSAGE =
+  'Database schema is out of date. Please run the latest Supabase migrations (provider_message_id + client_request_id) and retry.';
+
+function isSchemaCacheError(error: any): boolean {
+  const message = (error?.message || '').toLowerCase();
+  const details = (error?.details || '').toLowerCase();
+  return (
+    message.includes('column') &&
+      (message.includes('provider_message_id') || message.includes('client_request_id')) ||
+    details.includes('cached plan') ||
+    details.includes('schema') ||
+    message.includes('schema cache')
+  );
+}
+
 /**
  * Manual Send Message API
  *
@@ -104,6 +119,13 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (messageError) {
+      if (isSchemaCacheError(messageError)) {
+        return NextResponse.json(
+          { error: SCHEMA_MIGRATION_MESSAGE, needs_migration: true },
+          { status: 400 }
+        );
+      }
+
       if (messageError.code === '23505' && clientRequestId) {
         const { data: existingAfterInsert } = await supabaseAdmin
           .from('messages')
@@ -164,6 +186,12 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     console.error('[manual-send] Error:', error);
+    if (isSchemaCacheError(error)) {
+      return NextResponse.json(
+        { error: SCHEMA_MIGRATION_MESSAGE, needs_migration: true },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       { error: error.message || 'Internal server error' },
       { status: 500 }

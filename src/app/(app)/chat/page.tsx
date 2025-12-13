@@ -22,6 +22,19 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [chatsLoading, setChatsLoading] = useState(false);
   const [messagesLoading, setMessagesLoading] = useState(false);
+  const [jidMappings, setJidMappings] = useState<Record<string, string>>({});
+
+  const applyMappingsToChats = (items: Chat[] | null, mappings: Record<string, string>) => {
+    if (!items) return items;
+    return items.map((chat) => {
+      const remote = (chat as any).remote_id || (chat as any).remoteId;
+      const currentPhone = (chat as any).phone_jid || (chat as any).phoneJid;
+      if (!currentPhone && remote && mappings[remote]) {
+        return { ...chat, phone_jid: mappings[remote] } as Chat;
+      }
+      return chat;
+    });
+  };
 
   useEffect(() => {
     const initUser = async () => {
@@ -70,6 +83,53 @@ export default function ChatPage() {
   useEffect(() => {
     if (!sessionId) return;
 
+    const fetchMappings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('jid_mappings')
+          .select('lid_jid, phone_jid')
+          .eq('session_id', sessionId);
+        if (error) throw error;
+        const nextMap: Record<string, string> = {};
+        (data || []).forEach((row: any) => {
+          nextMap[row.lid_jid] = row.phone_jid;
+        });
+        setJidMappings(nextMap);
+      } catch (err) {
+        console.error('Error fetching jid_mappings:', err);
+      }
+    };
+
+    fetchMappings();
+
+    const mappingsChannel = supabase
+      .channel(`jid_mappings-${sessionId}`)
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'jid_mappings',
+        filter: `session_id=eq.${sessionId}`,
+      }, (payload) => {
+        setJidMappings((prev) => {
+          const copy = { ...prev };
+          const lid = (payload.new as any)?.lid_jid || (payload.old as any)?.lid_jid;
+          const phone = (payload.new as any)?.phone_jid;
+          if (payload.eventType === 'DELETE' && lid) {
+            delete copy[lid];
+          } else if (lid && phone) {
+            copy[lid] = phone;
+          }
+          return copy;
+        });
+      })
+      .subscribe();
+
+    return () => { mappingsChannel.unsubscribe(); };
+  }, [sessionId]);
+
+  useEffect(() => {
+    if (!sessionId) return;
+
     const fetchChats = async () => {
       setChatsLoading(true);
       try {
@@ -80,7 +140,7 @@ export default function ChatPage() {
           .order('last_message_at', { ascending: false });
 
         if (error) throw error;
-        setChats(data || []);
+        setChats(applyMappingsToChats(data || [], jidMappings));
       } catch (error) {
         console.error('Error fetching chats:', error);
         setChats([]);
@@ -106,13 +166,15 @@ export default function ChatPage() {
       }, (payload) => {
         if (payload.eventType === 'INSERT') {
           setChats((prev) => {
-            if (!prev) return [payload.new as Chat];
-            return [payload.new as Chat, ...prev];
+            const mapped = applyMappingsToChats([payload.new as Chat], jidMappings)?.[0] as Chat;
+            if (!prev) return [mapped];
+            return [mapped, ...prev];
           });
         } else if (payload.eventType === 'UPDATE') {
           setChats((prev) => {
             if (!prev) return prev;
-            const updated = prev.map((c) => (c.id === (payload.new as any).id ? (payload.new as Chat) : c));
+            const mapped = applyMappingsToChats([payload.new as Chat], jidMappings)?.[0] as Chat;
+            const updated = prev.map((c) => (c.id === (payload.new as any).id ? mapped : c));
             // Re-sort by last_message_at to keep most recent chats on top
             return updated.sort((a, b) => {
               const dateA = new Date(a.last_message_at || 0).getTime();
@@ -131,6 +193,12 @@ export default function ChatPage() {
 
     return () => { channel.unsubscribe(); };
   }, [sessionId]);
+
+  useEffect(() => {
+    if (chats) {
+      setChats(applyMappingsToChats(chats, jidMappings));
+    }
+  }, [jidMappings]);
 
   useEffect(() => {
     if (!sessionId || !selectedChatId) return;

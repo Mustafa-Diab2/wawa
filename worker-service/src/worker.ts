@@ -11,15 +11,142 @@ import {
   downloadMediaMessage,
   Browsers,
 } from "@whiskeysockets/baileys";
+import { createHash } from "crypto";
 
 import { supabaseAdmin } from "./lib/supabaseAdmin";
 import pino from "pino";
 import fs from "fs";
 import { callAI } from "./lib/ai-agent";
 
-import { upsertChat, linkLidToPhone, isPhoneJid, isLidJid } from "./lib/chat-utils";
+import { upsertChat, linkLidToPhone, isPhoneJid, isLidJid, normalizeJid } from "./lib/chat-utils";
 
 const sessions = new Map<string, any>();
+const syncedSessions = new Set<string>();
+const HISTORY_CHAT_LIMIT = 200;
+const HISTORY_MESSAGE_LIMIT = 50;
+const JID_MAPPING_SOURCE_REMOTE_ALT = "remoteJidAlt";
+
+async function handleJidMapping(params: { sessionId: string; lidJid: string; phoneJid: string; source: string }) {
+  const { sessionId, lidJid, phoneJid, source } = params;
+  if (!isLidJid(lidJid) || !isPhoneJid(phoneJid)) return;
+
+  console.log(`[Mapping] session=${sessionId} lid=${lidJid} -> phone=${phoneJid} (source=${source})`);
+
+  try {
+    await supabaseAdmin
+      .from("jid_mappings")
+      .upsert({
+        session_id: sessionId,
+        lid_jid: lidJid,
+        phone_jid: phoneJid,
+        last_seen_at: new Date().toISOString(),
+      })
+      .select("id")
+      .single();
+  } catch (err) {
+    console.error(`[Mapping] Failed upsert jid_mappings for ${lidJid}:`, err);
+  }
+
+  try {
+    await supabaseAdmin
+      .from("chats")
+      .update({ phone_jid: phoneJid, updated_at: new Date().toISOString() })
+      .eq("session_id", sessionId)
+      .eq("remote_id", lidJid)
+      .or(`phone_jid.is.null,phone_jid.neq.${phoneJid}`);
+  } catch (err) {
+    console.error(`[Mapping] Failed updating chat for ${lidJid}:`, err);
+  }
+
+  try {
+    await linkLidToPhone(sessionId, lidJid, phoneJid);
+  } catch (err) {
+    console.error(`[Mapping] linkLidToPhone error for ${lidJid}:`, err);
+  }
+}
+
+async function backfillJidMappings(sessionId: string) {
+  try {
+    const { data: mappings } = await supabaseAdmin
+      .from("jid_mappings")
+      .select("lid_jid, phone_jid")
+      .eq("session_id", sessionId);
+
+    if (!mappings?.length) {
+      console.log(`[Backfill] session=${sessionId} no jid_mappings to apply`);
+      return;
+    }
+
+    let updated = 0;
+    for (const mapping of mappings) {
+      const lid = mapping.lid_jid;
+      const phone = mapping.phone_jid;
+      if (!isLidJid(lid) || !isPhoneJid(phone)) continue;
+
+      const { data, error } = await supabaseAdmin
+        .from("chats")
+        .update({ phone_jid: phone, updated_at: new Date().toISOString() })
+        .eq("session_id", sessionId)
+        .eq("remote_id", lid)
+        .is("phone_jid", null)
+        .select("id");
+
+      if (error) {
+        console.error(`[Backfill] Update failed for ${lid}:`, error);
+        continue;
+      }
+      updated += data?.length || 0;
+    }
+
+    console.log(`[Backfill] session=${sessionId} updated ${updated} chats from jid_mappings`);
+  } catch (err) {
+    console.error(`[Backfill] Error processing mappings for session ${sessionId}:`, err);
+  }
+}
+
+function computeProviderId(params: {
+  waMessageId?: string | null;
+  jid: string;
+  timestamp: string;
+  body: string;
+  fromMe: boolean;
+}) {
+  if (params.waMessageId) return params.waMessageId;
+  const hash = createHash("sha1")
+    .update(`${params.jid}|${params.timestamp}|${params.body || ""}|${params.fromMe ? "1" : "0"}`)
+    .digest("hex")
+    .slice(0, 16);
+  return `fallback:${hash}`;
+}
+
+function parseMessageContent(msg: any) {
+  let body = "";
+  let mediaType: "image" | "video" | "audio" | "document" | "sticker" | null = null;
+
+  if (msg?.message?.conversation) {
+    body = msg.message.conversation;
+  } else if (msg?.message?.extendedTextMessage?.text) {
+    body = msg.message.extendedTextMessage.text;
+  } else if (msg?.message?.imageMessage) {
+    body = msg.message.imageMessage.caption || "";
+    mediaType = "image";
+  } else if (msg?.message?.videoMessage) {
+    body = msg.message.videoMessage.caption || "";
+    mediaType = "video";
+  } else if (msg?.message?.audioMessage) {
+    body = "";
+    mediaType = "audio";
+  } else if (msg?.message?.stickerMessage) {
+    body = "";
+    mediaType = "sticker";
+  } else if (msg?.message?.documentMessage) {
+    const fileName = msg.message.documentMessage.fileName || "";
+    body = fileName ? `[document] ${fileName}` : "[document]";
+    mediaType = "document";
+  }
+
+  return { body, mediaType };
+}
 
 async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: string): Promise<string | null> {
   try {
@@ -38,6 +165,156 @@ async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: st
   } catch (error) {
     console.error("Error downloading/uploading media:", error);
     return null;
+  }
+}
+
+async function loadRecentMessages(sock: any, jid: string, limit: number) {
+  try {
+    if (typeof sock.loadMessages === "function") {
+      const loaded = await sock.loadMessages(jid, limit);
+      if (Array.isArray(loaded)) return loaded;
+    }
+  } catch (err) {
+    console.warn(`[HistorySync] loadMessages failed for ${jid}:`, err);
+  }
+
+  try {
+    if (typeof sock.fetchMessagesFromWA === "function") {
+      const loaded = await sock.fetchMessagesFromWA(jid, limit);
+      if (Array.isArray(loaded)) return loaded;
+    }
+  } catch (err) {
+    console.warn(`[HistorySync] fetchMessagesFromWA failed for ${jid}:`, err);
+  }
+
+  try {
+    const storeMessages = sock.store?.messages?.[jid] || sock.store?.messages?.get?.(jid);
+    if (storeMessages && Array.isArray(storeMessages)) {
+      return storeMessages.slice(-limit);
+    }
+  } catch (err) {
+    console.warn(`[HistorySync] store lookup failed for ${jid}:`, err);
+  }
+
+  return [];
+}
+
+async function runHistorySync(sessionId: string, sock: any) {
+  if (syncedSessions.has(sessionId)) return;
+
+  try {
+    let chatIds: string[] = [];
+
+    try {
+      if (sock.chats?.all) {
+        chatIds = (sock.chats.all() || []).map((c: any) => c.id).filter(Boolean);
+      } else if (Array.isArray(sock.chats)) {
+        chatIds = sock.chats.map((c: any) => c.id || c.jid).filter(Boolean);
+      }
+    } catch (err) {
+      console.warn(`[HistorySync] unable to read chats for session ${sessionId}:`, err);
+    }
+
+    if (!Array.isArray(chatIds)) chatIds = [];
+    const recentChatIds = Array.from(new Set(chatIds)).filter((jid) => jid && jid !== "status@broadcast").slice(-HISTORY_CHAT_LIMIT);
+
+    if (recentChatIds.length === 0) {
+      console.log(`[HistorySync] session=${sessionId} chatsFetched=0 (skip)`);
+      return;
+    }
+
+    syncedSessions.add(sessionId);
+    console.log(`[HistorySync] session=${sessionId} chatsFetched=${recentChatIds.length}`);
+
+    for (const jid of recentChatIds) {
+      const phoneJid = isPhoneJid(jid) ? jid : undefined;
+      const { chat } = await upsertChat(sessionId, jid, phoneJid, {
+        type: jid.endsWith("@g.us") ? "GROUP" : "INDIVIDUAL",
+      });
+
+      const messages = await loadRecentMessages(sock, jid, HISTORY_MESSAGE_LIMIT);
+      let inserted = 0;
+      let skipped = 0;
+
+      for (const msg of messages) {
+        if (!msg?.message || !msg?.key) {
+          skipped += 1;
+          continue;
+        }
+
+        const providerId = msg.key.id;
+        if (!providerId) {
+          skipped += 1;
+          continue;
+        }
+
+        const fromMe = msg.key.fromMe ?? false;
+        const timestamp =
+          typeof msg.messageTimestamp === "number"
+            ? new Date(msg.messageTimestamp * 1000).toISOString()
+            : new Date().toISOString();
+
+        const body =
+          msg.message?.conversation ||
+          msg.message?.extendedTextMessage?.text ||
+          msg.message?.imageMessage?.caption ||
+          msg.message?.videoMessage?.caption ||
+          "";
+
+        let mediaType: "image" | "video" | "audio" | "document" | "sticker" | null = null;
+        if (msg.message?.imageMessage) mediaType = "image";
+        else if (msg.message?.videoMessage) mediaType = "video";
+        else if (msg.message?.audioMessage) mediaType = "audio";
+        else if (msg.message?.stickerMessage) mediaType = "sticker";
+        else if (msg.message?.documentMessage) mediaType = "document";
+
+        if (!body && !mediaType) {
+          skipped += 1;
+          continue;
+        }
+
+        const { data: existing } = await supabaseAdmin
+          .from("messages")
+          .select("id")
+          .eq("session_id", sessionId)
+          .eq("provider_message_id", providerId)
+          .limit(1)
+          .maybeSingle();
+
+        if (existing?.id) {
+          skipped += 1;
+          continue;
+        }
+
+        const { error: insertError } = await supabaseAdmin.from("messages").insert({
+          chat_id: chat.id,
+          session_id: sessionId,
+          remote_id: jid,
+          sender: fromMe ? "agent" : "user",
+          body: body || null,
+          timestamp,
+          is_from_us: fromMe,
+          media_type: mediaType,
+          media_url: null,
+          status: fromMe ? "sent" : "delivered",
+          created_at: timestamp,
+          provider_message_id: providerId,
+        });
+
+        if (insertError) {
+          skipped += 1;
+          continue;
+        }
+
+        inserted += 1;
+      }
+
+      console.log(
+        `[HistorySync] jid=${jid} messagesFetched=${messages.length} inserted=${inserted} skipped=${skipped}`
+      );
+    }
+  } catch (err) {
+    console.error(`[HistorySync] Error for session ${sessionId}:`, err);
   }
 }
 
@@ -61,6 +338,7 @@ async function startSession(sessionId: string) {
       logger: pino({ level: "silent" }) as any,
       browser: Browsers.ubuntu("Chrome"),
       syncFullHistory: true, // Enable full history sync to load old chats
+      shouldSyncHistoryMessage: () => true,
       defaultQueryTimeoutMs: undefined,
     });
 
@@ -68,6 +346,11 @@ async function startSession(sessionId: string) {
 
     sock.ev.on("connection.update", async (update) => {
       const { connection, lastDisconnect, qr } = update;
+      if (connection === "open") {
+        console.log(
+          `[Diag] connection.open session=${sessionId} syncFullHistory=${sock?.opts?.syncFullHistory} historyLimits chats=${HISTORY_CHAT_LIMIT} msgs=${HISTORY_MESSAGE_LIMIT}`
+        );
+      }
 
       if (qr) {
         console.log(`QR RECEIVED for session ${sessionId} len ${qr.length}`);
@@ -90,6 +373,7 @@ async function startSession(sessionId: string) {
 
         console.log(`Connection closed for ${sessionId}. Logged out: ${isLoggedOut}`);
         sessions.delete(sessionId);
+        syncedSessions.delete(sessionId);
 
         if (isLoggedOut) {
           console.log(`Session ${sessionId} logged out. Clearing all chats and restarting...`);
@@ -145,6 +429,25 @@ async function startSession(sessionId: string) {
           }
 
           console.log(`Finished loading chats for session ${sessionId}`);
+
+          await runHistorySync(sessionId, sock);
+          await backfillJidMappings(sessionId);
+
+          try {
+            const { count: chatCount } = await supabaseAdmin
+              .from("chats")
+              .select("*", { count: "exact", head: true })
+              .eq("session_id", sessionId);
+            const { count: msgCount } = await supabaseAdmin
+              .from("messages")
+              .select("*", { count: "exact", head: true })
+              .eq("session_id", sessionId);
+            console.log(
+              `[Diag] session=${sessionId} dbCounts chats=${chatCount ?? 0} messages=${msgCount ?? 0}`
+            );
+          } catch (diagErr) {
+            console.error(`[Diag] Failed counting records for session ${sessionId}:`, diagErr);
+          }
         } catch (e) {
           console.error(`Error updating connected status for ${sessionId}:`, e);
         }
@@ -158,6 +461,10 @@ async function startSession(sessionId: string) {
     // ==========================
     sock.ev.on("chats.set", async ({ chats: waChats }) => {
       console.log(`[Worker:ChatsSet] Received ${waChats.length} chats from WhatsApp for session ${sessionId}`);
+      if (waChats.length > 0) {
+        const first = waChats[0];
+        console.log(`[Worker:ChatsSet] sample chat id=${first.id} name=${first.name || (first as any).subject || ""}`);
+      }
 
       for (const waChat of waChats) {
         try {
@@ -185,6 +492,10 @@ async function startSession(sessionId: string) {
     // ==========================
     sock.ev.on("chats.upsert", async (waChats) => {
       console.log(`[Worker:ChatsUpsert] Received ${waChats.length} chat updates for session ${sessionId}`);
+      if (waChats.length > 0) {
+        const first = waChats[0];
+        console.log(`[Worker:ChatsUpsert] sample chat id=${first.id} name=${first.name || (first as any).subject || ""}`);
+      }
 
       for (const waChat of waChats) {
         try {
@@ -254,9 +565,157 @@ async function startSession(sessionId: string) {
     });
 
     // ==========================
+    // messaging-history.set - Historical messages sync
+    // ==========================
+    sock.ev.on(
+      "messaging-history.set",
+      async ({ chats: historyChats, contacts: historyContacts, messages: historyMessages, isLatest }) => {
+        const chatCount = (historyChats || []).length;
+        const msgCount = (historyMessages || []).length;
+        console.log(
+          `[Worker:HistorySet] Received history sync: chats=${chatCount} messages=${msgCount} isLatest=${isLatest}`
+        );
+        if (chatCount > 0) {
+          const first = historyChats![0] as any;
+          console.log(`[Worker:HistorySet] sample chat id=${first?.id} name=${first?.name || first?.subject || ""}`);
+        }
+        if (msgCount > 0) {
+          const firstMsg = historyMessages![0] as any;
+          console.log(
+            `[Worker:HistorySet] sample message provider=${firstMsg?.key?.id} jid=${firstMsg?.key?.remoteJid}`
+          );
+        }
+
+        const lastByChat = new Map<string, { body: string; ts: string }>();
+
+        for (const chat of historyChats || []) {
+          const jid = (chat as any).id;
+          if (!jid || jid === "status@broadcast") continue;
+          const isGroup = jid.endsWith("@g.us");
+          const phoneJidParam = isPhoneJid(jid) ? jid : undefined;
+          const name =
+            (chat as any).name ||
+            (chat as any).subject ||
+            (chat as any).pushName ||
+            (chat as any).pushname ||
+            jid.split("@")[0];
+
+          try {
+            await upsertChat(sessionId, jid, phoneJidParam, {
+              type: isGroup ? "GROUP" : "INDIVIDUAL",
+              name,
+            });
+          } catch (err) {
+            console.error(`[Worker:HistorySet] Error saving chat ${jid}:`, err);
+          }
+        }
+
+        for (const msg of historyMessages || []) {
+          try {
+            if (!msg.message) continue;
+
+            const jid = msg.key.remoteJid!;
+            if (!jid || jid === "status@broadcast") continue;
+
+            const altJidRaw = (msg.key as any).remoteJidAlt || (msg as any).remoteJidAlt || null;
+            const altJid = altJidRaw ? normalizeJid(altJidRaw) : null;
+            const altIsPhone = altJid ? isPhoneJid(altJid) : false;
+            if (isLidJid(jid) && altIsPhone) {
+              await handleJidMapping({
+                sessionId,
+                lidJid: jid,
+                phoneJid: altJid,
+                source: JID_MAPPING_SOURCE_REMOTE_ALT,
+              });
+            }
+
+            const timestamp =
+              typeof msg.messageTimestamp === "number"
+                ? new Date(msg.messageTimestamp * 1000).toISOString()
+                : new Date().toISOString();
+
+            const { body, mediaType } = parseMessageContent(msg);
+            if (!body && !mediaType) continue;
+
+            const providerId = computeProviderId({
+              waMessageId: msg.key.id,
+              jid,
+              timestamp,
+              body,
+              fromMe: msg.key.fromMe ?? false,
+            });
+
+            const { data: existing } = await supabaseAdmin
+              .from("messages")
+              .select("id")
+              .eq("session_id", sessionId)
+              .eq("provider_message_id", providerId)
+              .limit(1)
+              .maybeSingle();
+
+            if (existing?.id) continue;
+
+            const isPhone = isPhoneJid(jid);
+            const phoneJidParam = isPhone ? jid : altIsPhone ? altJid : undefined;
+            const { chat } = await upsertChat(sessionId, jid, phoneJidParam, {
+              type: jid.endsWith("@g.us") ? "GROUP" : "INDIVIDUAL",
+            });
+
+            const { error: insertError } = await supabaseAdmin.from("messages").insert({
+              chat_id: chat.id,
+              session_id: sessionId,
+              remote_id: jid,
+              sender: msg.key.fromMe ? "agent" : "user",
+              body,
+              timestamp,
+              is_from_us: msg.key.fromMe ?? false,
+              media_type: mediaType,
+              media_url: null,
+              status: msg.key.fromMe ? "sent" : "delivered",
+              created_at: timestamp,
+              provider_message_id: providerId,
+            });
+
+            if (insertError) {
+              if (insertError.code !== "23505") {
+                console.error("[Worker:HistorySet] Error inserting message:", insertError);
+              }
+              continue;
+            }
+
+            const prev = lastByChat.get(chat.id);
+            if (!prev || new Date(timestamp).getTime() > new Date(prev.ts).getTime()) {
+              lastByChat.set(chat.id, { body, ts: timestamp });
+            }
+          } catch (e) {
+            console.error("[Worker:HistorySet] Error processing message:", e);
+          }
+        }
+
+        for (const [chatId, data] of lastByChat.entries()) {
+          try {
+            await supabaseAdmin
+              .from("chats")
+              .update({
+                last_message: data.body,
+                last_message_at: data.ts,
+                unread_count: 0,
+                updated_at: new Date().toISOString(),
+              })
+              .eq("id", chatId);
+          } catch (err) {
+            console.error(`[Worker:HistorySet] Error updating chat ${chatId}:`, err);
+          }
+        }
+
+        console.log(`[Worker:HistorySet] Finished processing ${msgCount} historical messages`);
+      }
+    });
+    // ==========================
     // messages.upsert (SOURCE OF TRUTH)
     // ==========================
     sock.ev.on("messages.upsert", async (m) => {
+      console.log(`[Worker:MessagesUpsert] Received ${m.messages.length} messages, type=${m.type}`);
       if (m.type !== "notify" && m.type !== "append") return;
 
       for (const msg of m.messages) {
@@ -287,29 +746,29 @@ async function startSession(sessionId: string) {
           } else if (msg.message.extendedTextMessage?.text) {
             body = msg.message.extendedTextMessage.text;
           } else if (msg.message.imageMessage) {
-            body = msg.message.imageMessage.caption || "📷 صورة";
+            body = msg.message.imageMessage.caption || "[image]";
             mediaType = "image";
             mediaUrl = await downloadAndUploadMedia(msg, "image", sessionId);
           } else if (msg.message.videoMessage) {
-            body = msg.message.videoMessage.caption || "🎥 فيديو";
+            body = msg.message.videoMessage.caption || "[video]";
             mediaType = "video";
             mediaUrl = await downloadAndUploadMedia(msg, "video", sessionId);
           } else if (msg.message.audioMessage) {
-            body = msg.message.audioMessage.ptt ? "🎤 رسالة صوتية" : "🎵 ملف صوتي";
+            body = msg.message.audioMessage.ptt ? "[voice note]" : "[audio]";
             mediaType = "audio";
             mediaUrl = await downloadAndUploadMedia(msg, "audio", sessionId);
           } else if (msg.message.stickerMessage) {
-            body = "🎨 ملصق";
+            body = "[sticker]";
             mediaType = "sticker";
             mediaUrl = await downloadAndUploadMedia(msg, "sticker", sessionId);
           } else if (msg.message.documentMessage) {
-            const fileName = msg.message.documentMessage.fileName || "ملف";
-            body = `📎 ${fileName}`;
+            const fileName = msg.message.documentMessage.fileName || "document";
+            body = `[document] ${fileName}`;
             mediaType = "document";
             mediaUrl = await downloadAndUploadMedia(msg, "document", sessionId);
           }
 
-          // ✅ Skip empty/no-media messages (prevents blank rows)
+          // Skip empty/no-media messages (prevents blank rows)
           if ((!body || body.trim() === "") && !mediaType) {
             console.log(`[Worker:Upsert] ⏭️ Skip empty message provider=${waMessageId} jid=${jid}`);
             continue;
@@ -317,9 +776,21 @@ async function startSession(sessionId: string) {
 
           const isPhone = isPhoneJid(jid);
           const isLid = isLidJid(jid);
+          const altJidRaw = (msg.key as any).remoteJidAlt || (msg as any).remoteJidAlt || null;
+          const altJid = altJidRaw ? normalizeJid(altJidRaw) : null;
+          const altIsPhone = altJid ? isPhoneJid(altJid) : false;
+
+          if (isLid && altIsPhone) {
+            await handleJidMapping({
+              sessionId,
+              lidJid: jid,
+              phoneJid: altJid,
+              source: JID_MAPPING_SOURCE_REMOTE_ALT,
+            });
+          }
 
           console.log(
-            `[Worker:Upsert] session=${sessionId} jid=${jid} fromMe=${fromMe} provider=${waMessageId} isPhone=${isPhone} isLid=${isLid}`
+            `[Worker:Upsert] session=${sessionId} jid=${jid} fromMe=${fromMe} provider=${waMessageId} isPhone=${isPhone} isLid=${isLid} alt=${altJid || "N/A"}`
           );
 
           // ✅ 1) DEDUPE by provider id across session (BEFORE chat upsert)
@@ -397,7 +868,7 @@ async function startSession(sessionId: string) {
           }
 
           // ✅ 3) Normal flow
-          const phoneJidParam = isPhone ? jid : undefined;
+          const phoneJidParam = isPhone ? jid : altIsPhone ? altJid : undefined;
           const { chat } = await upsertChat(sessionId, jid, phoneJidParam, {
             type: "INDIVIDUAL",
             lastMessage: body,
@@ -442,10 +913,20 @@ async function startSession(sessionId: string) {
           console.log(`[Worker:Upsert] ✅ Saved message provider=${waMessageId} chat=${chat.id}`);
 
           // ==========================
-          // AI Agent Logic (incoming only)
+          // AI Agent Logic (incoming REAL-TIME messages only, skip historical)
           // ==========================
-          if (!fromMe && body && body.trim() !== "") {
+          const isRealTimeMessage = m.type === "notify";
+          if (!fromMe && body && body.trim() !== "" && isRealTimeMessage) {
             try {
+              if (!process.env.OPENAI_API_KEY) {
+                console.log("[AI] OPENAI_API_KEY missing, skipping AI and marking for human");
+                await supabaseAdmin
+                  .from("chats")
+                  .update({ needs_human: true, mode: "human", updated_at: new Date().toISOString() })
+                  .eq("id", chat.id);
+                continue;
+              }
+
               const { data: chatData } = await supabaseAdmin
                 .from("chats")
                 .select("mode, bot_id")

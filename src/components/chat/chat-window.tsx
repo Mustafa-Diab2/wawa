@@ -20,6 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getDisplayName, needsMapping } from "@/lib/phone-display";
 
 interface ChatWindowProps {
   chat: Chat;
@@ -35,9 +36,8 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
   const [currentBot, setCurrentBot] = useState<Bot | null>(null);
   const botsFetchedRef = useRef(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const phoneOrRemote = (chat as any).phone_jid || chat.remote_id || chat.remoteId || chat.id || '';
-  const displayNumber = (phoneOrRemote || '').split('@')[0];
-  const displayName = chat.name || displayNumber;
+  const displayName = getDisplayName(chat);
+  const mappingNeeded = needsMapping(chat);
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -155,6 +155,11 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <h3 className="font-semibold">{displayName}</h3>
+              {mappingNeeded && (
+                <Badge variant="destructive" className="text-[10px]">
+                  needs mapping
+                </Badge>
+              )}
               <Badge
                 variant={chat.mode === 'ai' ? 'default' : 'secondary'}
                 className="text-xs cursor-pointer"
@@ -214,12 +219,18 @@ export default function ChatWindow({ chat, messages, messagesLoading, sessionId 
           </div>
         ) : (
           <div className="space-y-4">
-              {uniqueMessages.map((message) => (
-                <ChatMessage
-                  key={getMessageKey(message)}
-                  message={message}
-                />
-              ))}
+              {uniqueMessages.length === 0 ? (
+                <div className="text-center text-muted-foreground py-8">
+                  No messages yet
+                </div>
+              ) : (
+                uniqueMessages.map((message) => (
+                  <ChatMessage
+                    key={getMessageKey(message)}
+                    message={message}
+                  />
+                ))
+              )}
               <div ref={messagesEndRef} />
           </div>
         )}

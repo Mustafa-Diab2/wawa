@@ -21,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { formatE164FromJid, getDisplayJid, getDisplayName, needsMapping } from '@/lib/phone-display';
 
 interface ChatListProps {
   chats: Chat[] | null;
@@ -57,12 +58,15 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(chat => {
-        const remoteId = (chat as any).phone_jid || chat.remote_id || chat.remoteId;
+        const displayName = getDisplayName(chat).toLowerCase();
+        const displayJid = (getDisplayJid(chat) || '').toLowerCase();
+        const formattedPhone = (formatE164FromJid(getDisplayJid(chat)) || '').toLowerCase();
         const lastMessage = chat.last_message ?? chat.lastMessage;
-        const nameMatch = chat.name?.toLowerCase().includes(query);
-        const remoteMatch = remoteId?.toLowerCase().includes(query);
+        const nameMatch = displayName.includes(query);
+        const remoteMatch = displayJid.includes(query);
+        const phoneMatch = formattedPhone.includes(query);
         const lastMatch = lastMessage?.toLowerCase().includes(query);
-        return Boolean(nameMatch || remoteMatch || lastMatch);
+        return Boolean(nameMatch || remoteMatch || phoneMatch || lastMatch);
       });
     }
 
@@ -235,9 +239,9 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
             </div>
           ) : (
             filteredChats.map((chat) => {
-              const phoneOrRemote = (chat as any).phone_jid || chat.remote_id || chat.remoteId || chat.id || '';
-              const displayNumber = phoneOrRemote.split('@')[0];
-              const displayName = chat.name || displayNumber || 'Chat';
+              const displayName = getDisplayName(chat);
+              const mappingNeeded = needsMapping(chat);
+              const displayDigits = getDisplayJid(chat) || '';
 
               return (
                 <div
@@ -261,9 +265,21 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
                   </Avatar>
                   <div className="flex-1 overflow-hidden">
                     <div className="flex items-center justify-between">
-                        <h3 className="font-semibold truncate">
-                          {displayName}
-                        </h3>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-semibold truncate">
+                            {displayName || displayDigits || 'Unknown number'}
+                          </h3>
+                          {mappingNeeded && (
+                            <Badge variant="outline" className="text-[10px]">
+                              LID
+                            </Badge>
+                          )}
+                          {mappingNeeded && (
+                            <Badge variant="destructive" className="text-[10px]">
+                              needs mapping
+                            </Badge>
+                          )}
+                        </div>
                       <p className="text-xs text-muted-foreground whitespace-nowrap">
                         {getFormattedTimestamp(chat.last_message_at ?? chat.lastMessageAt)}
                       </p>

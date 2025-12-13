@@ -22,14 +22,55 @@ export function normalizePhoneToJid(phone: string): string {
  * @returns Formatted phone number (e.g., "+20 123 456 7890")
  */
 export function formatPhoneFromJid(jid: string): string {
+  if (!jid) return '';
   const digits = jid.split('@')[0];
 
-  // Simple formatting: add + at start and space every 3 digits
-  if (digits.length > 3) {
-    return '+' + digits.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, '$1 $2 $3 $4');
+  // If it's a LID (too long), return shortened version
+  if (digits.length > 15) {
+    return digits.slice(0, 4) + '...' + digits.slice(-4);
+  }
+
+  // Format based on common country codes
+  if (digits.length >= 10 && digits.length <= 15) {
+    // Egyptian format: 20 XXX XXX XXXX
+    if (digits.startsWith('20') && digits.length === 12) {
+      return '+' + digits.replace(/(\d{2})(\d{3})(\d{3})(\d{4})/, '$1 $2 $3 $4');
+    }
+    // Saudi format: 966 XX XXX XXXX
+    if (digits.startsWith('966') && digits.length === 12) {
+      return '+' + digits.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/, '$1 $2 $3 $4');
+    }
+    // General international format
+    return '+' + digits.replace(/(\d{1,3})(\d{3})(\d{3})(\d+)/, '$1 $2 $3 $4');
   }
 
   return '+' + digits;
+}
+
+/**
+ * Get best display number from chat
+ * Prefers phone_jid over remote_id (which might be LID)
+ */
+export function getBestPhoneNumber(chat: any): string {
+  const phoneJid = chat?.phone_jid;
+  const remoteId = chat?.remote_id || chat?.remoteId;
+
+  // If we have a phone_jid, use it (it's the real phone number)
+  if (phoneJid && isPhoneJid(phoneJid)) {
+    return formatPhoneFromJid(phoneJid);
+  }
+
+  // If remote_id is a phone number (not LID), use it
+  if (remoteId && isPhoneJid(remoteId)) {
+    return formatPhoneFromJid(remoteId);
+  }
+
+  // Fallback to whatever we have
+  if (remoteId) {
+    return formatPhoneFromJid(remoteId);
+  }
+
+  return '';
 }
 
 /**

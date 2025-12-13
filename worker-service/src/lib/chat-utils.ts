@@ -98,8 +98,9 @@ export async function upsertChat(
   } = {}
 ): Promise<{ chat: any; isNew: boolean }> {
   const { name, type = 'INDIVIDUAL', lastMessage } = options;
+  const phoneJidSafe = phoneJid && isPhoneJid(phoneJid) ? phoneJid : undefined;
 
-  console.log(`[upsertChat] sessionId=${sessionId}, remoteJid=${remoteJid}, phoneJid=${phoneJid || 'N/A'}`);
+  console.log(`[upsertChat] sessionId=${sessionId}, remoteJid=${remoteJid}, phoneJid=${phoneJidSafe || 'N/A'}`);
 
   // Step 1: Try to find by remote_id (exact match - highest priority)
   const { data: existingByRemoteId } = await supabaseAdmin
@@ -114,24 +115,24 @@ export async function upsertChat(
     console.log(`[upsertChat] Found existing chat by remote_id: ${existingByRemoteId.id}`);
 
     // Update phone_jid if provided and not set
-    if (phoneJid && !existingByRemoteId.phone_jid) {
+    if (phoneJidSafe && !existingByRemoteId.phone_jid) {
       await supabaseAdmin
         .from('chats')
-        .update({ phone_jid: phoneJid, updated_at: new Date().toISOString() })
+        .update({ phone_jid: phoneJidSafe, updated_at: new Date().toISOString() })
         .eq('id', existingByRemoteId.id);
-      existingByRemoteId.phone_jid = phoneJid;
+      existingByRemoteId.phone_jid = phoneJidSafe;
     }
 
     return { chat: existingByRemoteId, isNew: false };
   }
 
   // Step 2: If phone_jid provided, try to find by phone_jid
-  if (phoneJid) {
+  if (phoneJidSafe) {
     const { data: existingByPhoneJid } = await supabaseAdmin
       .from('chats')
       .select('*')
       .eq('session_id', sessionId)
-      .eq('phone_jid', phoneJid)
+      .eq('phone_jid', phoneJidSafe)
       .limit(1)
       .single();
 
