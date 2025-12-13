@@ -11,6 +11,7 @@ import fs from "fs";
 import { callAI } from "./lib/ai-agent";
 
 const sessions = new Map<string, any>();
+const lastQRCodes = new Map<string, string>(); // Track last QR code sent for each session
 
 // Helper function to download and upload media (simplified for now - using external storage later)
 async function downloadAndUploadMedia(msg: any, mediaType: string, sessionId: string): Promise<string | null> {
@@ -68,7 +69,15 @@ async function startSession(sessionId: string) {
             const { connection, lastDisconnect, qr } = update;
 
             if (qr) {
+                // Only update if QR code has changed
+                const lastQR = lastQRCodes.get(sessionId);
+                if (lastQR === qr) {
+                    return; // Skip if same QR code
+                }
+
                 console.log(`QR RECEIVED for session ${sessionId} len ${qr.length}`);
+                lastQRCodes.set(sessionId, qr);
+
                 try {
                     const { error } = await (supabaseAdmin as any)
                         .from("whatsapp_sessions")

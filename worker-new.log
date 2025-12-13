@@ -1172,3 +1172,1998 @@ QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
 ✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
 QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
 ✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Found 3 group chats
+Finished loading chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Found 3 group chats
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Finished loading chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: true
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b logged out. Clearing all chats and restarting...
+Deleted all chats for logged out session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b reset. Restarting to generate new QR code...
+[Polling] ✅ New session detected: 383f9639-1547-4dda-b17d-4ebf188bd86b
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Session already running, skipping: 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 217
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 217)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 217
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 217)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 217
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 217)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 217
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 217)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 217
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 217)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 217
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 217)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 217
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 217)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 217
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 217)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 217
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 217)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 217
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 217)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 217
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 217)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 217
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 217)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
