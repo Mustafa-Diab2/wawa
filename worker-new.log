@@ -554,3 +554,324 @@ QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
 ✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
 QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
 ✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+[Polling] Found 1 pending messages
+[Worker] Sending message c3be1325-9f60-4988-96c9-773b39556e29 to 201000676697@s.whatsapp.net
+Closing session: SessionEntry {
+  _chains: {
+    'BSMoytA+ov24KEiccYT4/pNltWur551KfxhYc+vsVLB+': { chainKey: [Object], chainType: 2, messageKeys: {} },
+    'BX/xDUz8rwMs1wGutL5IHaVP2CuZ7n8PqYx/g1zZxZlO': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 1815967773,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 7f f1 0d 4c fc af 03 2c d7 01 ae b4 be 48 1d a5 4f d8 2b 99 ee 7f 0f a9 8c 7f 83 5c d9 c5 99 4e>,
+      privKey: <Buffer 38 21 8a 9d ca be d8 63 c9 ab 7a 63 10 72 3f 84 17 7f ca a2 c1 9d 72 87 4d dc 0b 01 1b 8f a9 57>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 23 28 ca d0 3e a2 fd b8 28 48 9c 71 84 f8 fe 93 65 b5 6b ab e7 9d 4a 7f 18 58 73 eb ec 54 b0 7e>,
+    previousCounter: 0,
+    rootKey: <Buffer 05 50 62 79 49 35 50 b9 06 f0 7f a9 46 c2 c4 a6 9d e8 1f d1 07 09 b9 36 22 91 1a 8a da 91 9a ad>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 cf 6e ac 81 4a 74 a5 f6 d3 02 41 2e 56 0c 8d 04 92 b4 26 70 59 61 c3 b1 2a b3 2c b9 4d 06 0a 2d>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1765652956999,
+    created: 1765652950128,
+    remoteIdentityKey: <Buffer 05 25 97 b9 d9 94 56 4b 6b 6c 22 04 4d 44 08 89 70 f6 6e 1c 8e 16 3c 10 42 8b da 0a a0 60 fb f6 54>
+  }
+}
+Closing session: SessionEntry {
+  _chains: {
+    BXBDKxymzcePjHqp3SqsVdn2Bsl6eTNGYSNZYyGInqc8: { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 213447506,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 70 43 2b 1c a6 cd c7 8f 8c 7a a9 dd 2a ac 55 d9 f6 06 c9 7a 79 33 46 61 23 59 63 21 88 9e a7 3c>,
+      privKey: <Buffer 40 0f aa 3e 11 fe a0 c9 81 1a d0 77 70 92 45 67 43 0a f5 e6 d3 43 b0 da 05 fc 30 df 1a 3c 4b 4a>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 3c b9 9a cb 89 96 c3 63 84 74 9f 50 77 ef 28 1a c0 01 5e d8 0b 76 96 cc 59 b8 aa b1 a5 be f6 46>,
+    previousCounter: 0,
+    rootKey: <Buffer 72 be c7 99 d9 bf e5 bd 0c d9 b4 ed 34 3e 52 75 35 5d 25 fd 61 68 04 80 7b c4 9c 39 62 ef 83 3f>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 96 80 3c d5 bb 23 4d f7 04 15 fd 1c 17 d8 fb 59 ed 01 14 23 b4 67 62 1d fb 47 d8 59 22 13 cb 7a>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1765652950136,
+    created: 1765652950136,
+    remoteIdentityKey: <Buffer 05 fa 3c f1 53 86 ee fc e4 cf d3 5f 73 4f e1 18 f6 be 3d eb c8 dc 3a 5c 34 97 34 01 a2 39 26 db 53>
+  },
+  pendingPreKey: {
+    signedKeyId: 5066471,
+    baseKey: <Buffer 05 96 80 3c d5 bb 23 4d f7 04 15 fd 1c 17 d8 fb 59 ed 01 14 23 b4 67 62 1d fb 47 d8 59 22 13 cb 7a>,
+    preKeyId: 1149
+  }
+}
+[Worker] ✅ Message c3be1325-9f60-4988-96c9-773b39556e29 sent successfully and status updated
+messages.upsert {
+  "messages": [
+    {
+      "key": {
+        "remoteJid": "201000676697@s.whatsapp.net",
+        "fromMe": true,
+        "id": "3EB0C0B5047039FAA9C060"
+      },
+      "message": {
+        "extendedTextMessage": {
+          "text": "ل"
+        }
+      },
+      "messageTimestamp": "1765653519",
+      "status": "PENDING"
+    }
+  ],
+  "type": "append"
+}
+Saved message 3EB0C0B5047039FAA9C060 to chat df15659e-0f5b-4ed3-b828-26ddeb912201
+messages.upsert {
+  "messages": [
+    {
+      "key": {
+        "remoteJid": "128638850732135@lid",
+        "remoteJidAlt": "201000676697@s.whatsapp.net",
+        "fromMe": false,
+        "id": "3A64C7D76B2E67DF6967",
+        "participant": "",
+        "addressingMode": "lid"
+      },
+      "messageTimestamp": 1765653530,
+      "pushName": "Diab",
+      "broadcast": false,
+      "message": {
+        "conversation": "H",
+        "messageContextInfo": {
+          "deviceListMetadata": {
+            "senderKeyHash": "rXP/98ogKCQzjQ==",
+            "senderTimestamp": "1765643003",
+            "recipientKeyHash": "5VY5r6FEIbKTyg==",
+            "recipientTimestamp": "1765642288"
+          },
+          "deviceListMetadataVersion": 2,
+          "messageSecret": "LGAvyfvTUhU9pk0AIgQAwuB8j6eef8JxzrsnVyuKfdg="
+        }
+      }
+    }
+  ],
+  "type": "notify"
+}
+Saved message 3A64C7D76B2E67DF6967 to chat b56eccb9-0325-4943-97ae-b2298bff1d27
+[AI] Chat b56eccb9-0325-4943-97ae-b2298bff1d27 is in AI mode, calling AI agent...
+[AI Agent] Using Gemini with 3 history messages
+[AI Agent] Gemini raw response: {
+  "reply": "أعتذر، لم أفهم سؤالك. يرجى توضيح ما تحتاج إليه.",
+  "handoff": false
+}
+[AI Agent] Gemini parsed response: { replyLength: 47, handoff: false, reason: undefined }
+[AI] Sent reply to 128638850732135@lid
+messages.upsert {
+  "messages": [
+    {
+      "key": {
+        "remoteJid": "128638850732135@lid",
+        "fromMe": true,
+        "id": "3EB06DF2488E9FAE2B6B1A"
+      },
+      "message": {
+        "extendedTextMessage": {
+          "text": "أعتذر، لم أفهم سؤالك. يرجى توضيح ما تحتاج إليه."
+        }
+      },
+      "messageTimestamp": "1765653531",
+      "status": "PENDING"
+    }
+  ],
+  "type": "append"
+}
+Saved message 3EB06DF2488E9FAE2B6B1A to chat b56eccb9-0325-4943-97ae-b2298bff1d27
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Found 3 group chats
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Finished loading chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Session 383f9639-1547-4dda-b17d-4ebf188bd86b connected.
+Fetching chats for session 383f9639-1547-4dda-b17d-4ebf188bd86b...
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+Connection closed for 383f9639-1547-4dda-b17d-4ebf188bd86b. Logged out: false
+Connection error for 383f9639-1547-4dda-b17d-4ebf188bd86b, reconnecting...
+Starting session 383f9639-1547-4dda-b17d-4ebf188bd86b
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 383f9639-1547-4dda-b17d-4ebf188bd86b len 237
+✅ QR Code for session 383f9639-1547-4dda-b17d-4ebf188bd86b successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)

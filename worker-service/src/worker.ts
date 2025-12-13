@@ -255,8 +255,8 @@ async function startSession(sessionId: string) {
                             .upsert(
                                 {
                                     session_id: sessionId,
-                                    remote_jid: jid,
-                                    remote_id: jid, // Keep for backward compatibility
+                                    remote_id: jid, // Primary field for uniqueness
+                                    phone_jid: jid, // For LID mapping
                                     name: jid.split('@')[0], // Use phone number as name
                                     type: "INDIVIDUAL",
                                     status: "INBOX",
@@ -272,7 +272,7 @@ async function startSession(sessionId: string) {
                                     updated_at: new Date().toISOString()
                                 },
                                 {
-                                    onConflict: "remote_jid,session_id",
+                                    onConflict: "session_id,remote_id", // Match actual constraint
                                     ignoreDuplicates: false
                                 }
                             )
