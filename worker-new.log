@@ -1,0 +1,54 @@
+
+> wacrm-worker@1.0.0 start
+> tsx src/worker.ts
+
+Starting Worker with Supabase...
+[Worker] Setting up polling for pending messages (every 3 seconds)...
+[Worker] Setting up polling for new sessions (every 5 seconds)...
+[Worker] Querying existing sessions from whatsapp_sessions table...
+[Worker] ✅ Found 2 existing sessions: [
+  { id: '521678a6-aa7d-46cc-824b-d333db715b31' },
+  { id: '33e73d2c-b72f-491c-a493-fdbfb9b99610' }
+]
+[Worker] Starting session from DB: 521678a6-aa7d-46cc-824b-d333db715b31
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+[Worker] Starting session from DB: 33e73d2c-b72f-491c-a493-fdbfb9b99610
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+Connection closed for 521678a6-aa7d-46cc-824b-d333db715b31. Logged out: false
+Connection error for 521678a6-aa7d-46cc-824b-d333db715b31, reconnecting...
+Starting session 521678a6-aa7d-46cc-824b-d333db715b31
+Connection closed for 33e73d2c-b72f-491c-a493-fdbfb9b99610. Logged out: false
+Connection error for 33e73d2c-b72f-491c-a493-fdbfb9b99610, reconnecting...
+Starting session 33e73d2c-b72f-491c-a493-fdbfb9b99610
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 521678a6-aa7d-46cc-824b-d333db715b31 len 237
+✅ QR Code for session 521678a6-aa7d-46cc-824b-d333db715b31 successfully updated in Supabase (len: 237)
+QR RECEIVED for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 len 237
+✅ QR Code for session 33e73d2c-b72f-491c-a493-fdbfb9b99610 successfully updated in Supabase (len: 237)

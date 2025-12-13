@@ -31,6 +31,7 @@ export default function ConnectPage() {
   const [userId, setUserId] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [session, setSession] = useState<SessionData | null>(null);
+  const [lastValidQR, setLastValidQR] = useState<string>(''); // Keep last valid QR
   const [isLoading, setIsLoading] = useState(true);
   const [isCreatingSession, setIsCreatingSession] = useState(false);
   const [channel, setChannel] = useState<RealtimeChannel | null>(null);
@@ -262,11 +263,43 @@ export default function ConnectPage() {
 
     setChannel(realtimeChannel);
 
-    // Polling disabled - using Realtime only to reduce console spam
-    // If Realtime doesn't work, consider enabling polling with longer interval
+    // Fetch immediately on mount
+    const fetchSession = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('whatsapp_sessions')
+          .select('*')
+          .eq('id', sessionId)
+          .single();
+
+        if (!error && data) {
+          console.log('[ConnectPage] Fetched session:', {
+            hasQR: !!data.qr,
+            qrLength: data.qr?.length || 0,
+            isReady: data.is_ready
+          });
+
+          // Keep last valid QR code
+          if (data.qr && data.qr.length > 0) {
+            setLastValidQR(data.qr);
+          }
+
+          setSession(data as SessionData);
+        }
+      } catch (error) {
+        console.error('[ConnectPage] Fetch error:', error);
+      }
+    };
+
+    // Fetch immediately
+    fetchSession();
+
+    // Polling as backup for Realtime
+    const pollInterval = setInterval(fetchSession, 2000); // Poll every 2 seconds
 
     return () => {
       realtimeChannel.unsubscribe();
+      clearInterval(pollInterval);
     };
   }, [sessionId]);
 
@@ -278,7 +311,9 @@ export default function ConnectPage() {
   }, [session?.is_ready, sessionId]);
 
   const connectionStatus = session?.is_ready ? "connected" : "disconnected";
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(session?.qr || '')}`;
+  // Use lastValidQR if current QR is empty
+  const displayQR = (session?.qr && session.qr.length > 0) ? session.qr : lastValidQR;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(displayQR)}`;
 
   const renderStatus = () => {
     if (isLoading) {
@@ -320,19 +355,20 @@ export default function ConnectPage() {
         </CardHeader>
         <CardContent className="flex flex-col items-center gap-4">
           <div className="p-4 bg-white rounded-lg shadow-inner h-[232px] w-[232px] flex items-center justify-center">
-            {connectionStatus === 'disconnected' && session?.qr ? (
+            {displayQR && !session?.is_ready ? (
               <Image
                 src={qrCodeUrl}
                 alt="QR Code"
                 width={200}
                 height={200}
                 unoptimized
+                key={displayQR}
               />
             ) : (
               <div className="w-[200px] h-[200px] flex items-center justify-center bg-gray-100 rounded-md">
                 {isLoading ? (
                     <Loader2 className="h-16 w-16 animate-spin text-primary" />
-                ) : connectionStatus === 'connected' ? (
+                ) : session?.is_ready ? (
                   <CheckCircle className="h-16 w-16 text-green-500" />
                 ) : (
                    <p className="text-sm text-muted-foreground text-center p-4">جاري إنشاء الرمز...</p>

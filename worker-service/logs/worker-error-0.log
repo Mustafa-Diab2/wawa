@@ -1,0 +1,10 @@
+2025-12-11T11:23:49: [Worker] ❌ Error sending message 085220e4-8534-4929-8fd1-02a4a47112cc: TypeError: Cannot read properties of undefined (reading 'id')
+2025-12-11T11:23:49:     at Object.sendMessage (/home/user/studio/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:1120:40)
+2025-12-11T11:23:49:     at Timeout._onTimeout (/home/user/studio/worker-service/src/worker.ts:573:36)
+2025-12-11T11:23:49:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-11T11:56:09: Error upserting chat for 201000676697@s.whatsapp.net: {
+2025-12-11T11:56:09:   code: '23505',
+2025-12-11T11:56:09:   details: 'Key (session_id, remote_id)=(b12bc287-35fc-4e09-85c2-697ae29782cf, 201000676697@s.whatsapp.net) already exists.',
+2025-12-11T11:56:09:   hint: null,
+2025-12-11T11:56:09:   message: 'duplicate key value violates unique constraint "chats_session_id_remote_id_key"'
+2025-12-11T11:56:09: }

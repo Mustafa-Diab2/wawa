@@ -1,6 +1,6 @@
 'use client';
 import { useState, useMemo } from 'react';
-import { Search, Inbox, CheckCircle, Archive, MessageSquarePlus, X } from 'lucide-react';
+import { Search, Inbox, CheckCircle, Archive, MessageSquarePlus, X, MoreVertical } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -21,7 +21,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { formatE164FromJid, getDisplayJid, getDisplayName, needsMapping } from '@/lib/phone-display';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { supabase } from '@/lib/supabase';
+import { useToast } from '@/hooks/use-toast';
 
 interface ChatListProps {
   chats: Chat[] | null;
@@ -33,6 +40,7 @@ interface ChatListProps {
 type FilterType = 'ALL' | 'INBOX' | 'DONE' | 'ARCHIVED';
 
 export default function ChatList({ chats, selectedChatId, onSelectChat, onNewChat }: ChatListProps) {
+  const { toast } = useToast();
   const [filter, setFilter] = useState<FilterType>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [newChatOpen, setNewChatOpen] = useState(false);
@@ -58,15 +66,13 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(chat => {
-        const displayName = getDisplayName(chat).toLowerCase();
-        const displayJid = (getDisplayJid(chat) || '').toLowerCase();
-        const formattedPhone = (formatE164FromJid(getDisplayJid(chat)) || '').toLowerCase();
+        const remoteId = chat.remote_id ?? chat.remoteId;
         const lastMessage = chat.last_message ?? chat.lastMessage;
-        const nameMatch = displayName.includes(query);
-        const remoteMatch = displayJid.includes(query);
-        const phoneMatch = formattedPhone.includes(query);
-        const lastMatch = lastMessage?.toLowerCase().includes(query);
-        return Boolean(nameMatch || remoteMatch || phoneMatch || lastMatch);
+        return (
+          (chat.name?.toLowerCase().includes(query)) ||
+          (remoteId?.toLowerCase().includes(query)) ||
+          (lastMessage?.toLowerCase().includes(query))
+        );
       });
     }
 
@@ -119,6 +125,39 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
     if (!filteredChats) return;
     const allIds = new Set(filteredChats.map(chat => chat.id));
     setSelectedChats(allIds);
+  };
+
+  const updateChatStatus = async (chatId: string, status: 'INBOX' | 'DONE' | 'ARCHIVED') => {
+    try {
+      const updates: any = {};
+
+      if (status === 'ARCHIVED') {
+        updates.is_archived = true;
+        updates.status = 'INBOX'; // Keep status as INBOX but archived
+      } else {
+        updates.status = status;
+        updates.is_archived = false;
+      }
+
+      const { error } = await supabase
+        .from('chats')
+        .update(updates)
+        .eq('id', chatId);
+
+      if (error) throw error;
+
+      toast({
+        title: 'تم التحديث',
+        description: status === 'DONE' ? 'تم نقل المحادثة إلى تم' : status === 'ARCHIVED' ? 'تم أرشفة المحادثة' : 'تم نقل المحادثة إلى صندوق الوارد',
+      });
+    } catch (error: any) {
+      console.error('Error updating chat status:', error);
+      toast({
+        title: 'خطأ',
+        description: 'فشل تحديث حالة المحادثة',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -238,64 +277,81 @@ export default function ChatList({ chats, selectedChatId, onSelectChat, onNewCha
               <p>لا توجد محادثات</p>
             </div>
           ) : (
-            filteredChats.map((chat) => {
-              const displayName = getDisplayName(chat);
-              const mappingNeeded = needsMapping(chat);
-              const displayDigits = getDisplayJid(chat) || '';
-
-              return (
-                <div
-                  key={chat.id}
-                  className={cn(
-                    'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50 cursor-pointer',
-                    selectedChatId === chat.id && 'bg-muted'
-                  )}
-                  onClick={() => onSelectChat(chat.id)}
-                >
+            filteredChats.map((chat) => (
+              <div
+                key={chat.id}
+                className={cn(
+                  'flex items-center gap-3 p-4 text-right transition-colors hover:bg-muted/50 cursor-pointer',
+                  selectedChatId === chat.id && 'bg-muted'
+                )}
+                onClick={(e) => {
+                  // Don't select chat if clicking on checkbox
+                  const target = e.target as HTMLElement;
+                  if (target.closest('[role="checkbox"]')) {
+                    return;
+                  }
+                  onSelectChat(chat.id);
+                }}
+              >
+                <div onClick={(e) => e.stopPropagation()}>
                   <Checkbox
                     checked={selectedChats.has(chat.id)}
                     onCheckedChange={(checked) => toggleChatSelection(chat.id, {} as any)}
-                    onClick={(e) => e.stopPropagation()}
                   />
-                  <Avatar className="h-10 w-10 border">
-                    <AvatarImage src={chat.avatar} alt={displayName} />
-                      <AvatarFallback>
-                        {displayName.charAt(0) || 'C'}
-                      </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 overflow-hidden">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <h3 className="font-semibold truncate">
-                            {displayName || displayDigits || 'Unknown number'}
-                          </h3>
-                          {mappingNeeded && (
-                            <Badge variant="outline" className="text-[10px]">
-                              LID
-                            </Badge>
-                          )}
-                          {mappingNeeded && (
-                            <Badge variant="destructive" className="text-[10px]">
-                              needs mapping
-                            </Badge>
-                          )}
-                        </div>
+                </div>
+                <Avatar className="h-10 w-10 border">
+                  <AvatarImage src={chat.avatar} alt={chat.name || 'Chat'} />
+                  <AvatarFallback>
+                    {chat.name ? chat.name.charAt(0) : ((chat.remote_id ?? chat.remoteId) || chat.id || '?').charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1 overflow-hidden">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-semibold truncate">{chat.name || ((chat.remote_id ?? chat.remoteId) || chat.id || '').split('@')[0]}</h3>
+                    <div className="flex items-center gap-1 flex-shrink-0">
                       <p className="text-xs text-muted-foreground whitespace-nowrap">
                         {getFormattedTimestamp(chat.last_message_at ?? chat.lastMessageAt)}
                       </p>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                          <Button variant="ghost" size="icon" className="h-6 w-6 hover:bg-accent">
+                            <MoreVertical className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
+                          {chat.status !== 'INBOX' && !chat.is_archived && (
+                            <DropdownMenuItem onClick={() => updateChatStatus(chat.id, 'INBOX')}>
+                              <Inbox className="h-4 w-4 ml-2" />
+                              نقل إلى صندوق الوارد
+                            </DropdownMenuItem>
+                          )}
+                          {chat.status !== 'DONE' && (
+                            <DropdownMenuItem onClick={() => updateChatStatus(chat.id, 'DONE')}>
+                              <CheckCircle className="h-4 w-4 ml-2" />
+                              نقل إلى تم
+                            </DropdownMenuItem>
+                          )}
+                          {!chat.is_archived && (
+                            <DropdownMenuItem onClick={() => updateChatStatus(chat.id, 'ARCHIVED')}>
+                              <Archive className="h-4 w-4 ml-2" />
+                              أرشفة
+                            </DropdownMenuItem>
+                          )}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
-                    <p className="text-sm text-muted-foreground truncate">
-                      {chat.last_message ?? chat.lastMessage}
-                    </p>
                   </div>
-                  {(chat.is_unread ?? chat.isUnread) && (
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
-                      1
-                    </div>
-                  )}
+                  <p className="text-sm text-muted-foreground truncate">
+                    {chat.last_message ?? chat.lastMessage}
+                  </p>
                 </div>
-              );
-            })
+                {(chat.is_unread ?? chat.isUnread) && (
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                    1
+                  </div>
+                )}
+              </div>
+            ))
           )}
         </div>
       </ScrollArea>
